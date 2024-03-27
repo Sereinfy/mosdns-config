@@ -1,0 +1,24 @@
+#!/bin/sh
+. /usr/share/openclash/log.sh
+. /lib/functions.sh
+
+# This script is called by /etc/init.d/openclash
+# Add your custom firewall rules here, they will be added after the end of the OpenClash iptables rules
+
+LOG_OUT "Tip: Start Add Custom Firewall Rules..."
+
+# ------------------------------------以下是自定义脚本 删除 OpenClash 对非FakeIP代理的流量转发 ---------------------------------------------------
+en_mode=$(uci -q get openclash.config.en_mode)
+proxy_port=$(uci -q get openclash.config.proxy_port)
+
+if [ "$en_mode" == "fake-ip" ]; then
+   LOG_OUT "update telegram ipset"
+   /etc/mosdns/script/geoip2ipset.sh /etc/openclash/GeoIP.dat telegram
+   sleep 1
+   LOG_OUT "limit route to only fake ips with proxy port $proxy_port"
+   iptables -t nat -D openclash -p tcp -j REDIRECT --to-ports $proxy_port
+   iptables -t nat -A openclash -m set --match-set telegram dst -p tcp -j REDIRECT --to-ports $proxy_port
+fi
+# ------------------------------------自定义脚本结束---------------------------------------------------
+
+exit 0
