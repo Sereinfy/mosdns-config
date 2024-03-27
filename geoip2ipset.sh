@@ -13,7 +13,7 @@ filename="${filename%.*}"
 filename="$tmpdir/${filename}_$tag.txt"
 
 if [ "$tag" == "telegram" ]; then
-    wget -4 --timeout 5 -O "$filename" 'https://ghproxy.cc/https://raw.githubusercontent.com/Sereinfy/ip-preferred/main/cidr.txt'
+    wget -4 --timeout 5 -O "$filename" 'https://ghproxy.cc/https://raw.githubusercontent.com/Sereinfy/mosdns-config/main/cidr.txt'
     if [ "$?" != "0" ]; then
          /usr/bin/v2dat unpack geoip -o "$tmpdir" -f "$tag" "$geoipfile"
     fi
