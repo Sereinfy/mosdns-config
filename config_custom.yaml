@@ -326,15 +326,16 @@ plugins:
 
       - matches:
           - qname $geosite_cn $cdnlist apple.com icloud.com edgesuite.net msftconnecttest.com trafficmanager.net
-        exec: jump ali_sequence
-        
+        exec: jump ali_sequence # 国内域名 and 国内cdn 走直连
+
       - matches:
-          - qname &/etc/mosdns/rule/original_domain_list.txt &/etc/mosdns/rule/grey_list.txt # 不进行 IP 替换的域名，通常是游戏等使用非常用端口的域名
+          - qname &/etc/mosdns/rule/original_domain_list.txt  # 不进行 IP 替换的域名，不转发给clash
         exec: jump fallback_sequence
         
       - matches:
-          - qname $gfwlist &/etc/mosdns/rule/CDN_Reject.txt
+          - qname $gfwlist &/etc/mosdns/rule/CDN_Reject.txt &/etc/mosdns/rule/grey_list.txt # 污染域名
         exec: jump clash_sequence # GFW 域名直接请求clash
+        
       - exec: $clash_fallback
 
   - tag: udp_server
