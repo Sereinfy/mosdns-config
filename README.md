@@ -34,7 +34,7 @@ OpenClash 在 Fake IP 模式下会自动帮我们添加对应的防火墙规则�
 >
 >   
 
-下载后更名为**<u>/etc/openclash/</u>**`GeoIP.dat`
+下载后更名为<u>/etc/openclash/</u>`GeoIP.dat`
 
 #### mosdns
 
