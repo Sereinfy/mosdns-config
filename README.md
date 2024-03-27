@@ -26,6 +26,16 @@ OpenClash 在 Fake IP 模式下会自动帮我们添加对应的防火墙规则�
 
 其中 `/etc/mosdns/rule/geoip2ipset.sh` 这个脚本可以根据 GeoIP 数据库来生成对应的 ipset。内容如下，这个文件放到路由器上后，记得要执行 `chmod a+x /etc/mosdns/rule/geoip2ipset.sh` 给它赋予可执行权限。
 
+> **geoip-asn.dat**（精简版 GeoIP，只包含上述新增类别）：
+>
+> - https://raw.githubusercontent.com/Loyalsoldier/geoip/release/geoip-asn.dat
+>
+> - https://cdn.jsdelivr.net/gh/Loyalsoldier/geoip@release/geoip-asn.dat
+>
+>   
+
+下载后更名为**<u>/etc/openclash/</u>**`GeoIP.dat`
+
 #### mosdns
 
 选自定义配置文件`config_custom.yaml`， `DNS 转发`的打勾，注意 Clash DNS 端口要改成你自己在 OpenClash 里的配置，这里 mosdns 监听了 5335 端口
