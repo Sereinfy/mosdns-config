@@ -16,7 +16,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Merge, deduplicate and sort proxy lists
+      - name: Merge proxy lists
         run: |
           curl -sSL -o gfw.txt https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/gfw.txt
           curl -sSL -o proxy-list.txt https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/proxy-list.txt
@@ -35,6 +35,14 @@ jobs:
           rm greatfire.txt
           rm custom_list.txt
         
+      - name: cloudflare lists
+        run: |
+          curl -sSL -o cloudflare-ipv4.txt https://www.cloudflare.com/ips-v4
+          curl -sSL -o cloudflare-ipv6.txt https://www.cloudflare.com/ips-v6
+        
+      - name: cloudflare lists
+        run: |
+          curl -sSL -o telegram-cidr.txt https://core.telegram.org/resources/cidr.txt
           
       - name: Commit and push changes
         run: |
