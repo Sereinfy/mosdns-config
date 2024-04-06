@@ -27,7 +27,7 @@ jobs:
           grep '^full:' proxy_list.txt > temp.txt
           grep -v '^(full:|regexp:)' proxy_list.txt >> temp1.txt
           grep '^regexp:' proxy_list.txt > temp2.txt
-          mv temp.txt temp1.txt temp2.txt >> proxy_list.txt
+          cat temp.txt temp1.txt temp2.txt >> proxy_list.txt
       - name: Commit and push changes
         run: |
           git config --global user.name "GitHub Actions"
