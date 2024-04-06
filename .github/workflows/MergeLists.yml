@@ -23,6 +23,7 @@ jobs:
           curl -sSL -o greatfire.txt https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/greatfire.txt
           curl -sSL -o custom_list.txt https://raw.githubusercontent.com/Journalist-HK/Rules/master/custom_list.txt
           cat gfw.txt proxy-list.txt greatfire.txt custom_list.txt | sort -u > proxy_list.txt
+          sed -i '/^#/d' proxy_list.txt
 
       - name: Commit and push changes
         run: |
