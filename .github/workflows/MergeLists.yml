@@ -25,7 +25,7 @@ jobs:
           cat gfw.txt proxy-list.txt greatfire.txt custom_list.txt | sort -u | sed '/^\s*$/d' | sed '/^#/d' > proxy_list.txt
           
           grep '^full:' proxy_list.txt > temp.txt
-          grep -v '^(full:|regexp:)' proxy_list.txt >> temp1.txt
+          grep -vE '^(full:|regexp:)' proxy_list.txt >> temp1.txt
           grep '^regexp:' proxy_list.txt > temp2.txt
           cat temp.txt temp1.txt temp2.txt >> proxy_list.txt
       - name: Commit and push changes
