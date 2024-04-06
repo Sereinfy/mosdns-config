@@ -1,0 +1,33 @@
+name: Merge Proxy Lists
+
+
+on:
+  schedule:
+    - cron: 0 8 * * *
+  push:
+    branches:
+      - main
+
+jobs:
+  merge_deduplicate_and_sort_lists:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Merge, deduplicate and sort proxy lists
+        run: |
+          curl -sSL -o gfw.txt https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/gfw.txt
+          curl -sSL -o proxy-list.txt https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/proxy-list.txt
+          curl -sSL -o greatfire.txt https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/greatfire.txt
+          curl -sSL -o custom_list.txt https://raw.githubusercontent.com/Journalist-HK/Rules/master/custom_list.txt
+          cat gfw.txt proxy-list.txt greatfire.txt custom_list.txt | sort -u > proxy_list.txt
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add
+          git commit -m "Updated at $(TZ=UTC-8 date +'%Y-%m-%d %H:%M:%S')" -a
+          git push -f -u origin main
