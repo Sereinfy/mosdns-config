@@ -23,8 +23,9 @@ jobs:
           curl -sSL -o greatfire.txt https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/greatfire.txt
           curl -sSL -o custom_list.txt https://raw.githubusercontent.com/Journalist-HK/Rules/master/custom_list.txt
           cat gfw.txt proxy-list.txt greatfire.txt custom_list.txt | sort -u | sed '/^\s*$/d' | sed '/^#/d' > proxy_list.txt
-          
-          grep '^regexp:' proxy_list.txt >> proxy_list.txt
+          grep '^regexp:' proxy_list.txt > temp.txt
+          grep -v '^regexp:' proxy_list.txt >> temp.txt
+          mv temp.txt proxy_list.txt
       - name: Commit and push changes
         run: |
           git config --global user.name "GitHub Actions"
