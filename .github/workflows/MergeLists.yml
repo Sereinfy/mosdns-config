@@ -33,6 +33,7 @@ jobs:
           rm gfw.txt
           rm proxy-list.txt
           rm greatfire.txt
+          rm custom_list.txt
         
           
       - name: Commit and push changes
