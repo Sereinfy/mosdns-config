@@ -22,14 +22,14 @@ jobs:
           curl -sSL -o proxy-list.txt https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/proxy-list.txt
           curl -sSL -o greatfire.txt https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/greatfire.txt
           curl -sSL -o custom_list.txt https://raw.githubusercontent.com/Journalist-HK/Rules/master/custom_list.txt
-          cat gfw.txt proxy-list.txt greatfire.txt custom_list.txt | sort -u | sed '/^\s*$/d' | sed '/^#/d' > temp.txt
+          cat gfw.txt proxy-list.txt greatfire.txt custom_list.txt | sort -u | sed '/^\s*$/d' | sed '/^#/d' > proxy_list.txt
           
-          grep '^full:' temp.txt > temp1.txt
-          grep -vE '^(full:|regexp:)' temp.txt >> temp2.txt
-          grep '^regexp:' temp.txt > temp3.txt
-          cat temp1.txt temp2.txt temp3.txt >> temp4.txt
-          mv temp4.txt proxy_list.txt
-          rm temp*.txt
+          grep '^full:' proxy_list.txt > temp.txt
+          grep -vE '^(full:|regexp:)' proxy_list.txt >> temp.txt
+          grep '^regexp:' proxy_list.txt > temp.txt
+          
+          mv temp.txt proxy_list.txt
+        
           
       - name: Commit and push changes
         run: |
