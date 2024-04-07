@@ -40,7 +40,7 @@ jobs:
           curl -sSL -o cloudflare-ipv4.txt https://www.cloudflare.com/ips-v4
           curl -sSL -o cloudflare-ipv6.txt https://www.cloudflare.com/ips-v6
         
-      - name: cloudflare lists
+      - name: telegram  lists
         run: |
           curl -sSL -o telegram-cidr.txt https://core.telegram.org/resources/cidr.txt
           
