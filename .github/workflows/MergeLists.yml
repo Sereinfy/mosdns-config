@@ -46,7 +46,8 @@ jobs:
           
       - name: Commit and push changes
         run: |
-          if [ -z "$(git status --porcelain)" ]; then 
+          if [ -z "$(git status --porcelain)" ]; then
+              echo "暂无更新，结束运行"
               exit 0
           else
             echo "status=success" >> $GITHUB_OUTPUT
