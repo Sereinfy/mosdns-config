@@ -10,7 +10,7 @@ with open("china_domain_list.txt", "wb") as file1:
 # 下载第二个txt文件
 url2 = "https://raw.githubusercontent.com/Sereinfy/mosdns-config/main/proxy_list.txt"  # 替换为第二个txt文件的实际URL
 response2 = requests.get(url2)
-with open("proxy_list.txt", "wb") as file2:
+with open("proxy_list2.txt", "wb") as file2:
     file2.write(response2.content)
 
 print("文件下载完成")
