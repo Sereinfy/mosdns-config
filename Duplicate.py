@@ -2,31 +2,15 @@ import urllib.request
 import requests
 
 # 下载第一个txt文件
-url1 = "https://ghproxy.cc/https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/direct-list.txt"  # 替换为第一个txt文件的实际URL
+url1 = "https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/direct-list.txt"  # 替换为第一个txt文件的实际URL
 response1 = requests.get(url1)
 with open("china_domain_list.txt", "wb") as file1:
     file1.write(response1.content)
 
 # 下载第二个txt文件
-url2 = "https://ghproxy.cc/https://raw.githubusercontent.com/Sereinfy/mosdns-config/main/proxy_list.txt"  # 替换为第二个txt文件的实际URL
+url2 = "https://raw.githubusercontent.com/Sereinfy/mosdns-config/main/proxy_list.txt"  # 替换为第二个txt文件的实际URL
 response2 = requests.get(url2)
 with open("proxy_list.txt", "wb") as file2:
-    file2.write(response2.content)
-
-print("文件下载完成")
-
-
-
-# 下载第一个txt文件
-url1 = "https://www.example.com/1.txt"  # 替换为第一个txt文件的实际URL
-response1 = requests.get(url1)
-with open("1.txt", "wb") as file1:
-    file1.write(response1.content)
-
-# 下载第二个txt文件
-url2 = "https://www.example.com/2.txt"  # 替换为第二个txt文件的实际URL
-response2 = requests.get(url2)
-with open("2.txt", "wb") as file2:
     file2.write(response2.content)
 
 print("文件下载完成")
