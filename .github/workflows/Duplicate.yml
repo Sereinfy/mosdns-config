@@ -35,6 +35,8 @@ jobs:
       - name: Download Filters
         run: |
           python Duplicate.py
+          rm china_domain_list.txt
+          rm proxy_list2.txt
             
       - name: Apply
         run: |
