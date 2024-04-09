@@ -4,9 +4,6 @@ name: Merge Proxy Lists
 on:
   schedule:
     - cron: 0 8 * * *
-  push:
-    branches:
-      - main
 
 jobs:
   merge_lists:
