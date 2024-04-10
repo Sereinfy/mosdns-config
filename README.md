@@ -32,6 +32,7 @@ OpenClash 在 Fake IP 模式下会自动帮我们添加对应的防火墙规则�
 
 
 下载后更名为<u>/etc/openclash/</u>`GeoIP.dat`
+更新，我自己合并了geoip-asn和GeoIP-cn
 
 `iptables.txt` 放在`插件设置` `开发者选项`
 
