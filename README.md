@@ -10,21 +10,43 @@ DNS分流流程
 
 1.自定义名单：`direct_domain_list`
 
-不进行 IP 替换的域名，且不转发给clash
+```
+      - matches:
+          - qname &/etc/mosdns/rule/direct_domain_list.txt
+        exec: jump remote_sequence # 1.不进行 IP 替换的域名，且不转发给clash
+```
 
-2.自定义名单：
+2.自定义名单： `grey_list`  `wall_list`
 
-适用于被墙/被污染/的，提前走代理。所以放在geosite_cn之前，也可以放geosite_cn之后
+放在geosite_cn之前，也可以放geosite_cn之后
 
-但有尚未移出geosite_cn列表，却被墙的，所以放前面最好
+有尚未移出geosite_cn列表，却被Q的，所以放前面最好
 
-`geosite_cn`列表走直连
+```
+      - matches:
+          - qname &./rule/google_cn.txt &./rule/grey_list.txt &./rule/wall_list.txt # wall_list手动创建
+        exec: jump clash_sequence # 2.适用于被Q/被污染/尚未移出geosite_cn列表的，提前走代理
+```
 
-`cdnlist`列表，这个列表会和gfw列表重复，实际上是可以走直连的
+3.`geosite_cn`列表走直连 
 
-自定义名单：gfw列表中还有一些可以走直连的，比如apple.com 
+`cdnlist` 列表，这个列表会和gfw列表重复，实际上是可以走直连的
 
-3.`gfw`列表：走代理
+gfw列表中还有一些可以走直连的，比如apple.com 
+
+```
+      - matches:
+          - qname $geosite_cn $cdnlist &./rule/akamai_domain_list.txt apple.com icloud.com
+        exec: jump ali_sequence # 国内域名 & 3.令存在于gfwlist列表中的部分国内cdn，提前走直连
+```
+
+4.`gfw`列表：走代理
+
+```
+      - matches:
+          - qname &/etc/mosdns/rule/proxy_domain_list.txt # GFW 域名直接请求clash
+        exec: jump clash_sequence
+```
 
 4.不在所有列表之内的
 
@@ -37,8 +59,6 @@ DNS分流流程
 不是的话，那就是国外可直连ip。走直连。
 
 ailidns无响应 用fallback
-
-
 
 
 
