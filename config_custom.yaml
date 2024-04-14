@@ -1,7 +1,7 @@
 log:
   level: info
   file: "/etc/mosdns/mosdns.log"
-    
+  # /etc/init.d/mosdns reload
 api:
   http: ":9091" # 在该地址启动 api 接口。
   
@@ -18,13 +18,13 @@ plugins:
     type: domain_set
     args:
       files:
-        - "/etc/mosdns/rule/china_domain_list.txt" # https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/direct-list.txt
+        - "/etc/mosdns/rule/china_domain_list.txt"
 
   - tag: geoip_cn # 国内 IP
     type: ip_set
     args:
       files:
-        - "/etc/mosdns/rule/china_ip_list.txt" # https://raw.githubusercontent.com/mayaxcn/china-ip-list/master/chnroute.txt
+        - "/etc/mosdns/rule/china_ip_list.txt"
 
   - tag: cdnlist # 国内CDN
     type: domain_set
@@ -32,49 +32,34 @@ plugins:
       exps:
         - "cloudflare.com"
         - "microsoft.com"
-        - "playstation.com"
-        - "playstation.net"
-        - "redhat.com"
-        - "samsung.com"
-        - "ubi.com"
-        - "ubisoft.com"
-        - "xboxlive.com"
+        - "msftconnecttest.com"
       files:
-        - "/etc/mosdns/rule/cdn_domain_list.txt" # https://raw.githubusercontent.com/pmkol/easymosdns/rules/cdn_domain_list.txt
-
-  - tag: gfwlist
-    type: domain_set
-    args:
-      files:
-        - "/etc/mosdns/rule/gfw.txt" # https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/gfw.txt
-        - "/etc/mosdns/rule/proxy-list.txt" # https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/proxy-list.txt
-        - "/etc/mosdns/rule/greatfire.txt" # https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/greatfire.txt
-        - "/etc/mosdns/rule/custom_list.txt" # https://raw.githubusercontent.com/Journalist-HK/Rules/master/custom_list.txt
+        - "/etc/mosdns/rule/apple_cn.txt"      
 
   - tag: cloudflare_ip
     type: ip_set
     args:
       files:
-        - "/etc/mosdns/rule/ip.txt" # https://raw.githubusercontent.com/XIU2/CloudflareSpeedTest/master/ip.txt
-
+        - "/etc/mosdns/rule/cloudflare-ipv4.txt"
+  
   - tag: cloudfront_ip
     type: ip_set
     args:
       files:
-        - "/etc/mosdns/rule/cloudfront.txt" # https://raw.githubusercontent.com/Journalist-HK/Rules/master/cloudfront.txt
+        - "/etc/mosdns/rule/cloudfront.txt"
 
   - tag: fastly_ip
     type: ip_set
     args:
       files:
-        - "/etc/mosdns/rule/fastly.txt" # https://raw.githubusercontent.com/Loyalsoldier/geoip/release/text/fastly.txt
+        - "/etc/mosdns/rule/fastly.txt"
 
   - tag: "cache_0"
     type: "cache"
     args:
-      size: 8192  # 默认: 1024。
+      size: 1024  # 默认: 1024。
       lazy_cache_ttl: 259200  # 默认: 0（禁用 lazy cache）。#建议值 86400（1天）~ 259200（3天）                     
-      dump_file: /usr/share/mosdns/cache.dump
+      dump_file: ./cache.dump
       dump_interval: 7200  # (实验性) 自动保存间隔。单位秒。默认 600。 如果距离上次 dump 有 1024 次更新，则自动保存。
 
   - tag: ecs_tw
@@ -103,15 +88,16 @@ plugins:
         - addr: "211.138.180.2" # 运营商 DNS，自行修改
         - addr: "211.138.180.3" # 运营商 DNS，自行修改
 
-  - tag: "forward_alidns"
+  - tag: "forward_open"
     type: forward
     args:
-      concurrent: 1
+      concurrent: 2
       upstreams:
-        - addr: "quic://223.6.6.6:853"
         - addr: "https://dns.alidns.com/dns-query"
           dial_addr: "223.5.5.5"
-          enable_http3: false
+          enable_pipeline: true
+        - addr: "https://1.12.12.12/dns-query"
+          enable_pipeline: true
           
   - tag: "forward_clash"
     type: "forward"
@@ -127,7 +113,7 @@ plugins:
       upstreams:
         - addr: "https://doh.apad.pro/dns-query"
           bootstrap: "211.138.180.2"
-          enable_http3: false
+          enable_pipeline: true
 
   - tag: "forward_remote"
     type: "forward"
@@ -136,14 +122,28 @@ plugins:
                     # 取最快返回的应答。超过 3 最多选 3 个。默认 1。
       upstreams:
         - addr: "https://162.159.36.1/dns-query"
-          enable_http3: false
-          # socks5: "127.0.0.1:1080" # 目前暂不支持用户名密码认证，只支持基于 TCP 的协议
+          enable_pipeline: true
+          enable_http3: true
         - addr: "https://doh.opendns.com/dns-query"
           dial_addr: "146.112.41.2"
-          enable_http3: false
-          # 101DNS
-        - addr: "tls://101.101.101.101"
           enable_pipeline: true
+        - addr: "https://doh.openkiss.top/dns-query"
+          bootstrap: "211.138.180.2"
+          enable_pipeline: true
+          
+  - tag: has_resp_sequence
+    type: sequence
+    args:
+      - matches:
+          - has_resp
+        exec: accept
+
+  - tag: local_sequence
+    type: sequence
+    args:
+      - exec: prefer_ipv4
+      - exec: $forward_local
+      - exec: jump has_resp_sequence # 有响应终止
 
   - tag: remote_sequence
     type: sequence
@@ -151,72 +151,49 @@ plugins:
       - exec: prefer_ipv4
       - exec: $ecs_tw
       - exec: $forward_remote
-      - exec: return
+      - exec: jump has_resp_sequence # 有响应终止
 
   - tag: clash_sequence
     type: sequence
     args:
-#      - exec: prefer_ipv4 # redir-host模式
+      - exec: prefer_ipv4 # redir-host模式下开启
       - exec: $forward_clash
       - exec: accept
-
-  - tag: has_resp_sequence
-    type: sequence
-    args:
-      - matches:
-          - has_resp
-        exec: accept
-        
-  - tag: "fallback"
-    type: "fallback"
-    args:
-      primary: forward_easy    # forward_easy
-      secondary: forward_remote  # remote
-      threshold: 360           # 无响应回滚阈值。单位毫秒。默认 500 。
-      always_standby: true     # 副可执行插件始终待命。
-      
-  - tag: fallback_sequence
-    type: sequence
-    args:
-      - exec: prefer_ipv4
-      - exec: $ecs_tw
-      - exec: $fallback
-      - exec: jump has_resp_sequence
       
   # IP 优选，需要定期修改，最好填写 2 - 4 个
+  - tag: blackhole_akamai # 替换部分 AKAMAI 域名 IP，详见 https://github.com/IrineSistiana/mosdns/discussions/489
+    type: sequence
+    args:
+      - exec: black_hole 23.48.201.5 23.33.126.146 23.202.34.147
+      - exec: query_summary best_akamai
+      - exec: ttl 3600-0
+      - exec: accept # 运行 black_hole 之后接受请求，不再进行后续判断
+      
   - tag: blackhole_cloudflare
     type: sequence
     args:
-      - exec: query_summary
-      - exec: black_hole 104.24.163.66 104.19.156.182 104.21.16.43
-      #best_cloudflare_ip
+      - exec: black_hole 104.16.148.10 104.18.165.169 104.17.16.120
+      - exec: query_summary cloudflare_best
       - exec: ttl 3600-0
       - exec: accept
 
   - tag: blackhole_cloudfront
     type: sequence
     args:
-      - exec: query_summary
-      - exec: black_hole 13.227.56.137 13.224.154.62 13.224.163.12
-      #best_cloudfront_ip
+      - exec: black_hole 13.33.95.179 13.33.97.190 13.226.79.70
+      - exec: query_summary cloudfront_best
       - exec: ttl 3600-0
       - exec: accept
-
-  - tag: remote_sequence_us # 使用 US ECS 请求上游
+      
+  - tag: change_cdn_ip_akamai
     type: sequence
     args:
-      - exec: prefer_ipv4
-      - exec: $ecs_us
-      - exec: $forward_remote
-      - exec: jump has_resp_sequence
-
-  - tag: fallback_sequence_us # 使用 US ECS 请求上游
-    type: sequence
-    args:
-      - exec: prefer_ipv4
-      - exec: $ecs_us
-      - exec: $fallback
-      - exec: jump has_resp_sequence
+      - matches:
+          - cname akamai.net
+          - qtype 1
+          - has_wanted_ans # 防止纯 IPV6 域名被替换
+        exec: jump blackhole_akamai
+      - exec: return
 
   - tag: change_cdn_ip_cf # https://github.com/XIU2/CloudflareSpeedTest/discussions/317
     type: sequence
@@ -233,16 +210,15 @@ plugins:
         exec: jump blackhole_cloudfront
       - exec: return
 
-  - tag: change_CF_ip_Pending
+  - tag: remote_sequence_us # 使用 US ECS 请求上游
     type: sequence
     args:
-      - matches:
-          - qtype 1
-          - has_wanted_ans
-          - resp_ip $cloudflare_ip
-        exec: query_summary cloudflareCDN
-      - exec: return
-      
+      - exec: query_summary fastly_remote
+      - exec: prefer_ipv4
+      - exec: $ecs_us
+      - exec: $forward_remote
+      - exec: jump has_resp_sequence
+       
   - tag: reforward_fastly_remote # 使用 US ECS 再次查询优化 Fastly CDN 结果
     type: sequence
     args:
@@ -251,53 +227,52 @@ plugins:
         exec: jump remote_sequence_us
       - exec: return
 
-  - tag: reforward_fastly_fallback # 使用 US ECS 再次查询优化 Fastly CDN 结果
+  - tag: gfw_ip_sequence
     type: sequence
     args:
-      - matches:
-          - resp_ip $fastly_ip
-        exec: jump fallback_sequence_us
-      - exec: return
+      - exec: query_summary gfw_ip_pass # 暂时记录一下 有sequence经过就去掉
+      - exec: goto clash_sequence
 
   - tag: ali_sequence
     type: sequence
     args:
       - exec: prefer_ipv4
-      - exec: $forward_alidns
+      - exec: $forward_open
+      - matches:
+          - "resp_ip &./rule/gfw_ip_list.txt" # 污染ip 去clash
+        exec: goto gfw_ip_sequence
+      - exec: jump change_cdn_ip_akamai
       - exec: jump change_cdn_ip_cf
-      - exec: jump reforward_fastly_fallback
-      - exec: accept # 查询失败也会停止，防止后续查询其他上游
-   
-  - tag: easy_sequence
-    type: sequence
-    args:
-      - exec: $forward_easy # 未知域名优先使用分流DNS
-      - matches:
-          - "resp_ip $geoip_cn"
-        exec: accept # 返回国内 IP 直接接受
-      - exec: jump change_CF_ip_Pending
-      - exec: jump reforward_fastly_fallback
-      - exec: jump clash_sequence # 返回国外 IP 去clash
-      
-  - tag: Global_sequence
-    type: sequence
-    args:
-      - exec: $forward_remote # 备用远程 DNS
-      - matches:
-          - "resp_ip $geoip_cn"
-        exec: $forward_alidns # 返回国内 IP 去alidns再次解析
-      - exec: jump change_CF_ip_Pending
       - exec: jump reforward_fastly_remote
-      - exec: jump clash_sequence # 返回国外 IP 去clash
-      
-  - tag: "clash_fallback"
+      - exec: accept # 有没有响应都终止，防止后续查询其他上游
+
+  - tag: default_sequence
+    type: sequence
+    args:
+      - exec: prefer_ipv4
+      - exec: $forward_open # 默认用国内，用来查询是否污染
+      - matches:
+          - "resp_ip $geoip_cn"
+        exec: accept # 国内直接接受
+      - exec: jump change_cdn_ip_akamai
+      - matches: # 有些 AKAMAI 的域名不能直接替换 IP（没有绑定全证书），
+          - cname &./rule/akamai_domain_list.txt # 此处多加一次判断，接受所有 AKAMAI CDN 的 IP。
+        exec: accept
+      - matches:
+          - "resp_ip &./rule/gfw_ip_list.txt" # 污染ip 去clash
+        exec: goto gfw_ip_sequence
+      - exec: jump change_cdn_ip_cf
+      - exec: jump reforward_fastly_remote # fastly IP 用us ecs二次解析
+      - exec: jump has_resp_sequence
+
+  - tag: "fallback"
     type: "fallback"
     args:
-      primary: easy_sequence    # 未知域名优先使用分流DNS
-      secondary: Global_sequence  # 备用远程 DNS
+      primary: forward_easy    # 未知域名优先使用分流DNS
+      secondary: forward_remote  # 备用远程 DNS
       threshold: 360           # 无响应回滚阈值。单位毫秒。默认 500 。
       always_standby: true     # 副可执行插件始终待命。
-      
+
   - tag: main
     type: sequence
     args:
@@ -325,19 +300,25 @@ plugins:
       - exec: $cache_0 # 下面的请求结果均进入缓存
 
       - matches:
-          - qname $geosite_cn $cdnlist apple.com icloud.com edgesuite.net msftconnecttest.com trafficmanager.net
-        exec: jump ali_sequence # 国内域名 and 国内cdn 走直连
+          - qname &/etc/mosdns/rule/direct_list.txt
+        exec: jump remote_sequence # 1.不进行 IP 替换的域名，且不转发给clash
 
       - matches:
-          - qname &/etc/mosdns/rule/original_domain_list.txt  # 不进行 IP 替换的域名，不转发给clash
-        exec: jump fallback_sequence
+          - qname &./rule/google_cn.txt &./rule/wall_list.txt # wall_list手动创建
+        exec: jump clash_sequence # 2.适用于被墙/被污染/尚未移出geosite_cn列表的，提前走代理
+
+      - matches:
+          - qname $geosite_cn $cdnlist &./rule/akamai_domain_list.txt
+        exec: jump ali_sequence # 国内域名 & 3.令存在于gfwlist列表中的部分国内cdn，提前走直连
         
       - matches:
-          - qname $gfwlist &/etc/mosdns/rule/CDN_Reject.txt &/etc/mosdns/rule/grey_list.txt # 污染域名
-        exec: jump clash_sequence # GFW 域名直接请求clash
+          - qname &/etc/mosdns/rule/proxy_domain_list.txt # GFW 域名直接请求clash
+        exec: jump clash_sequence
         
-      - exec: $clash_fallback
-
+      - exec: jump default_sequence
+      
+      - exec: $fallback
+      
   - tag: udp_server
     type: udp_server
     args:
@@ -349,18 +330,3 @@ plugins:
     args:
       entry: main
       listen: ":5335"
-      # cert: "/etc/nginx/conf.d/_lan.crt" # 配置 cert 和 key 后会启用 TLS (DoT)。
-      # key: "/etc/nginx/conf.d/_lan.key" 
-      idle_timeout: 10 # 空连接超时。单位秒。默认 10。
-
-  - tag: "http_server"
-    type: "http_server"
-    args:
-      entries:
-        - path: /dns-query     # 本路径执行
-          exec: main # 可执行插件的 tag。
-      src_ip_header: "X-Forwarded-For"  # 从 HTTP 头获取用户 IP。
-      listen: :5443  # 监听地址。
-      # cert: "/etc/nginx/conf.d/_lan.crt" # 留空 cert 和 key 后会禁用 TLS。
-      # key: "/etc/nginx/conf.d/_lan.key" 
-      idle_timeout: 30 # 默认 30。
