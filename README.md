@@ -91,9 +91,10 @@ OpenClash 在 Fake IP 模式下会自动帮我们添加对应的防火墙规则�
 
 
 
-下载后更名为<u>/etc/openclash/</u>`GeoIP.dat`<br/>
+~~下载后更名为<u>/etc/openclash/</u>`GeoIP.dat`~~ <br/> 
 更新，我自己合并了geoip-asn和GeoIP-cn
-
+- https://github.com/Sereinfy/geoip
+  
 `iptables.txt` 放在`插件设置` `开发者选项`
 
 其中 `/etc/mosdns/rule/geoip2ipset.sh` 这个脚本可以根据 GeoIP 数据库来生成对应的 ipset。内容如下，这个文件放到路由器上后，记得要执行 `chmod a+x /etc/mosdns/rule/geoip2ipset.sh` 给它赋予可执行权限。
