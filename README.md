@@ -6,7 +6,11 @@ update 获取配置所用到的规则
 
 iptables.txt 开发者选项里的代码
 
-geoip2ipset.sh 或者 ipset.sh 二选一 用来解决 telegram
+geoip2ipset.sh 或者 ipset.sh 二选一 用来解决 telegram 
+
+ipset.sh 搭配 telegram-cidr.txt文件。自行匹配路径
+
+geoip2ipset.sh 搭配 geoip文件。自行匹配路径
 
 config_custom.yaml mosdns配置文件
 
