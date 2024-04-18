@@ -1,64 +1,14 @@
 # 基于 DNS 的内网代理分流方案
 
-DNS分流流程
+主要文件
 
-屏蔽 QTYPE 65 #内网域名 # DDNS 和 其他白名单
+update 获取配置所用到的规则
 
-黑名单，可添加去广告列表 
+iptables.txt 开发者选项里的代码
 
-缓存开始，上方不缓存，下方进入缓存
+geoip2ipset.sh 或者 ipset.sh 二选一 用来解决 telegram
 
-1.自定义名单：`direct_domain_list`
-
-```
-      - matches:
-          - qname &/etc/mosdns/rule/direct_domain_list.txt
-        exec: jump remote_sequence # 1.不进行 IP 替换的域名，且不转发给clash
-```
-
-2.自定义名单： `grey_list`  `wall_list`
-
-放在geosite_cn之前，也可以放geosite_cn之后
-
-有尚未移出geosite_cn列表，却被Q的，所以放前面最好
-
-```
-      - matches:
-          - qname &./rule/google_cn.txt &./rule/grey_list.txt &./rule/wall_list.txt # wall_list手动创建
-        exec: jump clash_sequence # 2.适用于被Q/被污染/尚未移出geosite_cn列表的，提前走代理
-```
-
-3.`geosite_cn`列表走直连 
-
-`cdnlist` 列表，这个列表会和gfw列表重复，实际上是可以走直连的
-
-gfw列表中还有一些可以走直连的，比如apple.com 
-
-```
-      - matches:
-          - qname $geosite_cn $cdnlist &./rule/akamai_domain_list.txt apple.com icloud.com
-        exec: jump ali_sequence # 国内域名 & 3.令存在于gfwlist列表中的部分国内cdn，提前走直连
-```
-
-4.`gfw`列表：走代理
-
-```
-      - matches:
-          - qname &/etc/mosdns/rule/proxy_domain_list.txt # GFW 域名直接请求clash
-        exec: jump clash_sequence
-```
-
-4.不在所有列表之内的
-
-用ailidns解析后，判断ip
-
-如果是国内，直接接受
-
-如果是国外，判断是否为gfwip 是的话走代理
-
-不是的话，那就是国外可直连ip。走直连。
-
-ailidns无响应 用fallback
+config_custom.yaml mosdns配置文件
 
 
 
@@ -83,18 +33,11 @@ OpenClash 在 Fake IP 模式下会自动帮我们添加对应的防火墙规则�
 #### OpenClash
 
 
-
- `geoip-asn.dat`（精简版 GeoIP，只包含上述新增类别）：
-
-- https://raw.githubusercontent.com/Loyalsoldier/geoip/release/geoip-asn.dat
-- https://cdn.jsdelivr.net/gh/Loyalsoldier/geoip@release/geoip-asn.dat
-
-
-
-~~下载后更名为<u>/etc/openclash/</u>`GeoIP.dat`~~ <br/> 
 更新，我自己合并了geoip-asn和GeoIP-cn
+
 - https://github.com/Sereinfy/geoip
   
+
 `iptables.txt` 放在`插件设置` `开发者选项`
 
 其中 `/etc/mosdns/rule/geoip2ipset.sh` 这个脚本可以根据 GeoIP 数据库来生成对应的 ipset。内容如下，这个文件放到路由器上后，记得要执行 `chmod a+x /etc/mosdns/rule/geoip2ipset.sh` 给它赋予可执行权限。
