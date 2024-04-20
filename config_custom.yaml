@@ -82,15 +82,6 @@ plugins:
       upstreams:
         - addr: "127.0.0.1:7874"
 
-  - tag: "forward_easy"
-    type: "forward"
-    args:
-      concurrent: 1
-      upstreams:
-        - addr: "https://doh.apad.pro/dns-query"
-          bootstrap: "211.138.180.2"
-          enable_pipeline: true
-
   - tag: "forward_remote"
     type: "forward"
     args:
@@ -120,7 +111,7 @@ plugins:
       - exec: prefer_ipv4
       - exec: $ecs_tw
       - exec: $forward_remote
-      - exec: jump has_resp_sequence # 有响应终止
+      - exec: return
 
   - tag: remote_sequence_us # 使用 US ECS 再次查询优化 Fastly CDN 结果
     type: sequence
@@ -189,12 +180,16 @@ plugins:
           - has_wanted_ans
           - "resp_ip &./rule/cloudfront.txt"
         exec: jump blackhole_cloudfront
-        
-      - matches: # fastly US ECS
+      - exec: return
+      
+  - tag: reforward_fastly_remote
+    type: sequence
+    args:
+      - matches:
           - "resp_ip &./rule/fastly.txt"
         exec: jump remote_sequence_us
       - exec: return
-
+      
   - tag: gfw_ip_sequence
     type: sequence
     args:
@@ -209,6 +204,7 @@ plugins:
       - exec: prefer_ipv4
       - exec: $forward_open
       - exec: jump gfw_ip_sequence
+      - exec: jump reforward_fastly_remote
       - exec: jump change_cdn_ip
       - exec: accept # 有没有响应都终止，防止后续查询其他上游
 
@@ -221,6 +217,7 @@ plugins:
           - "resp_ip &./rule/china_ip_list.txt"
         exec: accept # 国内直接接受
       - exec: jump gfw_ip_sequence
+      - exec: jump reforward_fastly_remote
       - exec: jump remote_sequence_tw # mosdns前置：去掉 _tw 代表 国外ip全部走代理。
       - exec: jump change_cdn_ip
       - exec: jump has_resp_sequence
@@ -236,25 +233,22 @@ plugins:
       - exec: jump has_resp_sequence
 
       - matches:
-          - qname &/etc/mosdns/rule/private.txt #内网域名
+          - qname &./rule/private.txt &./rule/block_list.txt #内网域名 & 黑名单
         exec: reject 5 # 屏蔽内网域名
 
       - matches:
-          - qname &/etc/mosdns/rule/white_list.txt # DDNS 和 其他白名单
-        exec: $forward_local
+          - qname &./rule/white_list.txt # DDNS 和 其他白名单
+        exec: $forward_local # 运营商DNS
       - exec: ttl 5-180
       - exec: jump has_resp_sequence
-
-      - matches:
-          - qname &/etc/mosdns/rule/block_list.txt # 黑名单，可添加去广告列表 
-        exec: reject 5
 
       - exec: $cache_0 # 下面的请求结果均进入缓存
 
       - matches:
-          - qname &/etc/mosdns/rule/direct_list.txt
-        exec: jump remote_sequence_tw # 无污染 1.不进行 IP 替换的域名，且不转发给clash
-
+          - qname &./rule/direct_list.txt 
+        exec: jump remote_sequence_tw # 无污染DNS  1.不进行 IP 替换的域名，且不转发给clash
+      - exec: jump has_resp_sequence
+      
       - matches:
           - qname &./rule/google_cn.txt &./rule/wall_list.txt # wall_list手动创建
         exec: jump remote_sequence # 适用于被墙/被污染/ 2.尚未移出geosite_cn列表的，提前走代理
@@ -264,7 +258,7 @@ plugins:
         exec: jump open_sequence # 国内域名 & 3.令存在于gfwlist列表中的部分国内cdn，提前走直连
         
       - matches:
-          - qname &/etc/mosdns/rule/proxy_domain_list.txt # GFW 域名直接请求clash
+          - qname &./rule/proxy_domain_list.txt # GFW 域名直接请求clash
         exec: jump remote_sequence
 
       - exec: jump default_sequence
