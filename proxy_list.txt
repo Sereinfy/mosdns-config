@@ -4342,6 +4342,8 @@ bookshome.world
 booksinprint.com
 bookstagram.com
 booktopia.com.au
+bookwalker.com.tw
+bookwalker.jp
 booloo.com
 boomba.club
 boomerang.com
@@ -18001,6 +18003,7 @@ rakuten.ca
 rakuten.co.jp
 rakuten.com
 rakuten.com.tw
+rakuten.jp
 rakuten.ne.jp
 rakuten.tw
 rakuya.com.tw
