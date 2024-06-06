@@ -54,6 +54,7 @@ full:beck-online.beck.de
 full:bingsettingssearch.trafficmanager.net
 full:blizzard.nefficient.co.kr
 full:blizzcon-a.akamaihd.net
+full:blog.xiaoz.org
 full:blzddist1-a.akamaihd.net
 full:blzddistkr1-a.akamaihd.net
 full:blzmedia-a.akamaihd.net
@@ -6590,6 +6591,7 @@ devopsms.com
 devpn.com
 devsitetest.how
 devtools-paypal.com
+devv.ai
 dewitwithdurex.com
 dexterhorn.com
 dezyred.com
@@ -15749,6 +15751,7 @@ netflav5.com
 netflix.ca
 netflix.com
 netflix.net
+netflixdnstest0.com
 netflixdnstest1.com
 netflixdnstest10.com
 netflixdnstest2.com
