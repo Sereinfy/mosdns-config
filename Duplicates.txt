@@ -20,6 +20,9 @@ hoyo.link
 hoyoverse.com
 huaweicloud-dns.net
 huaweicloud-dns.org
+icbc-ltd.com
+icbcasia.com
+icbcswiss.com
 inshotapp.com
 joox.com
 kuke.com
