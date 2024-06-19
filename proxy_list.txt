@@ -7807,7 +7807,6 @@ enterprisepaging.com
 enterprisessl.com
 entrust.net
 entrustdatacard.com
-entware.net
 environment.google
 epa.gov.tw
 epac.to
@@ -19080,6 +19079,7 @@ s8forum.com
 sa-brazil-1.myhuaweicloud.com
 sa-saopaulo.myqcloud.com
 sa.hao123.com
+saasexch.cc
 saasexch.com
 saasexch.io
 sabuibo.net
