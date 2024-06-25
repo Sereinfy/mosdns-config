@@ -212,10 +212,12 @@ full:practivate.adobe.ipp
 full:practivate.adobe.newoa
 full:practivate.adobe.ntp
 full:prd-priconne-redive.akamaized.net
+full:preprod-publicca.googleapis.com
 full:production-openaicom-storage.azureedge.net
 full:psg-int-centralus.cloudapp.net
 full:psg-int-eastus.cloudapp.net
 full:public-us-pingsx.api.clonoth.com
+full:publicca.googleapis.com
 full:push-apple.com.akadns.net
 full:pvr-hamivideo.cdn.hinet.net
 full:qualcomm.sc.omtrdc.net
@@ -23469,7 +23471,6 @@ weiming.info
 weinvoiceit.com
 weiquanwang.org
 weisuo.ws
-weixinbridge.com
 weiyuksj.com
 weknowporn.com
 welcometobestbuy.ca
