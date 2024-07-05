@@ -205,6 +205,7 @@ full:p16-tiktokcdn-com.akamaized.net
 full:paper-attachments.s3.amazonaws.com
 full:pchomeonline.com.tw
 full:pki.google.com
+full:pki.safebrowsing.apple
 full:poshtestgallery.cloudapp.net
 full:practivate.adobe
 full:practivate.adobe.com
@@ -225,6 +226,7 @@ full:reddit.map.fastly.net
 full:rink.hockeyapp.net
 full:rtm.tnt-ea.com
 full:sa78gs.wpc.edgecastcdn.net
+full:safebrowsing.g.aaplimg.com
 full:scc.ott.hinet.net
 full:scholar.google.ae
 full:scholar.google.at
@@ -329,6 +331,7 @@ full:t21.nikkei.co.jp
 full:t21ipau.nikkei.co.jp
 full:teamviewer.com.cdn.cloudflare.net
 full:tesla-cdn.thron.com
+full:token.safebrowsing.apple
 full:tvcastlive-hamivideo.cdn.hinet.net
 full:ubisoft-orbit-savegames.s3.amazonaws.com
 full:ubisoft-uplay-savegames.s3.amazonaws.com
@@ -21308,6 +21311,7 @@ thieme.de
 thinkboxsoftware.com
 thinkdifferent.us
 thinkgeek.com
+thinkhk.com
 thinkingtaiwan.com
 thinkofliving.com
 thinkquarterly.co.uk
@@ -21629,6 +21633,7 @@ topxxxpornvids.com
 topyoungporn.com
 tor.blingblingsquad.net
 tor.updatestar.com
+tor.us
 tora.to
 torcidadeouro.com
 torcn.com
