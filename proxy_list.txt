@@ -338,6 +338,7 @@ full:ubisoft-orbit-savegames.s3.amazonaws.com
 full:ubisoft-uplay-savegames.s3.amazonaws.com
 full:ubistatic3-a.akamaihd.net
 full:ulrichsweb.serialssolutions.com
+full:upos-hz-mirrorakam.akamaized.net
 full:ve-dash-uk-live.akamaized.net
 full:ve-uhd-push-uk-live.akamaized.net
 full:venmo.s3.amazonaws.com
@@ -1613,6 +1614,8 @@ alibabacloud.com.tw
 alicejapan.co.jp
 alicloud.com
 aliengu.com
+aliexpress.ru
+alihealth.hk
 alipay.hk
 alipaymo.com
 alive.bar
@@ -5230,6 +5233,8 @@ ccav69.info
 ccav69.me
 ccav691api.com
 ccavb.tv
+ccbintl.com.hk
+ccbseoul.com
 cccat.cc
 cccat.co
 ccdc.cam.ac.uk
@@ -5524,11 +5529,15 @@ chinasmile.net
 chinasocialdemocraticparty.com
 chinasoul.org
 chinasucks.net
+chinatelecomglobal.com
+chinatelecomhk.com
 chinatimes.com
 chinatimes.com.tw
 chinatopsex.com
 chinatown.com.au
 chinatweeps.com
+chinaunicom.com.hk
+chinaunicomglobal.com
 chinaview.wordpress.com
 chinaway.org
 chinaworker.info
@@ -5805,6 +5814,8 @@ clubtubes.com
 clusterconnection.com
 clyp.it
 clzz2.xyz
+cmbi.com.hk
+cmbwinglungbank.com
 cmcn.org
 cmhalq.com
 cmi.org.tw
@@ -6176,11 +6187,23 @@ ct.org.tw
 ctan.org
 ctao.org
 ctee.com.tw
+ctexcel.ca
+ctexcel.com
+ctexcel.com.hk
+ctexcel.fr
+ctexcel.us
 ctfassets.net
 ctfriend.net
 ctitv.com.tw
 ctotires.com
 ctowc.org
+ctrip.co.id
+ctrip.co.kr
+ctrip.co.th
+ctrip.com.hk
+ctrip.my
+ctrip.sg
+ctripbuy.hk
 cts.com.tw
 ctv.com.tw
 ctwant.com
@@ -6217,6 +6240,7 @@ cumshotlist.com
 cumswappingsis.com
 cumteenporn.com
 cunhua.pics
+cuniq.com
 cuntempire.com
 cuntwars.com
 cup.com.hk
@@ -6642,7 +6666,11 @@ dickhardon.com
 dictate.ms
 didce.com
 diddykongracing.com
+didi-food.com
+didiaustralia.blog
+didiglobal.com
 didilist.com
+didimobility.co.jp
 dierectv.com
 difangwenge.org
 digicert-cn.com
@@ -6948,6 +6976,7 @@ dockerizer.com
 docleradn.com
 doclercdn.com
 docs.com
+docs.new
 docs.rs
 doctor-videos.com
 doctorvoice.org
@@ -7090,6 +7119,7 @@ drdremonsterdre.com
 drdreprobeatssale.com
 dreamamateurs.com
 dreambmw.ca
+dreamcast.hk
 dreamforce.com
 dreammovies.com
 dreamteamfc.com
@@ -7742,6 +7772,7 @@ empfil.com
 empflix.com
 empornium.site
 ems-ph.org
+emsec.hk
 emule-ed2k.com
 emulefans.com
 emuparadise.me
@@ -8488,12 +8519,14 @@ fapality.com
 fapcat.com
 fapdu.com
 fapdude.com
+fapello.com
 faperoni.com
 fapforfun.net
 faphdporn.com
 faphouse.com
 fapmovz.com
 fapnado.com
+fapomania.com
 fapopedia.net
 fappcelebs.com
 fappeningbook.com
@@ -8868,6 +8901,7 @@ flickr.com
 flickr.net
 flickrhivemind.net
 flickriver.com
+fliggy.hk
 fling.com
 flipboard.com
 flipfap.com
@@ -10894,6 +10928,7 @@ hgseav.com
 hh-content.com
 hhdcb3office.org
 hhthesakyatrizin.org
+hhtravel.com.tw
 hhvm.com
 hi-on.org.tw
 hibdontire.com
@@ -12903,6 +12938,10 @@ jbtalks.com
 jbtalks.my
 jburl.top
 jcpenney.com
+jd.co.th
+jd.hk
+jd.id
+jd.ru
 jdav-css.shop
 jdavsp.asia
 jdavsp.com
@@ -13540,6 +13579,7 @@ leagueoflegendsscripts.com
 leaguesharp.info
 leaguoflegends.com
 leakedmeat.com
+leakedzone.com
 leaksmodels.com
 leakxxx.com
 leannecrowvideos.com
@@ -13637,6 +13677,7 @@ libgen.me
 libgen.rs
 libgen.st
 liboggirls.net
+library.lol
 library.usc.cuhk.edu.hk
 librarylovefest.com
 libraryofthumbs.com
@@ -16494,6 +16535,7 @@ nudistsexvideos.com
 nudistvoyeurbeach.com
 nudity911.com
 nudography.com
+nudostar.tv
 nuespournous.com
 nuexpo.com
 nuget.org
@@ -17538,6 +17580,7 @@ pinflix.com
 ping.fm
 ping.pe
 ping.sx
+pingan.com.hk
 pingguotv.xyz
 pingxiangpuer.com
 pinimg.com
@@ -18790,11 +18833,15 @@ redchinacn.org
 redd.it
 reddit.app.link
 reddit.com
+redditblog.com
 reddithelp.com
+redditinc.com
 redditlist.com
 redditmail.com
 redditmedia.com
+redditspace.com
 redditstatic.com
+redditstatus.com
 redfaptube.com
 redgifs.com
 redhat.com
@@ -19657,6 +19704,7 @@ shat-tibet.com
 shattered.io
 shazam.com
 shdd.ink
+sheets.new
 sheflix.com
 shegg.com
 shegods.com
@@ -19958,6 +20006,7 @@ sleazyfork.org
 sleazyneasy.com
 slheng.com
 slickvpn.com
+slides.new
 slideshare.com
 slideshare.net
 slidesharecdn.com
@@ -21061,8 +21110,12 @@ tellmewhygame.com
 temetube.xyz
 tenacy.com
 tenbyfotolia.com
+tencent-cloud.cn
+tencent-cloud.com
 tencent.co.id
+tencent.com.hk
 tencent.design
+tencentcloud.com
 tenor.com
 tensojapan.com
 tensorflow.org
@@ -21534,6 +21587,7 @@ tktube.com
 tl.gd
 tma.co.jp
 tmagazine.com
+tmall.ru
 tmdb.org
 tmdfish.com
 tmei-taoyuan.com
@@ -21736,6 +21790,7 @@ trickip.org
 trikepatrol.com
 trimondi.de
 triokini.com
+trip.com
 tristatebmw.com
 trithucvn.net
 trithucvn.org
@@ -23524,6 +23579,7 @@ whatboyswant.com
 whatbrowser.org
 whatisairwatch.com
 whatisworkspaceone.com
+whats.new
 whatsapp-plus.info
 whatsapp-plus.me
 whatsapp-plus.net
@@ -24281,6 +24337,7 @@ xsvod.xyz
 xsz-av.com
 xtapes.to
 xtegvk.xyz
+xtracloud.net
 xtube.com
 xtubebdsm.com
 xtubezoo.com
@@ -25456,7 +25513,7 @@ regexp:^(.+\.)?singlelogin\..+$
 regexp:^(.+\.)?tagss\d*\.pro$
 regexp:^(.+\.)?z?lib(rary)?\..+$
 regexp:^[0-9]+vod-adaptive\.akamaized\.net$
-regexp:^chatgpt-async-webps-prod-eastus-\d+\.webpubsub\.azure\.com$
+regexp:^chatgpt-async-webps-prod-\S+-\d+\.webpubsub\.azure\.com$
 regexp:^epicgames-download\d\.akamaized\.net$
 regexp:^ewcdn[0-9]{2}\.nowe\.com$
 regexp:^github-production-release-asset-[0-9a-zA-Z]{6}\.s3\.amazonaws\.com$
