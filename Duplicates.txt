@@ -19,6 +19,8 @@ eilieili.cc
 fliggy.hk
 galaxyappstore.com
 gigabyte.com
+gvt1-cn.com
+gvt2-cn.com
 honkaiimpact3.com
 honkaistarrail.com
 hostmonit.com
@@ -33,6 +35,8 @@ inshotapp.com
 jd.hk
 joox.com
 kuke.com
+lbkrs.com
+longbridgeapp.com
 maa.plus
 miniso.com
 mox.moe
@@ -56,5 +60,3 @@ xianba.net
 yamibo.com
 full:developer.microsoft.com
 full:download.visualstudio.microsoft.com
-regexp:.+\.awsdns-cn-[0-9][0-9]\.(biz|com|net|top)$
-regexp:.+\.awsdns-cn-[0-9][a-e0-9]\.cn$
