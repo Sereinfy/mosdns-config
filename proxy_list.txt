@@ -54,7 +54,6 @@ full:beck-online.beck.de
 full:bingsettingssearch.trafficmanager.net
 full:blizzard.nefficient.co.kr
 full:blizzcon-a.akamaihd.net
-full:blog.xiaoz.org
 full:blzddist1-a.akamaihd.net
 full:blzddistkr1-a.akamaihd.net
 full:blzmedia-a.akamaihd.net
@@ -72,7 +71,6 @@ full:cbsservice.aws.syncbak.com
 full:cdn-spotify-experiments.conductrics.com
 full:cdn.js7k.com
 full:cdn.jsdelivr.net
-full:cdn.statically.io
 full:cdngarenanow-a.akamaihd.net
 full:chinapower.csis.org
 full:cisco.evergage.com
@@ -155,7 +153,6 @@ full:homebrew.bintray.com
 full:hpstore.corpmerchandise.com
 full:hulu.playback.edge.bamgrid.com
 full:i.jeded.com
-full:images.prismic.io
 full:img-prod-cms-rt-microsoft-com.akamaized.net
 full:img-s-msn-com.akamaized.net
 full:impala-media-production.s3.amazonaws.com
@@ -195,7 +192,6 @@ full:officecdn-microsoft-com.akamaized.net
 full:onekey.zendesk.com
 full:oneocsp.microsoft.com
 full:ood.opsource.net
-full:openai.ne.world
 full:openaiapi-site.azureedge.net
 full:openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net
 full:openaicomproductionae4b.blob.core.windows.net
@@ -307,7 +303,6 @@ full:scholar.google.sk
 full:scholar.googleusercontent.com
 full:scholar.l.google.com
 full:sentry.ppy.sh
-full:snap.snapmobile.asia
 full:sni1dcb6gl.wpc.edgecastcdn.net
 full:spectator.ppy.sh
 full:spotify.com.edgesuite.net
@@ -2001,6 +1996,7 @@ annualreviews.org
 anobii.com
 anon-v.com
 anon-v.lol
+anond.hatelabo.jp
 anonfiles.com
 anontext.com
 anonymitynetwork.com
@@ -3047,6 +3043,7 @@ b-ok.asia
 b-ok.cc
 b-ok.global
 b-ok.org
+b.hatena.ne.jp
 b0ne.com
 b3boos.com
 b6b33.com
@@ -3959,6 +3956,7 @@ blog.syx86.com
 blog.taragana.com
 blog.tiney.com
 blog.workflow.is
+blog.xiaoz.org
 blog.xuite.net
 blog.youthwant.com.tw
 blogblog.com
@@ -5282,6 +5280,7 @@ cdig.info
 cdjp.org
 cdkworkshop.com
 cdmatech.com
+cdn-ak2.favicon.st-hatena.com
 cdn-apple.com
 cdn-images.mailchimp.com
 cdn-telegram.org
@@ -5292,6 +5291,7 @@ cdn.jwplayer.com
 cdn.printfriendly.com
 cdn.seatguru.com
 cdn.softlayer.net
+cdn.statically.io
 cdn1.lp.saboom.com
 cdn77.com
 cdn77.org
@@ -6329,6 +6329,7 @@ cztv117.shop
 d-fukyu.com
 d-trust.net
 d-upp.com
+d.hatena.ne.jp
 d100.net
 d1b183sg0nvnuh.cloudfront.net
 d1c37gjwa26taa.cloudfront.net
@@ -10526,6 +10527,7 @@ guishan.org
 gumroad.com
 gumtree.sg
 gun-world.net
+gunosy.com
 gunsamerica.com
 gunsandammo.com
 guo.media
@@ -12111,6 +12113,7 @@ imagepost.com
 images-amazon.com
 images-gaytube.com
 images.comico.tw
+images.prismic.io
 imageshack.com
 imageshack.us
 imagetwist.com
@@ -17045,6 +17048,7 @@ op.gg
 op7979.com
 open.com.hk
 openai.com
+openai.ne.world
 openairinterface.org
 openallweb.com
 openamt.com
@@ -18795,6 +18799,7 @@ rael.org
 raggedbanner.com
 raidcall.com.tw
 raidtalk.com.tw
+rainbow.me
 rainbowplan.org
 raindrop.io
 raizoji.or.jp
@@ -20219,6 +20224,7 @@ smyxy.org
 snap-dev.net
 snap-telemetry.io
 snap.com
+snap.snapmobile.asia
 snapchat.com
 snapcraft.io
 snapdragon.cn
