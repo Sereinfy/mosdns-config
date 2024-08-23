@@ -12225,6 +12225,7 @@ infrapedia.com
 infraworks.com
 infura.io
 ingads.com
+ingest.sentry.io
 ingka.com
 ingka.dev
 ingkacentres.com
