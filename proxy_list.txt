@@ -4928,10 +4928,12 @@ bx.tl
 byapis.com
 bybeatsdre.com
 bybit.com
+bybitglobal.com
 bycbe.com
 bycsi.com
 bydrebeats.com
 bygpp1207.world
+byhkbit.com
 byjav.me
 byjhd.com
 bymj.io
@@ -25685,6 +25687,7 @@ regexp:^(.+\.)?(art|de|hk|ma|sg)?\d+lib\..+$
 regexp:^(.+\.)?b-ok\..+$
 regexp:^(.+\.)?booksc\..+$
 regexp:^(.+\.)?bookshome\..+$
+regexp:^(.+\.)?bybit\..+$
 regexp:^(.+\.)?htx\..+$
 regexp:^(.+\.)?huobi\..+$
 regexp:^(.+\.)?libsolutions\..+$
