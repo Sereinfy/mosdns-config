@@ -142,6 +142,7 @@ full:foxnewsplayer-a.akamaihd.net
 full:gamedownloads-rockstargames-com.akamaized.net
 full:gamer-cds.cdn.hinet.net
 full:gamer2-cds.cdn.hinet.net
+full:geckoiplc.com
 full:gigabyte2.azureedge.net
 full:github-cloud.s3.amazonaws.com
 full:gitlab-assets.oss-cn-hongkong.aliyuncs.com
@@ -226,6 +227,7 @@ full:qualcomm.sc.omtrdc.net
 full:reddit.map.fastly.net
 full:rink.hockeyapp.net
 full:rtm.tnt-ea.com
+full:s3.ap-south-1.amazonaws.com
 full:sa78gs.wpc.edgecastcdn.net
 full:safebrowsing.g.aaplimg.com
 full:scc.ott.hinet.net
@@ -338,6 +340,7 @@ full:ubisoft-orbit-savegames.s3.amazonaws.com
 full:ubisoft-uplay-savegames.s3.amazonaws.com
 full:ubistatic3-a.akamaihd.net
 full:ulrichsweb.serialssolutions.com
+full:upos-hz-mirrorakam.akamaized.net
 full:ve-dash-uk-live.akamaized.net
 full:ve-uhd-push-uk-live.akamaized.net
 full:venmo.s3.amazonaws.com
@@ -465,6 +468,7 @@ full:wwis-dubc1-vip97.adobe.com
 full:wwis-dubc1-vip98.adobe.com
 full:wwis-dubc1-vip99.adobe.com
 full:www-cdn.icloud.com.akadns.net
+full:www.geckoiplc.com
 full:zeenews-fonts.s3.amazonaws.com
 full:ztedevices.com
 000webhost.com
@@ -3047,7 +3051,6 @@ b-ok.asia
 b-ok.cc
 b-ok.global
 b-ok.org
-b.hatena.ne.jp
 b0ne.com
 b3boos.com
 b6b33.com
@@ -3760,6 +3763,8 @@ bild.de
 bili2.cc
 bili888.com
 bili999.com
+bilibili.tv
+biliintl.com
 biliplus.com
 biliworld.com
 bill-safe.com
@@ -3957,7 +3962,6 @@ blog.syx86.com
 blog.taragana.com
 blog.tiney.com
 blog.workflow.is
-blog.xiaoz.org
 blog.xuite.net
 blog.youthwant.com.tw
 blogblog.com
@@ -5283,7 +5287,6 @@ cdig.info
 cdjp.org
 cdkworkshop.com
 cdmatech.com
-cdn-ak2.favicon.st-hatena.com
 cdn-apple.com
 cdn-images.mailchimp.com
 cdn-telegram.org
@@ -5294,7 +5297,6 @@ cdn.jwplayer.com
 cdn.printfriendly.com
 cdn.seatguru.com
 cdn.softlayer.net
-cdn.statically.io
 cdn1.lp.saboom.com
 cdn77.com
 cdn77.org
@@ -7153,6 +7155,7 @@ drdremonsterdre.com
 drdreprobeatssale.com
 dreamamateurs.com
 dreambmw.ca
+dreamcast.hk
 dreamforce.com
 dreammovies.com
 dreamteamfc.com
@@ -10954,6 +10957,7 @@ herokussl.com
 herringnetwork.com
 hetzner.cloud
 hetzner.com
+hetzner.company
 hetzner.de
 heungkongdiscuss.com
 hex.pm
@@ -12228,7 +12232,6 @@ infrapedia.com
 infraworks.com
 infura.io
 ingads.com
-ingest.sentry.io
 ingka.com
 ingka.dev
 ingkacentres.com
@@ -12700,6 +12703,7 @@ iproperty.com.sg
 iptv.com.tw
 iptvbin.com
 ipvanish.com
+iq.com
 iqiyiavlive.buzz
 iqq2.cc
 iqq3.cc
@@ -19291,10 +19295,8 @@ s1s1s1.com
 s2csntp.miz.nao.ac.jp
 s2stagehance.com
 s3-ap-northeast-1.amazonaws.com
-s3-ap-southeast-1.amazonaws.com
 s3-ap-southeast-2.amazonaws.com
 s3.amazonaws.com
-s3.ap-south-1.amazonaws.com
 s81c.com
 s8ds5gfm.xyz
 s8forum.com
@@ -20229,7 +20231,6 @@ smyxy.org
 snap-dev.net
 snap-telemetry.io
 snap.com
-snap.snapmobile.asia
 snapchat.com
 snapcraft.io
 snapdragon.cn
@@ -25681,7 +25682,6 @@ regexp:.+\.na-siliconvalley\.tencentcos\.(cn|com(\.cn)?)$
 regexp:.+\.na-toronto\.tencentcos\.(cn|com(\.cn)?)$
 regexp:.+\.sa-saopaulo\.tencentcos\.(cn|com(\.cn)?)$
 regexp:^((((ut1-wwv)|(ntp\-(b|d|wwv))|(time(\-(([a-e]\-(g|b))|([a-e]\-wwv)))?))\.nist\.gov)|((ntp-c|ut1-time)|(utcnist(2|3)?))\.colorado\.edu)$
-regexp:^(.+\.)?(art|de|hk|ma|sg)?\d+lib\..+$
 regexp:^(.+\.)?b-ok\..+$
 regexp:^(.+\.)?booksc\..+$
 regexp:^(.+\.)?bookshome\..+$
@@ -25695,6 +25695,12 @@ regexp:^(.+\.)?okx-dns\d*\.com$
 regexp:^(.+\.)?singlelogin\..+$
 regexp:^(.+\.)?tagss\d*\.pro$
 regexp:^(.+\.)?z?lib(rary)?\..+$
+regexp:^.*(art|de|hk|ma|sg)?\d+lib\..+$
+regexp:^.*b\.hatena\.ne\.jp$
+regexp:^.*cdn-ak2\.favicon\.st-hatena\.com$
+regexp:^.*cdn\.statically\.io$
+regexp:^.*s3-ap-southeast-1\.amazonaws\.com$
+regexp:^.*snap\.snapmobile\.asia$
 regexp:^[0-9]+vod-adaptive\.akamaized\.net$
 regexp:^chatgpt-async-webps-prod-\S+-\d+\.webpubsub\.azure\.com$
 regexp:^epicgames-download\d\.akamaized\.net$
