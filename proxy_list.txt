@@ -12041,6 +12041,7 @@ go-lang.net
 go-lang.org
 go-pki.com
 go-to-library.sk
+go-vpn.com
 go.com
 go.dev
 go.nesnode.com
@@ -23160,6 +23161,7 @@ renovacionoffice.com
 renovacionxboxlive.com
 rentaride.com
 rentaride.de
+rentry.co
 renu.ac.uk
 renyurenquan.org
 renzhe.cloud
@@ -23329,7 +23331,6 @@ rnngroup.ac.uk
 ro89.com
 road-crew.com
 roadshow.hk
-roblox.com
 robobat.com
 roboforex.com
 roborecall.com
