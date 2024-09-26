@@ -164,6 +164,7 @@ full:firebaseremoteconfig.googleapis.com
 full:firstsearch.oclc.org
 full:fontshop-prod-responsive-images.s3.amazonaws.com
 full:foxnewsplayer-a.akamaihd.net
+full:freegecko.com
 full:gamedownloads-rockstargames-com.akamaized.net
 full:gamer-cds.cdn.hinet.net
 full:gamer2-cds.cdn.hinet.net
@@ -497,6 +498,7 @@ full:wwis-dubc1-vip97.adobe.com
 full:wwis-dubc1-vip98.adobe.com
 full:wwis-dubc1-vip99.adobe.com
 full:www-cdn.icloud.com.akadns.net
+full:www.freegecko.com
 full:www.geckoiplc.com
 full:zeenews-fonts.s3.amazonaws.com
 full:ztedevices.com
