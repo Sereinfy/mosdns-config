@@ -22,7 +22,7 @@ with open('china_domain_list.txt', 'r') as file1:
     lines1 = file1.readlines()
 
 # 打开第二个文件
-with open('proxy_list.txt', 'r') as file2:
+with open('proxy_list2.txt', 'r') as file2:
     # 读取第二个文件的所有行
     lines2 = file2.readlines()
 
