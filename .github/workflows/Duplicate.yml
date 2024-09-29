@@ -42,7 +42,7 @@ jobs:
 
       - name: Download Filters
         run: |
-          python Duplicate2.py
+          python dnsmasq-china.py
           rm china_domain_list1.txt
           rm proxy_list21.txt
           
