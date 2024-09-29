@@ -31,5 +31,5 @@ diff_lines = list(set(lines1).difference(set(lines2)) | set(lines2).difference(s
 
 # 将不同的行写入 Duplicates2.txt 文件
 with open('Duplicates2.txt', 'w') as f:
-    f.write('\n'.join(diff_lines))
+    f.write(.join(diff_lines))
 
