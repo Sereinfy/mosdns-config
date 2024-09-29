@@ -34,7 +34,7 @@ for line1 in lines1:
     # 遍历第二个文件的行
     for line2 in lines2:
         # 如果两行相同，则将其添加到common_lines列表中
-        if line1 == line2:
+        if line1 != line2:
             common_lines.append(line1)
 
 # 将common_lines列表中的行写入第三个文件
