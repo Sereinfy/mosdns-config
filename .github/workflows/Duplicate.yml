@@ -39,7 +39,13 @@ jobs:
           python Duplicate.py
           rm china_domain_list.txt
           rm proxy_list2.txt
-            
+
+      - name: Download Filters
+        run: |
+          python Duplicate2.py
+          rm china_domain_list1.txt
+          rm proxy_list21.txt
+          
       - name: Apply
         run: |
           if [ -z "$(git status --porcelain)" ]; then
