@@ -26,17 +26,10 @@ with open('proxy_list21.txt', 'r') as file2:
     # 读取第二个文件的所有行
     lines2 = file2.readlines()
 
-# 创建一个空列表，用于保存同时存在于两个文件中的行
-common_lines = []
+# 使用集合差集提取不同的行
+diff_lines = list(set(lines1).difference(set(lines2)) | set(lines2).difference(set(lines1)))
 
-# 遍历第一个文件的行
-for line1 in lines1:
-    # 遍历第二个文件的行
-    for line2 in lines2:
-        # 如果两行相同，则将其添加到common_lines列表中
-        if line1 != line2:
-            common_lines.append(line1)
+# 将不同的行写入 Duplicates2.txt 文件
+with open('Duplicates2.txt', 'w') as f:
+    f.write('\n'.join(diff_lines))
 
-# 将common_lines列表中的行写入第三个文件
-with open('Duplicates2.txt', 'w') as file3:
-    file3.writelines(common_lines)
