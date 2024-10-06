@@ -63,7 +63,7 @@ jobs:
         run: |
           chmod +x cidr-merger-linux-amd64
           ./cidr-merger-linux-amd64 gfw_ip_list0.txt > gfw_ip_list.txt
-          rm gfw_ip_list0.txt
+
       - name: Commit and push changes
         run: |
           if [ -z "$(git status --porcelain)" ]; then
