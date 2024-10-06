@@ -44,12 +44,12 @@ jobs:
       - name: gfwip lists
         run: |
           curl -sSL -o gfw_ipcidr.txt https://raw.githubusercontent.com/pmkol/easymosdns/refs/heads/rules/gfw_ip_list.txt
-          curl -sSL -o gfw_ip_list.txt https://raw.githubusercontent.com/jevonfy/GFWIPv4/refs/heads/main/gfw_ip_list.txt
+          curl -sSL -o gfw_ip.txt https://raw.githubusercontent.com/jevonfy/GFWIPv4/refs/heads/main/gfw_ip_list.txt
           curl -sSL -o facebook.txt https://raw.githubusercontent.com/Loyalsoldier/geoip/release/text/facebook.txt
           curl -sSL -o twitter.txt https://raw.githubusercontent.com/Loyalsoldier/geoip/release/text/twitter.txt
-          cat gfw_ipcidr.txt gfw_ip_list.txt facebook.txt twitter.txt | sort -u > gfw_ip_list.txt
+          cat gfw_ipcidr.txt gfw_ip.txt facebook.txt twitter.txt | sort -u > gfw_ip_list.txt
           rm gfw_ipcidr.txt
-          rm gfw_ip_list.txt
+          rm gfw_ip.txt
           rm facebook.txt
           rm twitter.txt
           
