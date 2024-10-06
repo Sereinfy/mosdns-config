@@ -4,7 +4,7 @@ name: Merge Proxy Lists
 on:
   schedule:
     - cron: 0 8 * * *
-
+  workflow_dispatch:
 jobs:
   merge_lists:
     runs-on: ubuntu-latest
