@@ -47,12 +47,23 @@ jobs:
           curl -sSL -o gfw_ip.txt https://raw.githubusercontent.com/jevonfy/GFWIPv4/refs/heads/main/gfw_ip_list.txt
           curl -sSL -o facebook.txt https://raw.githubusercontent.com/Loyalsoldier/geoip/release/text/facebook.txt
           curl -sSL -o twitter.txt https://raw.githubusercontent.com/Loyalsoldier/geoip/release/text/twitter.txt
-          cat gfw_ipcidr.txt gfw_ip.txt facebook.txt twitter.txt | sort -u > gfw_ip_list.txt
+          cat gfw_ipcidr.txt gfw_ip.txt facebook.txt twitter.txt | sort -u > gfw_ip_list0.txt
           rm gfw_ipcidr.txt
           rm gfw_ip.txt
           rm facebook.txt
           rm twitter.txt
-          
+      - name: Download Setup 
+        run: |
+          if [ -f cidr-merger-linux-amd64 ]; then
+            echo "File exists"
+          else
+            wget https://github.com/zhanhb/cidr-merger/releases/download/v1.1.3/cidr-merger-linux-amd64
+          fi
+      - name: merger file 
+        run: |
+          chmod +x cidr-merger-linux-amd64
+          ./cidr-merger-linux-amd64 gfw_ip_list0.txt > gfw_ip_list.txt
+          rm gfw_ip_list0.txt
       - name: Commit and push changes
         run: |
           if [ -z "$(git status --porcelain)" ]; then
