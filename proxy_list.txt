@@ -375,6 +375,7 @@ full:ve-dash-uk-live.akamaized.net
 full:ve-uhd-push-uk-live.akamaized.net
 full:venmo.s3.amazonaws.com
 full:videos-rockstargames-com.akamaized.net
+full:vip1.g5.cachefly.net
 full:vmware.tt.omtrdc.net
 full:vod-abematv.akamaized.net
 full:vod-dash-uk-live.akamaized.net
@@ -21480,6 +21481,7 @@ peoplenews.tw
 peoples.ac.uk
 peopo.org
 pepa.ac.uk
+perchance.org
 percy.in
 perfect-privacy.com
 perfected.ac.uk
