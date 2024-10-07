@@ -66,7 +66,7 @@ plugins:
 #        - tag: quad9_ECS
 #          addr: "https://9.9.9.11/dns-query"
         - tag: googleDOH_ECS
-          addr: "https://gobug.top/dns-query"
+          addr: "https://dns.google/dns-query"
           bootstrap: "218.30.118.6"
         - tag: apad
           addr: "https://doh.apad.pro/dns-query" #ECS优化
@@ -265,7 +265,7 @@ plugins:
 
       - matches:
           - qname apple.com edgesuite.net icloud.com live.com live.net msftconnecttest.com office365.com office.com outlook.com trafficmanager.net xbox.com
-        exec: forward 1.12.12.12 120.53.53.53
+        exec: forward 182.254.118.118 119.29.29.29
       - exec: jump has_resp_sequence
       
       - matches:
