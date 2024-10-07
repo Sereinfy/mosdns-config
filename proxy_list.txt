@@ -375,6 +375,7 @@ full:ve-dash-uk-live.akamaized.net
 full:ve-uhd-push-uk-live.akamaized.net
 full:venmo.s3.amazonaws.com
 full:videos-rockstargames-com.akamaized.net
+full:vip.flynet.club
 full:vip1.g5.cachefly.net
 full:vmware.tt.omtrdc.net
 full:vod-abematv.akamaized.net
@@ -393,6 +394,7 @@ full:vscode-sync.trafficmanager.net
 full:vscode.blob.core.windows.net
 full:vscode.search.windows.net
 full:vsmarketplacebadge.apphb.com
+full:web.flynet.club
 full:weblive-hamivideo.cdn.hinet.net
 full:wetv.qq.com
 full:widgets.stripst.com
@@ -499,6 +501,7 @@ full:wwis-dubc1-vip97.adobe.com
 full:wwis-dubc1-vip98.adobe.com
 full:wwis-dubc1-vip99.adobe.com
 full:www-cdn.icloud.com.akadns.net
+full:www.flynet.club
 full:www.freegecko.com
 full:www.geckoiplc.com
 full:zeenews-fonts.s3.amazonaws.com
