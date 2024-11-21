@@ -24,8 +24,7 @@ jobs:
           grep '^full:' temp.txt > temp1.txt
           grep -vE '^(full:|regexp:)' temp.txt >> temp2.txt
           grep '^regexp:' temp.txt > temp3.txt
-          cat temp1.txt temp2.txt temp3.txt >> temp4.txt
-          mv temp4.txt proxy_list.txt
+          cat temp1.txt temp2.txt temp3.txt >> proxy_list.txt
           rm temp*.txt
           rm gfw.txt
           rm proxy-list.txt
