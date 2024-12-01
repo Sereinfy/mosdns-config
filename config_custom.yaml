@@ -146,7 +146,7 @@ plugins:
     type: sequence
     args:
       - matches: # akamai.net 优选ip
-          - cname akamai.net akamaized.net edgesuite.net
+          - cname akamai.net akamaized.net
           - qtype 1
           - has_wanted_ans # 防止纯 IPV6 域名被替换
         exec: jump blackhole_akamai
