@@ -51,6 +51,7 @@ jobs:
           rm gfw_ip.txt
           rm facebook.txt
           rm twitter.txt
+          
       - name: Download Setup 
         run: |
           if [ -f cidr-merger-linux-amd64 ]; then
@@ -58,36 +59,13 @@ jobs:
           else
             wget https://github.com/zhanhb/cidr-merger/releases/download/v1.1.3/cidr-merger-linux-amd64
           fi
+          
       - name: merger file 
         run: |
           chmod +x cidr-merger-linux-amd64
           ./cidr-merger-linux-amd64 gfw_ip_list0.txt > gfw_ip_list.txt
           rm gfw_ip_list0.txt
 
-      - name: Download TXT files
-        run: |
-          mkdir -p ./rule
-          curl -o ./rule/cloudfront.txt https://files.imunify360.com/static/whitelist/v2/cloudfront-cdn.txt
-          curl -o ./rule/cdn77_ipv4.txt https://raw.githubusercontent.com/Journalist-HK/Rules/main/cdn77_ipv4.txt
-          curl -o ./rule/cachefly_ipv4.txt https://raw.githubusercontent.com/Journalist-HK/Rules/main/cachefly_ipv4.txt
-          curl -o ./rule/private.txt https://raw.githubusercontent.com/Journalist-HK/Rules/master/private.txt
-          curl -o ./rule/white_list.txt https://raw.githubusercontent.com/Journalist-HK/Rules/master/white_list.txt
-          curl -o rule/block_list.txt https://raw.githubusercontent.com/Journalist-HK/Rules/master/block_list.txt
-          curl -o rule/hosts_akamai.txt https://raw.githubusercontent.com/Journalist-HK/Rules/main/hosts_akamai.txt
-          curl -o rule/hosts_fastly.txt https://raw.githubusercontent.com/Journalist-HK/Rules/main/hosts_fastly.txt
-          curl -o rule/akamai_domain_list.txt https://raw.githubusercontent.com/Journalist-HK/Rules/master/akamai_domain_list.txt
-          curl -o rule/google_cn.txt https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/google-cn.txt
-          curl -o rule/china_domain_list.txt https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/direct-list.txt
-          curl -o rule/fastly.txt https://raw.githubusercontent.com/Loyalsoldier/geoip/release/text/fastly.txt
-          curl -o rule/china_ip_list.txt https://raw.githubusercontent.com/Sereinfy/china_ip_list/main/china_ip_list.txt
-          curl -o rule/proxy_domain_list.txt https://raw.githubusercontent.com/Sereinfy/mosdns-config/main/proxy_list.txt
-          curl -o rule/gfw_ip_list.txt https://raw.githubusercontent.com/Sereinfy/mosdns-config/main/gfw_ip_list.txt
-          curl -o rule/telegram-cidr.txt https://raw.githubusercontent.com/Sereinfy/mosdns-config/main/telegram-cidr.txt
-          curl -o rule/cloudflare_ipv4.txt https://raw.githubusercontent.com/Sereinfy/mosdns-config/main/cloudflare-ipv4.txt
-
-
-
-          
       - name: Commit and push changes
         run: |
           if [ -z "$(git status --porcelain)" ]; then
@@ -101,13 +79,3 @@ jobs:
             git commit -m "Updated at $(TZ=UTC-8 date +'%Y-%m-%d %H:%M:%S')" -a
             git push -f -u origin main
           fi
-          
-      - name: Commit and push changes to rule branch
-        run: |
-          cd ./rule/ || exit 1
-          git init
-          git config --local user.name "github-actions[bot]"
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git checkout -b rules
-          git add .
-          git push -f -u origin rules
