@@ -1,72 +1,86 @@
 name: Download remote file
 
-
 on:
   schedule:
-    - cron: 0 8 * * *
-  workflow_dispatch:
+    - cron: "0 8 * * *"  # 每天上午 8 点运行
+  workflow_dispatch:  # 支持手动触发
+
 jobs:
-  merge_lists:
+  download:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Download file
+      - name: Download and merge proxy list
         run: |
           curl -sSL -o gfw.txt https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/gfw.txt
           curl -sSL -o proxy-list.txt https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/proxy-list.txt
           curl -sSL -o greatfire.txt https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/greatfire.txt
           curl -sSL -o custom_list.txt https://raw.githubusercontent.com/Journalist-HK/Rules/master/custom_list.txt
+
           cat gfw.txt proxy-list.txt greatfire.txt custom_list.txt | sort -u | sed '/^\s*$/d' | sed '/^#/d' > temp.txt
-          
           grep '^full:' temp.txt > temp1.txt
           grep -vE '^(full:|regexp:)' temp.txt >> temp2.txt
           grep '^regexp:' temp.txt > temp3.txt
           cat temp1.txt temp2.txt temp3.txt >> proxy_list.txt
+          
           rm temp*.txt
-          rm gfw.txt
-          rm proxy-list.txt
-          rm greatfire.txt
-          rm custom_list.txt
-        
+          rm gfw.txt proxy-list.txt greatfire.txt custom_list.txt
+
       - name: Download cloudflare lists
         run: |
           curl -sSL -o cloudflare-ipv4.txt https://www.cloudflare.com/ips-v4
           curl -sSL -o cloudflare-ipv6.txt https://www.cloudflare.com/ips-v6
         
-      - name: Download telegram  lists
+      - name: Download telegram lists
         run: |
-          mkdir -p publish
           curl -sSL -o telegram-cidr.txt https://core.telegram.org/resources/cidr.txt
-          cp telegram-cidr.txt ./publish/
 
-      - name: gfwip lists
+      - name: Download GFW IP lists
         run: |
           curl -sSL -o gfw_ipcidr.txt https://raw.githubusercontent.com/pmkol/easymosdns/refs/heads/rules/gfw_ip_list.txt
           curl -sSL -o gfw_ip.txt https://raw.githubusercontent.com/jevonfy/GFWIPv4/refs/heads/main/gfw_ip_list.txt
           curl -sSL -o facebook.txt https://raw.githubusercontent.com/Loyalsoldier/geoip/release/text/facebook.txt
           curl -sSL -o twitter.txt https://raw.githubusercontent.com/Loyalsoldier/geoip/release/text/twitter.txt
           cat gfw_ipcidr.txt gfw_ip.txt facebook.txt twitter.txt | sort -u > gfw_ip_list0.txt
-          rm gfw_ipcidr.txt
-          rm gfw_ip.txt
-          rm facebook.txt
-          rm twitter.txt
-          
-      - name: Download Setup 
+          rm gfw_ipcidr.txt gfw_ip.txt facebook.txt twitter.txt
+
+      - name: Download Setup
         run: |
           if [ -f cidr-merger-linux-amd64 ]; then
             echo "File exists"
           else
             wget https://github.com/zhanhb/cidr-merger/releases/download/v1.1.3/cidr-merger-linux-amd64
           fi
-          
-      - name: merger file 
+
+      - name: Merge CIDR file
         run: |
           chmod +x cidr-merger-linux-amd64
           ./cidr-merger-linux-amd64 gfw_ip_list0.txt > gfw_ip_list.txt
           rm gfw_ip_list0.txt
+
+      - name: Download other lists
+        run: |
+          mkdir -p publish
+          curl -sSL https://files.imunify360.com/static/whitelist/v2/cloudfront-cdn.txt -o ./publish/cloudfront.txt
+          curl -sSL https://raw.githubusercontent.com/Journalist-HK/Rules/main/cdn77_ipv4.txt -o ./publish/cdn77_ipv4.txt
+          curl -sSL https://raw.githubusercontent.com/Journalist-HK/Rules/main/cachefly_ipv4.txt -o ./publish/cachefly_ipv4.txt
+          curl -sSL https://raw.githubusercontent.com/Journalist-HK/Rules/master/private.txt -o ./publish/private.txt
+          curl -sSL https://raw.githubusercontent.com/Journalist-HK/Rules/master/white_list.txt -o ./publish/white_list.txt
+          curl -sSL https://raw.githubusercontent.com/Journalist-HK/Rules/master/block_list.txt -o ./publish/block_list.txt
+          curl -sSL https://raw.githubusercontent.com/Journalist-HK/Rules/main/hosts_akamai.txt -o ./publish/hosts_akamai.txt
+          curl -sSL https://raw.githubusercontent.com/Journalist-HK/Rules/main/hosts_fastly.txt -o ./publish/hosts_fastly.txt
+          curl -sSL https://raw.githubusercontent.com/Journalist-HK/Rules/master/akamai_domain_list.txt -o ./publish/akamai_domain_list.txt
+          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/google-cn.txt -o ./publish/google_cn.txt
+          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/direct-list.txt -o ./publish/china_domain_list.txt
+          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/geoip/release/text/fastly.txt -o ./publish/fastly.txt
+          curl -sSL https://raw.githubusercontent.com/Sereinfy/china_ip_list/main/china_ip_list.txt -o ./publish/china_ip_list.txt
+          curl -sSL https://raw.githubusercontent.com/Sereinfy/mosdns-config/main/proxy_list.txt -o ./publish/proxy_domain_list.txt
+          curl -sSL https://raw.githubusercontent.com/Sereinfy/mosdns-config/main/gfw_ip_list.txt -o ./publish/gfw_ip_list.txt
+          curl -sSL https://raw.githubusercontent.com/Sereinfy/mosdns-config/main/telegram-cidr.txt -o ./publish/telegram-cidr.txt
+          curl -sSL https://raw.githubusercontent.com/Sereinfy/mosdns-config/main/cloudflare-ipv4.txt -o ./publish/cloudflare_ipv4.txt
 
       - name: Git push assets to "release" branch
         run: |
