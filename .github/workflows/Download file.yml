@@ -15,6 +15,7 @@ jobs:
 
       - name: Download and merge proxy list
         run: |
+          mkdir -p publish
           curl -sSL -o gfw.txt https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/gfw.txt
           curl -sSL -o proxy-list.txt https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/proxy-list.txt
           curl -sSL -o greatfire.txt https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/greatfire.txt
@@ -25,18 +26,18 @@ jobs:
           grep -vE '^(full:|regexp:)' temp.txt >> temp2.txt
           grep '^regexp:' temp.txt > temp3.txt
           cat temp1.txt temp2.txt temp3.txt >> proxy_list.txt
-          
+          mv proxy_list.txt ./publish/proxy_domain_list.txt
           rm temp*.txt
           rm gfw.txt proxy-list.txt greatfire.txt custom_list.txt
 
       - name: Download cloudflare lists
         run: |
-          curl -sSL -o cloudflare-ipv4.txt https://www.cloudflare.com/ips-v4
-          curl -sSL -o cloudflare-ipv6.txt https://www.cloudflare.com/ips-v6
+          curl -sSL -o ./publish/cloudflare_ipv4.txt https://www.cloudflare.com/ips-v4
+          curl -sSL -o ./publish/cloudflare_ipv6.txt https://www.cloudflare.com/ips-v6
         
       - name: Download telegram lists
         run: |
-          curl -sSL -o telegram-cidr.txt https://core.telegram.org/resources/cidr.txt
+          curl -sSL -o ./publish/telegram-cidr.txt https://core.telegram.org/resources/cidr.txt
 
       - name: Download GFW IP lists
         run: |
@@ -58,12 +59,11 @@ jobs:
       - name: Merge CIDR file
         run: |
           chmod +x cidr-merger-linux-amd64
-          ./cidr-merger-linux-amd64 gfw_ip_list0.txt > gfw_ip_list.txt
+          ./cidr-merger-linux-amd64 gfw_ip_list0.txt > ./publish/gfw_ip_list.txt
           rm gfw_ip_list0.txt
 
       - name: Download other lists
         run: |
-          mkdir -p publish
           curl -sSL https://files.imunify360.com/static/whitelist/v2/cloudfront-cdn.txt -o ./publish/cloudfront.txt
           curl -sSL https://raw.githubusercontent.com/Journalist-HK/Rules/main/cdn77_ipv4.txt -o ./publish/cdn77_ipv4.txt
           curl -sSL https://raw.githubusercontent.com/Journalist-HK/Rules/main/cachefly_ipv4.txt -o ./publish/cachefly_ipv4.txt
@@ -77,10 +77,6 @@ jobs:
           curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/direct-list.txt -o ./publish/china_domain_list.txt
           curl -sSL https://raw.githubusercontent.com/Loyalsoldier/geoip/release/text/fastly.txt -o ./publish/fastly.txt
           curl -sSL https://raw.githubusercontent.com/Sereinfy/china_ip_list/main/china_ip_list.txt -o ./publish/china_ip_list.txt
-          curl -sSL https://raw.githubusercontent.com/Sereinfy/mosdns-config/main/proxy_list.txt -o ./publish/proxy_domain_list.txt
-          curl -sSL https://raw.githubusercontent.com/Sereinfy/mosdns-config/main/gfw_ip_list.txt -o ./publish/gfw_ip_list.txt
-          curl -sSL https://raw.githubusercontent.com/Sereinfy/mosdns-config/main/telegram-cidr.txt -o ./publish/telegram-cidr.txt
-          curl -sSL https://raw.githubusercontent.com/Sereinfy/mosdns-config/main/cloudflare-ipv4.txt -o ./publish/cloudflare_ipv4.txt
 
       - name: Git push assets to "release" branch
         run: |
