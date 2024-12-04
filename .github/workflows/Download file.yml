@@ -38,7 +38,9 @@ jobs:
         
       - name: Download telegram  lists
         run: |
+          mkdir -p publish
           curl -sSL -o telegram-cidr.txt https://core.telegram.org/resources/cidr.txt
+          cp cidr.txt ./publish/
 
       - name: gfwip lists
         run: |
@@ -79,3 +81,14 @@ jobs:
             git commit -m "Updated at $(TZ=UTC-8 date +'%Y-%m-%d %H:%M:%S')" -a
             git push -f -u origin main
           fi
+      - name: Git push assets to "release" branch
+        run: |
+          cd publish || exit 1
+          git init
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b release
+          git add .
+          git commit -m "${{ env.RELEASE_NAME }}"
+          git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
+          git push -f origin release
