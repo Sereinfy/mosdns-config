@@ -88,7 +88,6 @@ jobs:
       - name: Commit and push changes to rule branch
         run: |
           cd rule || exit 1
-          git init
           git checkout -b rule
           git add .
           git config --global user.name "GitHub Actions"
