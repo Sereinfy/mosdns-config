@@ -68,19 +68,6 @@ jobs:
           ./cidr-merger-linux-amd64 gfw_ip_list0.txt > gfw_ip_list.txt
           rm gfw_ip_list0.txt
 
-      - name: Commit and push changes
-        run: |
-          if [ -z "$(git status --porcelain)" ]; then
-              echo "暂无更新，结束运行"
-              exit 0
-          else
-            echo "status=success" >> $GITHUB_OUTPUT
-            git add .
-            git config --local user.email "action@github.com"
-            git config --local user.name "GitHub Action"
-            git commit -m "Updated at $(TZ=UTC-8 date +'%Y-%m-%d %H:%M:%S')" -a
-            git push -f -u origin main
-          fi
       - name: Git push assets to "release" branch
         run: |
           cd publish || exit 1
