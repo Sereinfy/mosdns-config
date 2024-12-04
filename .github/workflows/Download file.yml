@@ -66,12 +66,12 @@ jobs:
 
       - name: Download TXT files
         run: |
-          mkdir -p rule
-          curl -o rule/cloudfront.txt https://files.imunify360.com/static/whitelist/v2/cloudfront-cdn.txt
-          curl -o rule/cdn77_ipv4.txt https://raw.githubusercontent.com/Journalist-HK/Rules/main/cdn77_ipv4.txt
-          curl -o rule/cachefly_ipv4.txt https://raw.githubusercontent.com/Journalist-HK/Rules/main/cachefly_ipv4.txt
-          curl -o rule/private.txt https://raw.githubusercontent.com/Journalist-HK/Rules/master/private.txt
-          curl -o rule/white_list.txt https://raw.githubusercontent.com/Journalist-HK/Rules/master/white_list.txt
+          mkdir -p ./rule
+          curl -o ./rule/cloudfront.txt https://files.imunify360.com/static/whitelist/v2/cloudfront-cdn.txt
+          curl -o ./rule/cdn77_ipv4.txt https://raw.githubusercontent.com/Journalist-HK/Rules/main/cdn77_ipv4.txt
+          curl -o ./rule/cachefly_ipv4.txt https://raw.githubusercontent.com/Journalist-HK/Rules/main/cachefly_ipv4.txt
+          curl -o ./rule/private.txt https://raw.githubusercontent.com/Journalist-HK/Rules/master/private.txt
+          curl -o ./rule/white_list.txt https://raw.githubusercontent.com/Journalist-HK/Rules/master/white_list.txt
           curl -o rule/block_list.txt https://raw.githubusercontent.com/Journalist-HK/Rules/master/block_list.txt
           curl -o rule/hosts_akamai.txt https://raw.githubusercontent.com/Journalist-HK/Rules/main/hosts_akamai.txt
           curl -o rule/hosts_fastly.txt https://raw.githubusercontent.com/Journalist-HK/Rules/main/hosts_fastly.txt
@@ -104,9 +104,10 @@ jobs:
           
       - name: Commit and push changes to rule branch
         run: |
-          cd rule || exit 1
+          cd ./rule/ || exit 1
           git init
           git config --local user.name "github-actions[bot]"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -b rules
           git add .
+          git push -f -u origin rules
