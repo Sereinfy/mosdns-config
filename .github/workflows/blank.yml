@@ -21,31 +21,31 @@ jobs:
           git checkout -b rules origin/rules || git checkout --orphan rules
           git reset --hard
 
-      # 下载多个 TXT 文件
+      # 下载多个 TXT 文件并保存到仓库目录下的 rules 目录
       - name: Download TXT files
         run: |
-          mkdir -p /tmp/easymosdns
-          curl https://files.imunify360.com/static/whitelist/v2/cloudfront-cdn.txt > /tmp/easymosdns/cloudfront.txt
-          curl https://ghproxy.cc/https://raw.githubusercontent.com/Journalist-HK/Rules/main/cdn77_ipv4.txt > /tmp/easymosdns/cdn77_ipv4.txt
-          curl https://ghproxy.cc/https://raw.githubusercontent.com/Journalist-HK/Rules/main/cachefly_ipv4.txt > /tmp/easymosdns/cachefly_ipv4.txt
-          curl https://ghproxy.cc/https://raw.githubusercontent.com/Journalist-HK/Rules/master/private.txt > /tmp/easymosdns/private.txt
-          curl https://ghproxy.cc/https://raw.githubusercontent.com/Journalist-HK/Rules/master/white_list.txt > /tmp/easymosdns/white_list.txt
-          curl https://ghproxy.cc/https://raw.githubusercontent.com/Journalist-HK/Rules/master/block_list.txt > /tmp/easymosdns/block_list.txt
-          curl https://ghproxy.cc/https://raw.githubusercontent.com/Journalist-HK/Rules/main/hosts_akamai.txt > /tmp/easymosdns/hosts_akamai.txt
-          curl https://ghproxy.cc/https://raw.githubusercontent.com/Journalist-HK/Rules/main/hosts_fastly.txt > /tmp/easymosdns/hosts_fastly.txt
-          curl https://ghproxy.cc/https://raw.githubusercontent.com/Journalist-HK/Rules/master/akamai_domain_list.txt > /tmp/easymosdns/akamai_domain_list.txt
-          curl https://ghproxy.cc/https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/google-cn.txt > /tmp/easymosdns/google_cn.txt
-          curl https://ghproxy.cc/https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/direct-list.txt > /tmp/easymosdns/china_domain_list.txt
-          curl https://ghproxy.cc/https://raw.githubusercontent.com/Loyalsoldier/geoip/release/text/fastly.txt > /tmp/easymosdns/fastly.txt
-          curl https://ghproxy.cc/https://raw.githubusercontent.com/Sereinfy/china_ip_list/main/china_ip_list.txt > /tmp/easymosdns/china_ip_list.txt
-          curl https://ghproxy.cc/https://raw.githubusercontent.com/Sereinfy/mosdns-config/main/proxy_list.txt > /tmp/easymosdns/proxy_domain_list.txt
-          curl https://ghproxy.cc/https://raw.githubusercontent.com/Sereinfy/mosdns-config/main/gfw_ip_list.txt > /tmp/easymosdns/gfw_ip_list.txt
-          curl https://ghproxy.cc/https://raw.githubusercontent.com/Sereinfy/mosdns-config/main/telegram-cidr.txt > /tmp/easymosdns/telegram-cidr.txt
-          curl https://ghproxy.cc/https://raw.githubusercontent.com/Sereinfy/mosdns-config/main/cloudflare-ipv4.txt > /tmp/easymosdns/cloudflare_ipv4.txt
+          mkdir -p ./rules
+          curl https://files.imunify360.com/static/whitelist/v2/cloudfront-cdn.txt > ./rules/cloudfront.txt
+          curl https://ghproxy.cc/https://raw.githubusercontent.com/Journalist-HK/Rules/main/cdn77_ipv4.txt > ./rules/cdn77_ipv4.txt
+          curl https://ghproxy.cc/https://raw.githubusercontent.com/Journalist-HK/Rules/main/cachefly_ipv4.txt > ./rules/cachefly_ipv4.txt
+          curl https://ghproxy.cc/https://raw.githubusercontent.com/Journalist-HK/Rules/master/private.txt > ./rules/private.txt
+          curl https://ghproxy.cc/https://raw.githubusercontent.com/Journalist-HK/Rules/master/white_list.txt > ./rules/white_list.txt
+          curl https://ghproxy.cc/https://raw.githubusercontent.com/Journalist-HK/Rules/master/block_list.txt > ./rules/block_list.txt
+          curl https://ghproxy.cc/https://raw.githubusercontent.com/Journalist-HK/Rules/main/hosts_akamai.txt > ./rules/hosts_akamai.txt
+          curl https://ghproxy.cc/https://raw.githubusercontent.com/Journalist-HK/Rules/main/hosts_fastly.txt > ./rules/hosts_fastly.txt
+          curl https://ghproxy.cc/https://raw.githubusercontent.com/Journalist-HK/Rules/master/akamai_domain_list.txt > ./rules/akamai_domain_list.txt
+          curl https://ghproxy.cc/https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/google-cn.txt > ./rules/google_cn.txt
+          curl https://ghproxy.cc/https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/direct-list.txt > ./rules/china_domain_list.txt
+          curl https://ghproxy.cc/https://raw.githubusercontent.com/Loyalsoldier/geoip/release/text/fastly.txt > ./rules/fastly.txt
+          curl https://ghproxy.cc/https://raw.githubusercontent.com/Sereinfy/china_ip_list/main/china_ip_list.txt > ./rules/china_ip_list.txt
+          curl https://ghproxy.cc/https://raw.githubusercontent.com/Sereinfy/mosdns-config/main/proxy_list.txt > ./rules/proxy_domain_list.txt
+          curl https://ghproxy.cc/https://raw.githubusercontent.com/Sereinfy/mosdns-config/main/gfw_ip_list.txt > ./rules/gfw_ip_list.txt
+          curl https://ghproxy.cc/https://raw.githubusercontent.com/Sereinfy/mosdns-config/main/telegram-cidr.txt > ./rules/telegram-cidr.txt
+          curl https://ghproxy.cc/https://raw.githubusercontent.com/Sereinfy/mosdns-config/main/cloudflare-ipv4.txt > ./rules/cloudflare_ipv4.txt
 
       # 将下载的文件添加到 rules 分支并推送
       - name: Commit and push downloaded TXT files
         run: |
-          git add /tmp/easymosdns/*.txt
+          git add ./rules/*.txt
           git commit -m "Add downloaded TXT files"
           git push --set-upstream origin rules
