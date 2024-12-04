@@ -93,7 +93,7 @@ jobs:
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -b rule
           git add .
-          git push -f publish rule
+          git push -f origin rule
           
       - name: Commit and push changes
         run: |
