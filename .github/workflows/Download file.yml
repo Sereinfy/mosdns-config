@@ -66,7 +66,7 @@ jobs:
 
       - name: Download TXT files
         run: |
-          mkdir -p /rule
+          mkdir -p ./rule
           curl https://files.imunify360.com/static/whitelist/v2/cloudfront-cdn.txt > /tmp/easymosdns/cloudfront.txt
           curl https://raw.githubusercontent.com/Journalist-HK/Rules/main/cdn77_ipv4.txt > /tmp/easymosdns/cdn77_ipv4.txt
           curl https://raw.githubusercontent.com/Journalist-HK/Rules/main/cachefly_ipv4.txt > /tmp/easymosdns/cachefly_ipv4.txt
