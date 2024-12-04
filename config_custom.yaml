@@ -131,14 +131,6 @@ plugins:
       - exec: ttl 3600-0
       - exec: accept
 
-  - tag: blackhole_cloudfront
-    type: sequence
-    args:
-      #- exec: black_hole 108.139.4.72 13.227.74.215 13.249.160.37
-      - exec: query_summary cloudfront_best
-      - exec: ttl 3600-0
-      - exec: accept
-
   - tag: blackhole_cachefly
     type: sequence
     args:
@@ -180,13 +172,7 @@ plugins:
           - has_wanted_ans
           - "resp_ip &./rule/cloudflare_ipv4.txt"
         exec: jump blackhole_cloudflare
-        
-      - matches: # cloudfront 优选ip
-          - qtype 1
-          - has_wanted_ans
-          - "resp_ip &./rule/cloudfront.txt"
-        exec: jump blackhole_cloudfront
-        
+
       - matches:
           - qtype 28
           - has_wanted_ans
