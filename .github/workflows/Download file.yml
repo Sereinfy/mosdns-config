@@ -40,7 +40,7 @@ jobs:
         run: |
           mkdir -p publish
           curl -sSL -o telegram-cidr.txt https://core.telegram.org/resources/cidr.txt
-          cp cidr.txt ./publish/
+          cp telegram-cidr.txt ./publish/
 
       - name: gfwip lists
         run: |
