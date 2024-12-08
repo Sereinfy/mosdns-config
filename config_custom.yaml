@@ -221,7 +221,7 @@ plugins:
     type: sequence
     args:
       - exec: prefer_ipv4
-      - exec: $forward_alidns
+      - exec: $forward_alidns # 这里推荐使用当地运营商dns
       - exec: jump gfw_ip_sequence
       - exec: jump change_cdn_ip
       - exec: jump reforward_cdn77_jp
