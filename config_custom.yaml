@@ -1,6 +1,6 @@
 log:
   level: info
-  file: "/etc/mosdns/mosdns.log"
+  file: "./mosdns.log"
   # /etc/init.d/mosdns reload
 api:
   http: ":9091" # 在该地址启动 api 接口。
@@ -11,16 +11,16 @@ plugins:
     type: "hosts"
     args:
       files:
-        - "/etc/mosdns/rule/hosts.txt"
-        - "/etc/mosdns/rule/hosts_fastly.txt"
-        - "/etc/mosdns/rule/hosts_akamai.txt"
+        - "./rule/hosts.txt"
+        - "./rule/hosts_fastly.txt"
+        - "./rule/hosts_akamai.txt"
         
   - tag: geosite_cn # 国内域名
     type: domain_set
     args:
       files:
-        - "/etc/mosdns/rule/china_domain_list.txt"
-        - "/etc/mosdns/rule/akamai_domain_list.txt" # 主要用于子域名qname 举例: akamaized.net不通
+        - "./rule/china_domain_list.txt"
+        - "./rule/akamai_domain_list.txt" # 主要用于子域名qname 举例: akamaized.net不通
                                                     #             v16m-default.akamaized.net正常
   - tag: "cache_0"
     type: "cache"
@@ -37,6 +37,13 @@ plugins:
       upstreams:
         - addr: "211.138.180.2" # 运营商 DNS
         - addr: "211.138.180.3" # 一般情况下是最快的
+
+  - tag: "forward_clash"
+    type: forward
+    args:
+      concurrent: 1
+      upstreams:
+        - addr: "127.0.0.1:7874"
         
   - tag: "forward_alidns"
     type: forward
@@ -90,12 +97,21 @@ plugins:
           - has_resp
         exec: accept
 
+  - tag: fallback_clash  #在需要获取真实IP的情况下，当Clash故障或关闭时，查询DNS将返回真实IP地址。 
+    type: fallback
+    args:
+      primary: forward_clash
+      secondary: forward_remote
+      threshold: 200  # clash 使用fake-ip是秒答 200毫秒足够
+      always_standby: false  # 副可执行插件 不待命
+      
   - tag: remote_sequence # forward 二选一
     type: sequence
     args:
       - exec: prefer_ipv4
-#      - exec: forward 127.0.0.1:7874  # mosdns前置：Dnsmasq → mosdns → clash
-      - exec: $forward_remote         # mosdns后置：Dnsmasq → clash → mosdns
+      - exec: $fallback_clash           # mosdns前置：Dnsmasq → mosdns → clash
+#      - exec: forward 127.0.0.1:7874   # mosdns前置：Dnsmasq → mosdns → clash # 不带故障转移
+#      - exec: $forward_remote          # mosdns后置：Dnsmasq → clash → mosdns
       - exec: accept
 
   - tag: remote_sequence_us # 使用 US ECS 再次查询优化
@@ -205,7 +221,7 @@ plugins:
     type: sequence
     args:
       - exec: prefer_ipv4
-      - exec: $forward_local
+      - exec: $forward_alidns
       - exec: jump gfw_ip_sequence
       - exec: jump change_cdn_ip
       - exec: jump reforward_cdn77_jp
@@ -259,7 +275,7 @@ plugins:
       - exec: jump has_resp_sequence
 
       - exec: $cache_0 # 下面的请求结果均进入缓存
-
+      
       - matches:
           - qname apple.com edgesuite.net icloud.com live.com live.net msftconnecttest.com office365.com office.com outlook.com trafficmanager.net xbox.com
         exec: $forward_dnspod
@@ -271,10 +287,10 @@ plugins:
 
       - matches:
           - qname $geosite_cn
-        exec: jump local_sequence # 国内域名 & apple cn & 令存在于gfwlist列表中的部分国内cdn，提前走直连
+        exec: jump local_sequence # 国内域名 & apple cn & 以及令存在于gfwlist列表中的部分国内cdn，提前走直连
         
       - matches:
-          - qname &./rule/proxy_domain_list.txt # GFW 域名直接请求clash
+          - qname &./rule/proxy_domain_list.txt # GFW 域名直接走代理
         exec: jump remote_sequence
         
       - exec: $fallback
@@ -283,10 +299,10 @@ plugins:
     type: udp_server
     args:
       entry: main
-      listen: ":5335"
+      listen: "127.0.0.1:5353"
 
   - tag: tcp_server
     type: tcp_server
     args:
       entry: main
-      listen: ":5335"
+      listen: "127.0.0.1:5353"
