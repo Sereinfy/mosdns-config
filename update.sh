@@ -5,7 +5,7 @@
 mosdns_working_dir="/etc/mosdns"
 mkdir -p /tmp/easymosdns \
 && curl https://ghproxy.cc/https://raw.githubusercontent.com/Sereinfy/mosdns-config/release/cloudfront.txt > /tmp/easymosdns/cloudfront.txt \
-&& curl https://ghproxy.cc/https://raw.githubusercontent.com/Sereinfy/mosdns-config/release/cdn77_ipv4.txt > /tmp/easymosdns/cdn77_ipv4.txt \
+&& curl https://ghproxy.cc/https://raw.githubusercontent.com/Sereinfy/mosdns-config/release/original_domain_list.txt > /tmp/easymosdns/original_domain_list.txt \
 && curl https://ghproxy.cc/https://raw.githubusercontent.com/Sereinfy/mosdns-config/release/cachefly_ipv4.txt > /tmp/easymosdns/cachefly_ipv4.txt \
 && curl https://ghproxy.cc/https://raw.githubusercontent.com/Sereinfy/mosdns-config/release/private.txt > /tmp/easymosdns/private.txt \
 && curl https://ghproxy.cc/https://raw.githubusercontent.com/Sereinfy/mosdns-config/release/white_list.txt > /tmp/easymosdns/white_list.txt \
