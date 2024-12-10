@@ -77,6 +77,7 @@ jobs:
           curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/direct-list.txt -o ./publish/china_domain_list.txt
           curl -sSL https://raw.githubusercontent.com/Loyalsoldier/geoip/release/text/fastly.txt -o ./publish/fastly.txt
           curl -sSL https://raw.githubusercontent.com/Sereinfy/china_ip_list/main/china_ip_list.txt -o ./publish/china_ip_list.txt
+          curl -sSL https://raw.githubusercontent.com/Journalist-HK/Rules/refs/heads/main/original_domain_list.txt -o ./publish/original_domain_list.txt
 
       - name: Git push assets to "release" branch
         run: |
