@@ -282,13 +282,6 @@ plugins:
       threshold: 360           # 无响应回滚阈值。单位毫秒。默认 500 。
       always_standby: true     # 副可执行插件始终待命。
 
-  - tag: not_ip_sequence # 临时测试用
-    type: sequence
-    args:
-      - exec: query_summary not_ip
-      - matches: "!qtype 1 28"
-        exec: accept
-          
   - tag: main
     type: sequence
     args:
@@ -298,9 +291,6 @@ plugins:
 
       - exec: $hosts
       - exec: jump has_resp_sequence
-
-      - matches: "!qtype 1 28"
-        exec: jump not_ip_sequence
 
       - matches:
           - qname &./rule/private.txt &./rule/block_list.txt #内网域名 & 黑名单
@@ -312,6 +302,11 @@ plugins:
       - exec: ttl 5-180 #如果使用了DDNS，把这个打开
       - exec: jump has_resp_sequence
 
+      - matches: "!qtype 1 28"
+        exec: $forward_ecs google_doh
+      - matches: "!qtype 1 28" # = accept
+        exec: accept
+        
       - exec: $cache_0 # 下面的请求结果均进入缓存
       - exec: jump has_resp_sequence
       
