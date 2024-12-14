@@ -225,8 +225,7 @@ plugins:
         exec: goto remote_sequence
       - matches: # 屏蔽ip
           - "resp_ip 0.0.0.0 127.0.0.1 ::1"  
-        exec: $forward_remote
-      - exec: jump has_resp_sequence
+        exec: goto remote_sequence
 
   - tag: local_sequence
     type: sequence
