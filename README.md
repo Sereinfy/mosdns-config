@@ -19,31 +19,19 @@
 curl -s 127.0.0.1:9091/plugins/cache_0/flush || exit 1
   ```
 
-## 遇到的问题
+## 通过 socks5 代理来提高境外 DNS 的联通性
 
-  ``` 1. qanme 写法
-
-
-准备两个 txt 文件：
-- 只有一个文件里面有百度：
-  nslookup.exe baidu.com ok
-
-- 两个文件里面都有百度：
-  Query refused
-    - matches:
-        - qname & /etc/mosdns/rule/baidu1.txt # 黑名单，可添加去广告列表
-        - qname & /etc/mosdns/rule/baidu2.txt # 黑名单，可添加去广告列表  
-      exec: reject 5
-      # 确认是 AND 关系
-
-### 2. 第二种情况
-
-
-- matches:
-    - qname & /etc/mosdns/rule/baidu1.txt & /etc/mosdns/rule/baidu2.txt # 只有一个文件里面有百度
-  exec: reject 5
-  Query refused
-  # 确认是 OR 关系
+  ```
+  - tag: "forward_remote"
+    type: "forward"
+    args:
+      concurrent: 1
+      upstreams:
+        - addr: "https://162.159.36.1/dns-query"
+          enable_http3: false
+          socks5: "127.0.0.1:1080" # 目前暂不支持用户名密码认证，只支持基于 TCP 的协议
+        - addr: "https://162.159.46.1/dns-query"
+          enable_http3: false
   ```
 ## 代码修改来源
   https://github.com/Journalist-HK/mosdns-config
