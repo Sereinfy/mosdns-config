@@ -181,7 +181,7 @@ plugins:
         exec: accept
 
       - matches:
-          - qname $akamailist github.com
+          - qname $akamailist
         exec: jump ali_sequence_jp
 
       - matches:
