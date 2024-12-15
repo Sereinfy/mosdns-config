@@ -1,0 +1,237 @@
+log:
+  level: debug
+  file: "./mosdns.log"
+  # /etc/init.d/mosdns reload
+api:
+  http: ":9091" # 在该地址启动 api 接口。
+include:
+  - "./blackhole.yaml"
+  - "./forward.yaml"
+  - "./load_rules.yaml"
+
+plugins:
+
+  - tag: "cache_local"
+    type: "cache"
+    args:
+      size: 8192  # 默认: 1024。
+      lazy_cache_ttl: 259200  # 默认: 0（禁用 lazy cache）。#建议值 86400（1天）~ 259200（3天）
+      dump_file: ./cache_local.dump
+      dump_interval: 7200  # (实验性) 自动保存间隔。
+
+  - tag: "cache_black"
+    type: "cache"
+    args:
+      size: 8192
+      lazy_cache_ttl: 259200
+      dump_file: ./cache_black.dump
+      dump_interval: 7200
+
+  - tag: has_resp_sequence
+    type: sequence
+    args:
+      - matches:
+          - has_resp
+        exec: accept
+
+  - tag: "fallback_fakeip" # "!has_resp"
+    type: "fallback"
+    args:
+      primary: forward_fakeip # clash 返回fake-ip
+      secondary: forward_remote # 在有获取真实IP的需求时，当Clash故障或关闭，查询DNS将返回真实IP地址。
+      threshold: 200
+      always_standby: false # 副可执行插件,不待命时，由于clash秒答，所以相当于普通sequence插件
+
+  - tag: "fallback_remote"
+    type: "fallback"
+    args:
+      primary: forward_remote
+      secondary: forward_easy
+      threshold: 500           # 无响应回滚阈值。单位毫秒。默认 500 。
+      always_standby: true     # 副可执行插件始终待命。
+
+  - tag: ttl_36000_sequence
+    type: sequence
+    args:
+      - exec: query_summary ttl_36000
+      - exec: black_hole ::36 #测试后注释并删除且刷新 http://127.0.0.1:9091/plugins/cache_black/flush
+      - exec: ttl 36000 # 重启失效
+      - exec: accept
+
+  - tag: remote_sequence # forward 二选一
+    type: sequence
+    args:
+#      - exec: prefer_ipv4
+      - exec: $fallback_fakeip          # mosdns前置：Dnsmasq → mosdns → clash
+#      - exec: $forward_fakeip   # mosdns前置：Dnsmasq → mosdns → clash # 不带故障转移
+      - exec: ttl 1
+#      - exec: $forward_remote          # mosdns后置：Dnsmasq → clash → mosdns
+      - exec: accept
+
+  - tag: not_ip_sequence
+    type: sequence
+    args:
+      - matches: "!resp_ip 0.0.0.0/0 2000::/3"
+        exec: query_summary dns_not_ip # 打印日志 没实际作用
+      - matches: "!resp_ip 0.0.0.0/0 2000::/3"
+        exec: $forward_ecs google_doh
+      - matches: "!resp_ip 0.0.0.0/0 2000::/3"
+        exec: jump ttl_36000_sequence
+
+  - tag: gfw_ip_sequence
+    type: sequence
+    args:
+      - matches: # 污染ip 屏蔽ip
+          - "resp_ip $banned_ip 0.0.0.0 127.0.0.1 ::1"
+        exec: query_summary dns_hijack # 打印日志 后期放入wall_list.txt
+      - matches: # 污染ip 屏蔽ip
+          - "resp_ip $banned_ip 0.0.0.0 127.0.0.1 ::1"
+        exec: jump remote_sequence
+
+  - tag: local_sequence
+    type: sequence
+    args:
+#      - exec: prefer_ipv4
+      - exec: $cache_black
+      - exec: jump has_resp_sequence
+      - exec: query_summary local_Request
+      - exec: $forward_alidns # 这里推荐使用当地运营商dns
+      - matches:
+        - "!qtype 1" # rcode 3
+        - "!resp_ip 0.0.0.0/0 2000::/3" 
+        exec: jump ttl_36000_sequence #test url 010dh.com
+      - matches:
+        - "!qtype 1"
+        exec: accept # test url sensearch.baidu.com
+      - exec: jump not_ip_sequence #test url c.mi.com
+      - exec: jump gfw_ip_sequence
+      - exec: query_summary next_Request
+      - exec: $cache_local # 下面的请求结果均进入缓存 已响应 不能用has_resp_sequence
+      - exec: jump change_cdn_ip
+      - exec: accept # 有没有响应都终止，防止后续查询其他上游
+
+  - tag: ali_sequence_jp # 阿里日本准确度高，腾讯美国准确度高
+    type: sequence
+    args:
+#      - exec: prefer_ipv4
+      - exec: ecs 13.78.0.0
+      - exec: $forward_ecs google_doh
+      - exec: jump change_cdn_ip
+      - exec: accept
+
+  - tag: tencent_sequence_lax
+    type: sequence
+    args:
+#      - exec: prefer_ipv4
+      - exec: ecs 151.101.196.0
+      - exec: $forward_dnspod
+      - exec: jump change_cdn_ip
+      - exec: accept
+
+  - tag: default_sequence
+    type: sequence
+    args:
+#      - exec: prefer_ipv4
+      - exec: $cache_local # 下面的请求结果均进入缓存
+      - exec: jump has_resp_sequence
+      - exec: query_summary default_Request
+      - exec: $forward_alidns # 默认用国内，用来查询是否污染
+      - matches:
+        - "rcode 0"
+        - "qtype 28"
+        - "!resp_ip 2000::/3"
+        - "!resp_ip ::1"
+        exec: jump ttl_36000_sequence #test url wedata.net
+      - matches:
+          - "resp_ip $geoip_cn"
+        exec: accept # 国内直接接受
+      - exec: jump not_ip_sequence
+      - exec: jump gfw_ip_sequence
+      - exec: drop_resp
+
+      - exec: query_summary global_Request
+      - exec: ecs 151.101.196.0   # Los_Angeles
+      - exec: $fallback_remote    # 也可以直接用 forward_ecs or forward_remote
+      - exec: jump change_cdn_ip
+      - exec: jump has_resp_sequence
+
+  - tag: main
+    type: sequence
+    args:
+      - matches:
+          - qtype 65
+        exec: reject 3 # 屏蔽 QTYPE 65
+
+      - exec: $hosts
+      - exec: jump has_resp_sequence
+
+      - matches:
+          - qname $privatelist $blocklist #内网域名 & 黑名单
+        exec: reject 5
+
+      - matches:
+          - qname $whitelist # DDNS 和 白名单
+        exec: $forward_local
+      - exec: ttl 5-180 #如果使用了DDNS，把这个打开
+      - exec: jump has_resp_sequence
+
+      - matches: "!qtype 1 28"
+        exec: $forward_ecs google_doh
+      - matches: "!qtype 1 28" # = accept
+        exec: accept
+
+      - matches:
+          - qname $akamailist github.com
+        exec: jump ali_sequence_jp
+
+      - matches:
+          - qname ebay.com # 占位
+        exec: jump tencent_sequence_lax
+
+      - matches:
+          - qname apple.com edgesuite.net icloud.com live.com live.net msftconnecttest.com office365.com office.com outlook.com trafficmanager.net xbox.com
+        exec: $forward_dnspod
+      - exec: jump has_resp_sequence
+
+      - matches:
+          - qname $originallist # 不进行 IP 替换的域名，通常是游戏等使用非常用端口的域名
+        exec: $forward_remote
+      - exec: jump has_resp_sequence
+
+      - matches:
+          - qname $google_cn &./rule/wall_list.txt # wall_list手动创建
+        exec: jump remote_sequence # 适用于被墙/被污染/尚未移出geosite_cn列表的，提前走代理
+
+      - matches:
+          - qname $geosite_cn
+        exec: jump local_sequence # 国内域名 & apple cn 提前走直连
+
+      - matches:
+          - qname $gfwlist # GFW 域名直接走代理
+        exec: jump remote_sequence
+
+      - exec: $default_sequence # 不在列表内的域名
+
+  - tag: udp_server
+    type: udp_server
+    args:
+      entry: main
+      listen: ":5353"
+
+  - tag: tcp_server
+    type: tcp_server
+    args:
+      entry: main
+      listen: ":5353"
+
+#  - tag: singbox_udp
+#    type: udp_server
+#    args:
+#      entry: default_sequence
+#      listen: ":6363"
+
+#  - tag: singbox_tcp
+#    type: tcp_server
+#    args:
+#      entry: default_sequence
+#      listen: ":6363"
