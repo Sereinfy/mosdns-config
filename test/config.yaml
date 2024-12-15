@@ -34,6 +34,14 @@ plugins:
           - has_resp
         exec: accept
 
+  - tag: "fallback_fakeip" # "!has_resp"
+    type: "fallback"
+    args:
+      primary: forward_fakeip # clash 返回fake-ip
+      secondary: forward_remote # 在有获取真实IP的需求时，当Clash故障或关闭，查询DNS将返回真实IP地址。
+      threshold: 200
+      always_standby: false # 副可执行插件,不待命时，由于clash秒答，所以相当于普通sequence插件
+
   - tag: "fallback_remote"
     type: "fallback"
     args:
@@ -54,7 +62,8 @@ plugins:
     type: sequence
     args:
 #      - exec: prefer_ipv4
-      - exec: $forward_fakeip   # mosdns前置：Dnsmasq → mosdns → clash
+#      - exec: $fallback_fakeip          # mosdns前置：Dnsmasq → mosdns → clash
+      - exec: $forward_fakeip   # mosdns前置：Dnsmasq → mosdns → clash # 不带故障转移
       - exec: ttl 1
 #      - exec: $forward_remote          # mosdns后置：Dnsmasq → clash → mosdns
       - exec: accept
