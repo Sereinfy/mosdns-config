@@ -84,7 +84,7 @@ jobs:
         run: 
           curl -L https://github.com/C502/v2dat/releases/latest/download/v2dat --output ./publish/v2dat && chmod +x ./publish/v2dat
           curl -L https://github.com/Sereinfy/ruleset_geodata/releases/download/clash/geosite.dat --output ./publish/geosite.dat
-          ./publish/v2dat unpack geosite geosite.dat -o geosite
+          ./publish/v2dat unpack geosite ./publish/geosite.dat -o ./publish/geosite
 
       - name: Git push assets to "release" branch
         run: |
