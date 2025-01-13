@@ -79,6 +79,17 @@ jobs:
           curl -sSL https://raw.githubusercontent.com/Sereinfy/china_ip_list/main/china_ip_list.txt -o ./publish/china_ip_list.txt
           curl -sSL https://raw.githubusercontent.com/Journalist-HK/Rules/refs/heads/main/original_domain_list.txt -o ./publish/original_domain_list.txt
 
+
+      - name: Get custom v2dat
+        run: curl -L https://github.com/C502/v2dat/releases/latest/download/v2dat --output v2dat && chmod +x v2dat
+
+      - name: Get custom geosite
+        run: curl -L https://github.com/Sereinfy/ruleset_geodata/releases/download/clash/geosite.dat --output geosite.dat
+
+      - name: Extract txt
+        run: ./v2dat unpack geosite geosite.dat
+
+
       - name: Git push assets to "release" branch
         run: |
           cd publish || exit 1
