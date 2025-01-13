@@ -91,8 +91,8 @@ jobs:
           curl -L https://github.com/Sereinfy/ruleset_geodata/releases/download/clash/geosite.dat --output geosite.dat
 
           # 解包 geosite.dat，输出到 out 目录
-          [ ! -d "publish/out" ] && mkdir -p publish/out
-          ./v2dat unpack geosite geosite.dat -d publish/out
+          [ ! -d "./publish/out" ] && mkdir -p ./publish/out
+          ./v2dat unpack geosite geosite.dat -o ./publish/out
 
           
       - name: Git push assets to "release" branch
