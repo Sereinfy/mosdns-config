@@ -91,6 +91,7 @@ jobs:
           curl -L https://github.com/Sereinfy/ruleset_geodata/releases/download/clash/geosite.dat --output geosite.dat
 
           # 解包 geosite.dat，输出到 out 目录
+          [ ! -d "out" ] && mkdir -p out
           ./v2dat unpack geosite geosite.dat -d out
 
           # 移动 out 目录到 publish 目录
