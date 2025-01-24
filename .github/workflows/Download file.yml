@@ -82,17 +82,17 @@ jobs:
       - name: Extract txt
         run: |
           # 下载 v2dat 文件
-          curl -L https://github.com/C502/v2dat/releases/latest/download/v2dat --output v2dat
+          curl -L https://github.com/MetaCubeX/geo/releases/download/v1.1/geo-linux-amd64 --output geo
 
           # 给 v2dat 文件赋予执行权限
           chmod +x ./v2dat
 
           # 下载 geosite.dat 文件
-          curl -L https://github.com/Sereinfy/ruleset_geodata/releases/download/clash/geosite.dat --output geosite.dat
+          curl -L https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat --output geosite.dat
 
           # 解包 geosite.dat，输出到 out 目录
           [ ! -d "./publish/out" ] && mkdir -p ./publish/out
-          ./v2dat unpack geosite geosite.dat -o ./publish/out
+          ./geo unpack site geosite.dat -o ./publish/out
 
           
       - name: Git push assets to "release" branch
