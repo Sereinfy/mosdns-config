@@ -85,7 +85,7 @@ jobs:
           curl -L https://github.com/MetaCubeX/geo/releases/download/v1.1/geo-linux-amd64 --output geo
 
           # 给 v2dat 文件赋予执行权限
-          chmod +x ./v2dat
+          chmod +x ./geo
 
           # 下载 geosite.dat 文件
           curl -L https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat --output geosite.dat
