@@ -92,7 +92,7 @@ jobs:
 
           # 解包 geosite.dat，输出到 out 目录
           [ ! -d "./publish/out" ] && mkdir -p ./publish/out
-          ./geo unpack site geosite.dat -o ./publish/out
+          ./geo unpack site geosite.dat -d ./publish/out
 
           
       - name: Git push assets to "release" branch
