@@ -41,9 +41,9 @@ plugins:
     args:
       concurrent: 2 # 并发数。每次请求随机选取 concurrent 个 upstreams 发送请求。
       upstreams:
-        - addr: "https://162.159.36.1/dns-query" # cloudflare
+        - addr: "https://149.112.112.112/dns-query" # Quad9
         - addr: "https://208.67.222.123/dns-query" # opendns
-        - addr: "https://101.101.101.101/dns-query" # TWNIC DNS Quad 101
+        - addr: "https://101.101.101.101/dns-query" # TWNIC Quad 101
 
   - tag: "forward_ecs"
     type: "forward"
@@ -52,10 +52,10 @@ plugins:
       upstreams:
         - tag: quad9_11
           addr: "https://9.9.9.11/dns-query"
-          socks5: "127.0.0.1:10808"
+#          socks5: "127.0.0.1:10808"
         - tag: google_doh
           addr: "https://8.8.8.8/dns-query"
-          socks5: "127.0.0.1:10808"
+#          socks5: "127.0.0.1:10808"
 
   - tag: "forward_easy"
     type: "forward"

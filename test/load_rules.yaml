@@ -137,12 +137,6 @@ plugins:
       files:
         - "./rule/cloudflare_ipv4.txt" # https://raw.githubusercontent.com/XIU2/CloudflareSpeedTest/master/ip.txt
 
-  - tag: cloudflare_ipv6
-    type: ip_set
-    args:
-      files:
-        - "./rule/cloudflare_ipv6.txt" # https://raw.githubusercontent.com/XIU2/CloudflareSpeedTest/master/ipv6.txt
-
   - tag: cloudfront_ipv4
     type: ip_set
     args:

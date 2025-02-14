@@ -1,5 +1,5 @@
 log:
-  level: debug
+  level: error
   file: "./mosdns.log"
   # /etc/init.d/mosdns reload
 api:
@@ -63,9 +63,9 @@ plugins:
     args:
 #      - exec: prefer_ipv4
 #      - exec: $fallback_fakeip          # mosdns前置：Dnsmasq → mosdns → clash
-      - exec: $forward_fakeip   # mosdns前置：Dnsmasq → mosdns → clash # 不带故障转移
-      - exec: ttl 1
-#      - exec: $forward_remote          # mosdns后置：Dnsmasq → clash → mosdns
+#      - exec: $forward_fakeip   # mosdns前置：Dnsmasq → mosdns → clash # 不带故障转移
+#      - exec: ttl 1
+      - exec: $forward_remote          # mosdns后置：Dnsmasq → clash → mosdns
       - exec: accept
 
   - tag: not_ip_sequence
@@ -74,7 +74,7 @@ plugins:
       - matches: "!resp_ip 0.0.0.0/0 2000::/3"
         exec: query_summary dns_not_ip # 打印日志 没实际作用
       - matches: "!resp_ip 0.0.0.0/0 2000::/3"
-        exec: $forward_ecs google_doh
+        exec: $forward_ecs
       - matches: "!resp_ip 0.0.0.0/0 2000::/3"
         exec: jump ttl_36000_sequence
 
@@ -115,7 +115,7 @@ plugins:
     args:
 #      - exec: prefer_ipv4
       - exec: ecs 13.78.0.0
-      - exec: $forward_ecs google_doh
+      - exec: $forward_ecs
       - exec: jump change_cdn_ip
       - exec: accept
 
@@ -176,7 +176,7 @@ plugins:
       - exec: jump has_resp_sequence
 
       - matches: "!qtype 1 28"
-        exec: $forward_ecs google_doh
+        exec: $forward_ecs
       - matches: "!qtype 1 28" # = accept
         exec: accept
 
