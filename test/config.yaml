@@ -62,10 +62,9 @@ plugins:
     type: sequence
     args:
 #      - exec: prefer_ipv4
-#      - exec: $fallback_fakeip          # mosdns前置：Dnsmasq → mosdns → clash
-#      - exec: $forward_fakeip   # mosdns前置：Dnsmasq → mosdns → clash # 不带故障转移
-#      - exec: ttl 1
-      - exec: $forward_remote          # mosdns后置：Dnsmasq → clash → mosdns
+      - exec: $fallback_fakeip          # mosdns前置：Dnsmasq → mosdns → clash
+#      - exec: $forward_fakeip           # mosdns前置：Dnsmasq → mosdns → clash # 不带故障转移
+#      - exec: $forward_remote           # mosdns后置：Dnsmasq → clash → mosdns
       - exec: accept
 
   - tag: not_ip_sequence
@@ -74,7 +73,7 @@ plugins:
       - matches: "!resp_ip 0.0.0.0/0 2000::/3"
         exec: query_summary dns_not_ip # 打印日志 没实际作用
       - matches: "!resp_ip 0.0.0.0/0 2000::/3"
-        exec: $forward_ecs google_doh
+        exec: $forward_ecs google_doh #再次尝试获取IP
       - matches: "!resp_ip 0.0.0.0/0 2000::/3"
         exec: jump ttl_36000_sequence
 
@@ -136,7 +135,7 @@ plugins:
       - exec: jump has_resp_sequence
       - exec: query_summary default_Request
       - exec: $forward_alidns # 默认用国内，用来查询是否污染
-      - matches: # 基于应答表外V6成功
+      - matches: # 基于应答 表外V6成功且不是污染IP且没有IP
         - "rcode 0"
         - "qtype 28"
         - "!resp_ip 2000::/3"
@@ -148,7 +147,7 @@ plugins:
       - exec: jump not_ip_sequence
       - exec: jump gfw_ip_sequence
       - exec: drop_resp
-
+      
       - exec: query_summary global_Request
       - exec: ecs 151.101.196.0   # Los_Angeles
       - exec: $fallback_remote    # 也可以直接用 forward_ecs or forward_remote
@@ -176,7 +175,7 @@ plugins:
       - exec: jump has_resp_sequence
 
       - matches: "!qtype 1 28"
-        exec: $forward_ecs
+        exec: $forward_ecs google_doh
       - matches: "!qtype 1 28" # = accept
         exec: accept
 
