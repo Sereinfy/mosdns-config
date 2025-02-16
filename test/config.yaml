@@ -97,11 +97,15 @@ plugins:
       - exec: $forward_alidns # 这里推荐使用当地运营商dns
       - matches:
         - "!qtype 1" # rcode 3
-        - "!resp_ip 0.0.0.0/0 2000::/3" #不是正常IP或没有IP
+        - "!resp_ip 0.0.0.0/0 2000::/3" #不是正常IP
         exec: jump ttl_36000_sequence #test url 010dh.com
       - matches:
-        - "!qtype 1" # 基于查询接受国内V6
+        - "!qtype 1" # 基于查询接受国内V6，有没有IP都接受
         exec: accept # test url sensearch.baidu.com
+      - matches:
+        - "qtype 1"  #国内V4有IP才接受
+        - "resp_ip 0.0.0.0/0 2000::/3"
+        exec: accept
       - exec: jump not_ip_sequence #test url c.mi.com
       - exec: jump gfw_ip_sequence
       - exec: query_summary next_Request
