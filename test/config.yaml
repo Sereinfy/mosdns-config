@@ -1,5 +1,5 @@
 log:
-  level: error
+  level: info
   file: "./mosdns.log"
   # /etc/init.d/mosdns reload
 api:
@@ -74,7 +74,7 @@ plugins:
       - matches: "!resp_ip 0.0.0.0/0 2000::/3"
         exec: query_summary dns_not_ip # 打印日志 没实际作用
       - matches: "!resp_ip 0.0.0.0/0 2000::/3"
-        exec: $forward_ecs
+        exec: $forward_ecs google_doh
       - matches: "!resp_ip 0.0.0.0/0 2000::/3"
         exec: jump ttl_36000_sequence
 
@@ -98,10 +98,10 @@ plugins:
       - exec: $forward_alidns # 这里推荐使用当地运营商dns
       - matches:
         - "!qtype 1" # rcode 3
-        - "!resp_ip 0.0.0.0/0 2000::/3" 
+        - "!resp_ip 0.0.0.0/0 2000::/3" #不是正常IP或没有IP
         exec: jump ttl_36000_sequence #test url 010dh.com
       - matches:
-        - "!qtype 1"
+        - "!qtype 1" # 基于查询接受国内V6
         exec: accept # test url sensearch.baidu.com
       - exec: jump not_ip_sequence #test url c.mi.com
       - exec: jump gfw_ip_sequence
@@ -136,7 +136,7 @@ plugins:
       - exec: jump has_resp_sequence
       - exec: query_summary default_Request
       - exec: $forward_alidns # 默认用国内，用来查询是否污染
-      - matches:
+      - matches: # 基于应答表外V6成功
         - "rcode 0"
         - "qtype 28"
         - "!resp_ip 2000::/3"
