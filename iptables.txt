@@ -22,3 +22,27 @@ fi
 # ------------------------------------自定义脚本结束---------------------------------------------------
 
 exit 0
+
+·······················
+
+另一个版本
+# ------------------------------------自动判断---------------------------------------------------
+FW4=$(command -v fw4)
+en_mode=$(uci -q get openclash.config.en_mode)
+proxy_port=$(uci -q get openclash.config.proxy_port)
+
+if [ "$en_mode" == "fake-ip" ]; then
+  LOG_OUT "limit route to only fake ips with proxy port $proxy_port"
+  
+  /etc/mosdns/rule/geoip2ipset.sh /etc/openclash/GeoIP.dat telegram
+  
+  if [ -n "$FW4" ]; then
+    handle=$(nft -a list chain inet fw4 openclash | grep 'ip protocol tcp counter' | awk '{print $NF}')
+    LOG_OUT "deleting nft rule handle $handle"
+    nft delete rule inet fw4 openclash handle $handle
+    nft add rule inet fw4 openclash ip protocol tcp ip daddr @telegram counter redirect to $proxy_port
+  else
+    iptables -t nat -D openclash -p tcp -j REDIRECT --to-ports $proxy_port
+    iptables -t nat -A openclash -m set --match-set telegram dst -p tcp -j REDIRECT --to-ports $proxy_port
+  fi
+fi
