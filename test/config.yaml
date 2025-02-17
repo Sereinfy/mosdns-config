@@ -61,7 +61,6 @@ plugins:
   - tag: remote_sequence # forward 二选一
     type: sequence
     args:
-#      - exec: prefer_ipv4
       - exec: $fallback_fakeip          # mosdns前置：Dnsmasq → mosdns → clash
 #      - exec: $forward_fakeip           # mosdns前置：Dnsmasq → mosdns → clash # 不带故障转移
 #      - exec: $forward_remote           # mosdns后置：Dnsmasq → clash → mosdns
@@ -90,7 +89,6 @@ plugins:
   - tag: local_sequence
     type: sequence
     args:
-#      - exec: prefer_ipv4
       - exec: $cache_black
       - exec: jump has_resp_sequence
       - exec: query_summary local_Request
@@ -112,16 +110,15 @@ plugins:
   - tag: ali_sequence_jp # 阿里日本准确度高，腾讯美国准确度高
     type: sequence
     args:
-#      - exec: prefer_ipv4
       - exec: ecs 13.78.0.0
-      - exec: $forward_ecs
+#      - exec: $forward_ecs
+      - exec: $forward_alidns ali_doh 
       - exec: jump change_cdn_ip
       - exec: accept
 
   - tag: tencent_sequence_lax
     type: sequence
     args:
-#      - exec: prefer_ipv4
       - exec: ecs 151.101.196.0
       - exec: $forward_dnspod
       - exec: jump change_cdn_ip
@@ -130,7 +127,6 @@ plugins:
   - tag: default_sequence
     type: sequence
     args:
-#      - exec: prefer_ipv4
       - exec: $cache_local # 下面的请求结果均进入缓存
       - exec: jump has_resp_sequence
       - exec: query_summary default_Request
