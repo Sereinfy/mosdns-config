@@ -1,11 +1,27 @@
 plugins:
+  - tag: ecs_jp
+    type: ecs_handler
+    args:
+      forward: false
+      preset: 13.78.0.0
+      send: false
+      mask4: 17
+
+  - tag: ecs_lax
+    type: ecs_handler
+    args:
+      forward: false
+      preset: 151.101.196.0
+      send: false
+      mask4: 22
+      
   - tag: "forward_local"
     type: forward
     args:
       concurrent: 1
       upstreams:
-        - addr: "202.98.192.67" # 运营商 DNS
-#        - addr: "211.138.180.3" # 一般情况下是最快的
+        - addr: "211.138.180.2" # 运营商 DNS
+        - addr: "211.138.180.3" # 一般情况下是最快的
 
   - tag: "forward_fakeip"
     type: forward
@@ -43,7 +59,6 @@ plugins:
       upstreams:
         - addr: "https://149.112.112.112/dns-query" # Quad9
         - addr: "https://208.67.222.123/dns-query" # opendns
-        - addr: "https://101.101.101.101/dns-query" # TWNIC Quad 101
 
   - tag: "forward_ecs"
     type: "forward"

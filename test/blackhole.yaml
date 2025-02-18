@@ -11,7 +11,7 @@ plugins:
   - tag: blackhole_cloudflare_ipv4
     type: sequence
     args:
-#      - exec: black_hole 104.18.181.45 104.18.164.218 104.18.166.94
+      - exec: black_hole 104.18.77.231 104.18.151.172
       - exec: query_summary cloudflare_best
       - exec: ttl 3600-0
       - exec: accept
@@ -47,7 +47,7 @@ plugins:
       - exec: black_hole 2404:6800:4004:821::2013 # best_ghs_ipv6
       - exec: ttl 3600-0
       - exec: accept
-
+        
   - tag: change_cdn_ip # https://github.com/XIU2/CloudflareSpeedTest/discussions/317
     type: sequence
     args:
@@ -60,16 +60,6 @@ plugins:
       - matches: # 有些 AKAMAI 的域名不能直接替换 IP（没有绑定全证书）
           - cname &./rule/akamai_domain_list.txt
         exec: accept # 此处多加一次判断，接受全部 AKAMAI CDN 的 域名 不用再过一遍下面的matches
-
-      - matches:
-          - cname full:custom.crisp.help pacloudflare.com cc-ecdn.net # Cloudflare Spectrum、Salesforce 不进行替换
-        exec: return
-
-      - matches:
-          - qtype 1
-          - has_wanted_ans
-          - "resp_ip &./rule/cloudflare_ipv4.txt"
-        exec: jump blackhole_cloudflare_ipv4
         
       - matches:
           - qtype 1
