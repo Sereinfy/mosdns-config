@@ -1,25 +1,9 @@
 #!/bin/bash
 
-geoipfile="$1"
-tag="$2"
-tmpdir="/tmp/v2dat"
+tag="$1"
 FW4=$(command -v fw4)
+filename="/etc/mosdns/rule/telegram-cidr.txt"
 
-cd $(cd $(dirname $BASH_SOURCE) && pwd)
-
-mkdir -p "$tmpdir"
-filename=$(basename -- "$geoipfile")
-filename="${filename%.*}"
-filename="$tmpdir/${filename}_$tag.txt"
-
-if [ "$tag" == "telegram" ]; then
-    wget -4 --timeout 5 -O "$filename" 'https://ghproxy.cc/https://raw.githubusercontent.com/Sereinfy/mosdns-config/main/cidr.txt'
-    if [ "$?" != "0" ]; then
-         /usr/bin/v2dat unpack geoip -o "$tmpdir" -f "$tag" "$geoipfile"
-    fi
-else
-    /usr/bin/v2dat unpack geoip -o "$tmpdir" -f "$tag" "$geoipfile"
-fi
 
 if test -f "$filename"; then
     if [ -n "$FW4" ]; then
@@ -48,5 +32,3 @@ if test -f "$filename"; then
 else
     echo "$filename missing."
 fi
-
-rm -rf "$tmpdir"
