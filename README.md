@@ -46,7 +46,7 @@
 curl -s 127.0.0.1:9091/plugins/缓存的文件名/flush || exit 1
   ```
 
-### 2. ** 通过 Socks5 代理优化境外 DNS 解析**
+### 2. **通过 Socks5 代理优化境外 DNS 解析**
 
   ```
   - tag: "forward_remote"
@@ -60,5 +60,5 @@ curl -s 127.0.0.1:9091/plugins/缓存的文件名/flush || exit 1
         - addr: "https://162.159.46.1/dns-query"
           enable_http3: false
   ```
-### 3. ** 代码来源**
+### 3. **代码来源**
   https://github.com/Journalist-HK/mosdns-config
