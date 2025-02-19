@@ -12,26 +12,41 @@
         │或
         └── 无污染真实IP
   ```
-## 主要思路
+## 核心思路
 
-1. **国内域名解析**：使用运营商 DNS 进行解析。
-2. **国内列表**：在国内域名之前有一个 `wall_list.txt`（需手动创建），用于手动将特定域名提前走国外，或者发送给 Clash。
-3. **国外列表**：在国外域名之前有一个 `akamai_domain_list.txt`，这个列表与国内列表放在一起，走直连。
-4. **结构示例**：
-   - `wall_list.txt` → 走国外
-   - `google_cn` → 走国外（也可以走直连 [慎用]）
-   - `geosite_cn` → 走直连
-   - `akamai_domain_list.txt` → 走直连
-   - `proxy_domain_list.txt` → 走国外
-5. **国外域名解析**：使用国外知名公共 DNS 进行解析。
-   
-`update.sh` 文件中包含所有的文件。
-## 修改配置后刷新缓存
-  ```
-curl -s 127.0.0.1:9091/plugins/cache_0/flush || exit 1
+### 1. **域名解析策略**
+- **国内域名**：使用运营商 DNS 解析。
+- **国外域名**：使用国外知名公共 DNS 解析。
+
+### 2. **域名分流规则**
+- **国内列表**：
+  - 文件：`wall_list.txt`（需手动创建）。
+  - 作用：手动指定某些域名走国外（或通过 Clash 转发）。
+- **国外列表**：
+  - 文件：`akamai_domain_list.txt`。
+  - 作用：与国内列表合并，指定某些国外域名走直连。
+
+### 3. **分流结构示例**
+- `wall_list.txt` → 走国外。
+- `google_cn` → 走国外（或直连，慎用）。
+- `geosite_cn` → 走直连。
+- `akamai_domain_list.txt` → 走直连。
+- `proxy_domain_list.txt` → 走国外。
+
+### 4. **配置文件**
+- `update.sh`：包含所有相关文件的更新
+
+---
+
+## 操作指南
+
+### 1. **刷新缓存**
+修改配置后，执行以下命令刷新缓存：
+```bash
+curl -s 127.0.0.1:9091/plugins/缓存的文件名/flush || exit 1
   ```
 
-## 通过 socks5 代理来提高境外 DNS 的联通性
+### 2. ** 通过 Socks5 代理优化境外 DNS 解析**
 
   ```
   - tag: "forward_remote"
@@ -45,5 +60,5 @@ curl -s 127.0.0.1:9091/plugins/cache_0/flush || exit 1
         - addr: "https://162.159.46.1/dns-query"
           enable_http3: false
   ```
-## 代码修改来源
+### 3. ** 代码来源**
   https://github.com/Journalist-HK/mosdns-config
