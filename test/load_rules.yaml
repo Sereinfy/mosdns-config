@@ -92,6 +92,18 @@ plugins:
 #      files:
 #        - "./rule/cdn_domain_list.txt" # https://raw.githubusercontent.com/pmkol/easymosdns/rules/cdn_domain_list.txt
 
+#  - tag: jp_dns_list
+#    type: domain_set
+#    args:
+#      files:
+#        - "./rule/jp_dns_list.txt" # https://raw.githubusercontent.com/Journalist-HK/Rules/main/jp_dns_list.txt
+
+#  - tag: us_dns_list
+#    type: domain_set
+#    args:
+#      files:
+#        - "./rule/us_dns_list.txt" # https://raw.githubusercontent.com/Journalist-HK/Rules/main/us_dns_list.txt
+
   - tag: gfwlist
     type: domain_set
     args:

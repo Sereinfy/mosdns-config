@@ -48,7 +48,7 @@ plugins:
       - exec: ttl 3600-0
       - exec: accept
 
-  - tag: change_cdn_ip_cloudflare # 表外域名不替换
+  - tag: change_cdn_ip_cloudflare # https://github.com/XIU2/CloudflareSpeedTest/discussions/317
     type: sequence
     args:
       - matches:

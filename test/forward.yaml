@@ -60,6 +60,7 @@ plugins:
         - addr: "https://149.112.112.112/dns-query" # Quad9
         - addr: "https://208.67.222.123/dns-query" # opendns
 
+
   - tag: "forward_ecs"
     type: "forward"
     args:
