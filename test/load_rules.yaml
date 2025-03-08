@@ -1,11 +1,11 @@
 plugins:
-#  - tag: redirect
-#    type: redirect
-#    args:
+  - tag: redirect
+    type: redirect
+    args:
 #       rules:
 #         - cdn.jsdelivr.net cdn.jsdelivr.net.cdn.cloudflare.net
-#      files:  # 从文件载入规则
-#        - "./rule/redirect.txt"
+      files:  # 从文件载入规则
+        - "./rule/redirect.txt"
 
   - tag: "hosts"
     type: "hosts"
@@ -91,18 +91,6 @@ plugins:
 #        - "xboxlive.com"
 #      files:
 #        - "./rule/cdn_domain_list.txt" # https://raw.githubusercontent.com/pmkol/easymosdns/rules/cdn_domain_list.txt
-
-#  - tag: jp_dns_list
-#    type: domain_set
-#    args:
-#      files:
-#        - "./rule/jp_dns_list.txt" # https://raw.githubusercontent.com/Journalist-HK/Rules/main/jp_dns_list.txt
-
-#  - tag: us_dns_list
-#    type: domain_set
-#    args:
-#      files:
-#        - "./rule/us_dns_list.txt" # https://raw.githubusercontent.com/Journalist-HK/Rules/main/us_dns_list.txt
 
   - tag: gfwlist
     type: domain_set

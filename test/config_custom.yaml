@@ -5,9 +5,9 @@ log:
 api:
   http: ":9091" # 在该地址启动 api 接口。
 include:
-  - "./blackhole.yaml"
   - "./forward.yaml"
   - "./load_rules.yaml"
+  - "./blackhole.yaml"
 
 plugins:
 
@@ -34,14 +34,6 @@ plugins:
           - has_resp
         exec: accept
 
-  - tag: "fallback_remote"
-    type: "fallback"
-    args:
-      primary: forward_remote
-      secondary: forward_easy
-      threshold: 500           # 无响应回滚阈值。单位毫秒。默认 500 。
-      always_standby: true     # 副可执行插件始终待命。
-
   - tag: ttl_36000_sequence
     type: sequence
     args:
@@ -53,22 +45,9 @@ plugins:
   - tag: remote_sequence # forward 二选一
     type: sequence
     args:
-      - exec: $forward_fakeip           # mosdns前置：Dnsmasq → mosdns → clash
-#      - exec: $fallback_remote           # mosdns后置：Dnsmasq → clash → mosdns
+#      - exec: $forward_fakeip           # mosdns前置：Dnsmasq → mosdns → clash
+      - exec: $forward_remote           # mosdns后置：Dnsmasq → clash → mosdns
       - exec: accept
-
-  - tag: change_cdn_ip_cf # https://github.com/XIU2/CloudflareSpeedTest/discussions/317
-    type: sequence
-    args:
-      - matches:
-          - cname full:custom.crisp.help pacloudflare.com cc-ecdn.net # Cloudflare Spectrum、Salesforce 不进行替换
-        exec: return
-
-      - matches:
-          - qtype 1
-          - has_wanted_ans
-          - "resp_ip &./rule/cloudflare_ipv4.txt"
-        exec: jump blackhole_cloudflare_ipv4
         
   - tag: not_ip_sequence
     type: sequence
@@ -109,17 +88,16 @@ plugins:
       - exec: query_summary next_Request
       - exec: $cache_local # 下面的请求结果均进入缓存 已响应 不能用has_resp_sequence
       - exec: jump change_cdn_ip
-      - exec: jump change_cdn_ip_cf
+      - exec: jump change_cdn_ip_cloudflare
       - exec: accept # 有没有响应都终止，防止后续查询其他上游
 
   - tag: ali_sequence_jp # 阿里日本准确度高，腾讯美国准确度高
     type: sequence
     args:
       - exec: $ecs_jp
-#      - exec: $forward_ecs #忘记为什么用这个 而不用ali了
       - exec: $forward_alidns ali_doh 
       - exec: jump change_cdn_ip
-      - exec: jump change_cdn_ip_cf
+      - exec: jump change_cdn_ip_cloudflare
       - exec: accept
 
   - tag: tencent_sequence_lax
@@ -128,14 +106,12 @@ plugins:
       - exec: $ecs_lax
       - exec: $forward_dnspod
       - exec: jump change_cdn_ip
-      - exec: jump change_cdn_ip_cf
+      - exec: jump change_cdn_ip_cloudflare
       - exec: accept
 
   - tag: default_sequence
     type: sequence
     args:
-      - exec: $cache_local # 下面的请求结果均进入缓存
-      - exec: jump has_resp_sequence
       - exec: query_summary default_Request
       - exec: $forward_alidns # 默认用国内，用来查询是否污染
       - matches: # 基于应答 表外V6成功且不是污染IP且没有IP
@@ -227,18 +203,6 @@ plugins:
     args:
       entry: main
       listen: ":5353"
-
-  - tag: remote_dns_server
-    type: udp_server
-    args:
-      entry: fallback_remote
-      listen: ":5366"
-      
-  - tag: easy_dns_server
-    type: udp_server
-    args:
-      entry: forward_easy
-      listen: ":5377" 
       
 #  - tag: singbox_udp
 #    type: udp_server
