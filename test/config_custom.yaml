@@ -141,7 +141,8 @@ plugins:
       - matches:
           - qname &./rule/wall_list.txt # wall_list手动创建
         exec: jump remote_sequence # 适用于被墙/被污染/尚未移出geosite_cn列表的，提前走代理
-        
+
+      - exec: $redirect
       - exec: $hosts
       - exec: jump has_resp_sequence
 
