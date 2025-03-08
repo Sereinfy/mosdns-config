@@ -72,6 +72,7 @@ jobs:
           curl -sSL https://raw.githubusercontent.com/Journalist-HK/Rules/master/block_list.txt -o ./publish/block_list.txt
           curl -sSL https://raw.githubusercontent.com/Journalist-HK/Rules/main/hosts_akamai.txt -o ./publish/hosts_akamai.txt
           curl -sSL https://raw.githubusercontent.com/Journalist-HK/Rules/main/hosts_fastly.txt -o ./publish/hosts_fastly.txt
+          curl -sSL https://raw.githubusercontent.com/Journalist-HK/Rules/main/redirect.txt -o ./publish/redirect.txt
           curl -sSL https://raw.githubusercontent.com/Journalist-HK/Rules/master/akamai_domain_list.txt -o ./publish/akamai_domain_list.txt
           curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/google-cn.txt -o ./publish/google_cn.txt
           curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/direct-list.txt -o ./publish/china_domain_list.txt
