@@ -16,6 +16,7 @@ mkdir -p /tmp/easymosdns \
 && curl https://ghfast.top/https://raw.githubusercontent.com/Sereinfy/mosdns-config/release/google_cn.txt > /tmp/easymosdns/google_cn.txt \
 && curl https://ghfast.top/https://raw.githubusercontent.com/Sereinfy/mosdns-config/release/china_domain_list.txt > /tmp/easymosdns/china_domain_list.txt \
 && curl https://ghfast.top/https://raw.githubusercontent.com/Sereinfy/mosdns-config/release/fastly.txt > /tmp/easymosdns/fastly.txt \
+&& curl https://ghfast.top/https://raw.githubusercontent.com/Sereinfy/mosdns-config/release/redirect.txt > /tmp/easymosdns/redirect.txt \
 && curl https://ghfast.top/https://raw.githubusercontent.com/Sereinfy/mosdns-config/release/china_ip_list.txt > /tmp/easymosdns/china_ip_list.txt \
 && curl https://ghfast.top/https://raw.githubusercontent.com/Sereinfy/mosdns-config/release/proxy_domain_list.txt > /tmp/easymosdns/proxy_domain_list.txt \
 && curl https://ghfast.top/https://raw.githubusercontent.com/Sereinfy/mosdns-config/release/gfw_ip_list.txt > /tmp/easymosdns/gfw_ip_list.txt \
