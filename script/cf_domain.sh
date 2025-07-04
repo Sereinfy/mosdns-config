@@ -3,19 +3,19 @@
 LOG_FILE="/etc/mosdns/mosdns.log"
 OUTPUT_FILE="/etc/mosdns/cloudflare_best.txt"
 
-# ¼ì²éÈÕÖ¾ÎÄ¼şÊÇ·ñ´æÔÚ
+# æ£€æŸ¥æ—¥å¿—æ–‡ä»¶æ˜¯å¦å­˜åœ¨
 if [ ! -f "$LOG_FILE" ]; then
     echo "Error: $LOG_FILE not found." >&2
     exit 1
 fi
 
-# Èç¹ûÊä³öÎÄ¼ş²»´æÔÚ£¬Ôò´´½¨
+# å¦‚æœè¾“å‡ºæ–‡ä»¶ä¸å­˜åœ¨ï¼Œåˆ™åˆ›å»º
 touch "$OUTPUT_FILE"
 
-# Í³¼ÆĞÂÔöÓòÃûÊıÁ¿
+# ç»Ÿè®¡æ–°å¢åŸŸåæ•°é‡
 added_count=0
 
-# ÌáÈ¡±¾´ÎÈÕÖ¾ÖĞµÄĞÂÓòÃû£¨È¥ÖØ£©
+# æå–æœ¬æ¬¡æ—¥å¿—ä¸­çš„æ–°åŸŸåï¼ˆå»é‡ï¼‰
 grep "cloudflare_best" "$LOG_FILE" | \
 awk -F'"qname": "' '{print $2}' | \
 awk -F'"' '{print $1}' | \
@@ -24,15 +24,15 @@ sort -u | \
 while read -r domain; do
     [ -z "$domain" ] && continue
     
-    # ¼ì²éÊÇ·ñÒÑ´æÔÚÓÚ OUTPUT_FILE ÖĞ
+    # æ£€æŸ¥æ˜¯å¦å·²å­˜åœ¨äº OUTPUT_FILE ä¸­
     if ! grep -qFx "$domain" "$OUTPUT_FILE"; then
         echo "$domain" >> "$OUTPUT_FILE"
-        echo "[+] Added: $domain"  # ¿ÉÑ¡£ºÏÔÊ¾ĞÂÔöµÄÓòÃû
+        echo "[+] Added: $domain"  # å¯é€‰ï¼šæ˜¾ç¤ºæ–°å¢çš„åŸŸå
         added_count=$((added_count + 1))
     fi
 done
 
-# ¸ù¾İ added_count ÅĞ¶ÏÊÇ·ñÓĞĞÂÔö
+# æ ¹æ® added_count åˆ¤æ–­æ˜¯å¦æœ‰æ–°å¢
 if [ "$added_count" -gt 0 ]; then
     echo "Done. Added $added_count new domains to $OUTPUT_FILE"
 else
