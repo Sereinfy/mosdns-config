@@ -1,8 +1,9 @@
 #!/bin/bash
 
-tag="telegram"
+tag="$1"
 FW4=$(command -v fw4)
-filename="/etc/mosdns/telegram-cidr.txt"
+filename="/etc/mosdns/rule/telegram-cidr.txt"
+
 
 if test -f "$filename"; then
     if [ -n "$FW4" ]; then
