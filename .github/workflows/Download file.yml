@@ -89,7 +89,7 @@ jobs:
           chmod +x ./geo
 
           # 下载 geosite.dat 文件
-          curl -L https://github.com/Sereinfy/ruleset_geodata/releases/download/clash/geosite.dat --output geosite.dat
+          curl -L https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo/geosite.dat --output geosite.dat
 
           # 解包 geosite.dat，输出到 out 目录
           [ ! -d "./publish/out" ] && mkdir -p ./publish/out
