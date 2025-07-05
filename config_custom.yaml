@@ -16,7 +16,7 @@ plugins:
     args:
       size: 8192  # 默认: 1024。
       lazy_cache_ttl: 259200  # 默认: 0（禁用 lazy cache）。#建议值 86400（1天）~ 259200（3天）
-      dump_file: ./cache_local.dump
+      dump_file: ./cache_0.dump
       dump_interval: 7200  # (实验性) 自动保存间隔。
 
   - tag: has_resp_sequence
@@ -29,7 +29,7 @@ plugins:
   - tag: TTL_36000
     type: sequence
     args:
-      - exec: query_summary TTL_36000
+      - exec: query_summary dns_not_ip
       - exec: black_hole ::36 #测试后注释并删除且刷新 http://127.0.0.1:9091/plugins/cache_0/flush
       - exec: ttl 36000 # 重启失效
       - exec: accept
@@ -44,9 +44,6 @@ plugins:
   - tag: not_ip_sequence
     type: sequence
     args:
-      - matches:
-        - "!resp_ip 0.0.0.0/0 2000::/3"
-        exec: query_summary dns_not_ip # 打印日志
       - matches:
         - "qtype 1"
         - "rcode 0 2 3 5"
@@ -98,15 +95,15 @@ plugins:
   - tag: default_sequence
     type: sequence
     args:
+      - exec: query_summary extra_domain
       - exec: $forward_alidns # 默认用国内，用来查询是否污染
-      - matches:
-          - "resp_ip $geoip_cn"
-        exec: accept # 国内直接接受
       - exec: jump not_ip_sequence
       - exec: jump gfw_ip_sequence
       - exec: jump change_cdn_ip
-      - exec: drop_resp
-
+      - matches:
+          - "!resp_ip $geoip_cn"
+        exec: drop_resp # 国内直接接受
+      
   - tag: "fallback_final"
     type: "fallback"
     args:
@@ -123,7 +120,7 @@ plugins:
         exec: reject 3 # 屏蔽 QTYPE 65
 
       - matches:
-          - qname &./rule/wall_list.txt # wall_list手动创建
+          - qname &./rule/wall_list.txt  # wall_list.txt手动创建
         exec: jump remote_sequence # 适用于被墙/被污染/尚未移出geosite_cn列表的，提前走代理
 
       - exec: $redirect
@@ -147,6 +144,11 @@ plugins:
         
       - exec: $cache_0
       - exec: jump has_resp_sequence
+
+      - matches:
+          - qname $greylist &./output/dns_hijack.txt  # dns_hijack.txt手动创建
+        exec: $forward_remote # 污染域名请求远程 DNS
+      - exec: jump has_resp_sequence
       
       - matches:
           - qname $akamailist
@@ -162,7 +164,7 @@ plugins:
       - exec: jump has_resp_sequence
 
       - matches:
-          - qname $originallist # 不进行 IP 替换的域名，通常是游戏等使用非常用端口的域名
+          - qname $originallist # 不进行 IP 替换的域名，通常是游戏等使用非常用端口的域名 和 污染域名直接请求远程 DNS
         exec: $forward_remote
       - exec: jump has_resp_sequence
 
