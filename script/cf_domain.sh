@@ -1,21 +1,32 @@
 #!/bin/sh
 
-LOG_FILE="/etc/mosdns/mosdns.log"
-OUTPUT_FILE="/etc/mosdns/cloudflare_best.txt"
+# »ñÈ¡½Å±¾ËùÔÚÄ¿Â¼£¨¼ÙÉè·ÅÔÚ/etc/mosdns/script/£©
+SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 
-# æ£€æŸ¥æ—¥å¿—æ–‡ä»¶æ˜¯å¦å­˜åœ¨
+# Ïà¶ÔÂ·¾¶¶¨Òå£¨±£³ÖÄúÔ­ÓÐµÄ±äÁ¿½á¹¹£©
+LOG_FILE="$SCRIPT_DIR/../mosdns.log"
+OUTPUT_DIR="$SCRIPT_DIR/../output"  # µ¥¶À¶¨ÒåoutputÄ¿Â¼
+CLOUDFLARE_OUTPUT="$OUTPUT_DIR/cloudflare_best.txt" 
+AKAMAI_OUTPUT="$OUTPUT_DIR/best_akamai.txt"
+
+# ¼ì²éÈÕÖ¾ÎÄ¼þ
 if [ ! -f "$LOG_FILE" ]; then
     echo "Error: $LOG_FILE not found." >&2
     exit 1
 fi
 
-# å¦‚æžœè¾“å‡ºæ–‡ä»¶ä¸å­˜åœ¨ï¼Œåˆ™åˆ›å»º
-touch "$OUTPUT_FILE"
+# ´´½¨Êä³öÄ¿Â¼£¨Ô­mkdirÂß¼­±£³Ö²»±ä£©
+mkdir -p "$OUTPUT_DIR"
 
-# ç»Ÿè®¡æ–°å¢žåŸŸåæ•°é‡
-added_count=0
+# ³õÊ¼»¯Êä³öÎÄ¼þ£¨Ô­touchÂß¼­±£³Ö²»±ä£©
+touch "$CLOUDFLARE_OUTPUT"
+touch "$AKAMAI_OUTPUT"
 
-# æå–æœ¬æ¬¡æ—¥å¿—ä¸­çš„æ–°åŸŸåï¼ˆåŽ»é‡ï¼‰
+# Í³¼Æ±äÁ¿£¨Ô­Ñù±£Áô£©
+cloudflare_added=0
+akamai_added=0
+
+# ´¦Àícloudflare_best£¨Ô­Ñù±£Áô£©
 grep "cloudflare_best" "$LOG_FILE" | \
 awk -F'"qname": "' '{print $2}' | \
 awk -F'"' '{print $1}' | \
@@ -24,17 +35,38 @@ sort -u | \
 while read -r domain; do
     [ -z "$domain" ] && continue
     
-    # æ£€æŸ¥æ˜¯å¦å·²å­˜åœ¨äºŽ OUTPUT_FILE ä¸­
-    if ! grep -qFx "$domain" "$OUTPUT_FILE"; then
-        echo "$domain" >> "$OUTPUT_FILE"
-        echo "[+] Added: $domain"  # å¯é€‰ï¼šæ˜¾ç¤ºæ–°å¢žçš„åŸŸå
-        added_count=$((added_count + 1))
+    if ! grep -qFx "$domain" "$CLOUDFLARE_OUTPUT"; then
+        echo "$domain" >> "$CLOUDFLARE_OUTPUT"
+        echo "[+] [Cloudflare] Added: $domain"
+        cloudflare_added=$((cloudflare_added + 1))
     fi
 done
 
-# æ ¹æ® added_count åˆ¤æ–­æ˜¯å¦æœ‰æ–°å¢ž
-if [ "$added_count" -gt 0 ]; then
-    echo "Done. Added $added_count new domains to $OUTPUT_FILE"
+# ´¦Àíbest_akamai£¨Ô­Ñù±£Áô£©
+grep "best_akamai" "$LOG_FILE" | \
+awk -F'"qname": "' '{print $2}' | \
+awk -F'"' '{print $1}' | \
+sed 's/\.$//' | \
+sort -u | \
+while read -r domain; do
+    [ -z "$domain" ] && continue
+    
+    if ! grep -qFx "$domain" "$AKAMAI_OUTPUT"; then
+        echo "$domain" >> "$AKAMAI_OUTPUT"
+        echo "[+] [Akamai] Added: $domain"
+        akamai_added=$((akamai_added + 1))
+    fi
+done
+
+# Êä³ö½á¹û£¨Ô­Ñù±£Áô£©
+if [ "$cloudflare_added" -gt 0 ]; then
+    echo "Done. Added $cloudflare_added new domains to $CLOUDFLARE_OUTPUT"
 else
-    echo "No new domains found in $LOG_FILE."
+    echo "No new cloudflare_best domains found in $LOG_FILE."
+fi
+
+if [ "$akamai_added" -gt 0 ]; then
+    echo "Done. Added $akamai_added new domains to $AKAMAI_OUTPUT"
+else
+    echo "No new best_akamai domains found in $LOG_FILE."
 fi
