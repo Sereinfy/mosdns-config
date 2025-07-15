@@ -64,7 +64,7 @@ jobs:
 
       - name: Download other lists
         run: |
-          curl -sSL https://files.imunify360.com/static/whitelist/v2/cloudfront-cdn.txt -o ./publish/cloudfront.txt
+          curl -sSL https://raw.githubusercontent.com/Sereinfy/ipranges/main/amazon/cloudfront_ips.txt -o ./publish/cloudfront_ipv4.txt
           curl -sSL https://raw.githubusercontent.com/Journalist-HK/Rules/main/cdn77_ipv4.txt -o ./publish/cdn77_ipv4.txt
           curl -sSL https://raw.githubusercontent.com/Journalist-HK/Rules/main/cachefly_ipv4.txt -o ./publish/cachefly_ipv4.txt
           curl -sSL https://raw.githubusercontent.com/Journalist-HK/Rules/master/private.txt -o ./publish/private.txt
@@ -72,10 +72,10 @@ jobs:
           curl -sSL https://raw.githubusercontent.com/Journalist-HK/Rules/master/block_list.txt -o ./publish/block_list.txt
           curl -sSL https://raw.githubusercontent.com/Journalist-HK/Rules/main/hosts_akamai.txt -o ./publish/hosts_akamai.txt
           curl -sSL https://raw.githubusercontent.com/Journalist-HK/Rules/main/hosts_fastly.txt -o ./publish/hosts_fastly.txt
-          curl -sSL https://raw.githubusercontent.com/Journalist-HK/Rules/main/redirect.txt -o ./publish/redirect.txt
+          curl -sSL https://raw.githubusercontent.com/Journalist-HK/Rules/main/redirect.txt -o ./publish/redirect_list.txt
           curl -sSL https://raw.githubusercontent.com/Journalist-HK/Rules/master/akamai_domain_list.txt -o ./publish/akamai_domain_list.txt
           curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/google-cn.txt -o ./publish/google_cn.txt
-          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/direct-list.txt -o ./publish/china_domain_list.txt
+          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/direct-list.txt -o ./publish/direct_domain_list.txt
           curl -sSL https://raw.githubusercontent.com/Loyalsoldier/geoip/release/text/fastly.txt -o ./publish/fastly.txt
           curl -sSL https://raw.githubusercontent.com/Sereinfy/china_ip_list/main/china_ip_list.txt -o ./publish/china_ip_list.txt
           curl -sSL https://raw.githubusercontent.com/Journalist-HK/Rules/refs/heads/main/original_domain_list.txt -o ./publish/original_domain_list.txt
