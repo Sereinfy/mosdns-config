@@ -3,7 +3,7 @@ plugins:
   - tag: blackhole_akamai_ipv4 # 替换部分 AKAMAI 域名 IP，详见 https://github.com/IrineSistiana/mosdns/discussions/489
     type: sequence
     args:
-#      - exec: black_hole 173.222.248.75 23.208.31.195 23.220.73.71
+      - exec: black_hole 104.84.150.173 104.84.150.180 23.200.143.19
       - exec: query_summary best_akamai
       - exec: ttl 3600-0
       - exec: accept # 运行 black_hole 之后接受请求，不再进行后续判断
@@ -11,7 +11,7 @@ plugins:
   - tag: blackhole_cloudflare_ipv4
     type: sequence
     args:
-      - exec: black_hole 172.67.175.115 104.17.139.37
+      - exec: black_hole 104.18.89.52 104.17.124.33 172.64.229.7
       - exec: query_summary cloudflare_best
       - exec: ttl 3600-0
       - exec: accept
@@ -19,7 +19,7 @@ plugins:
   - tag: blackhole_cloudfront_ipv4
     type: sequence
     args:
-#      - exec: black_hole 108.139.4.72 13.227.74.215 13.249.160.37
+      - exec: black_hole 13.32.60.227 13.226.58.100 13.226.62.159
       - exec: query_summary cloudfront_best
       - exec: ttl 3600-0
       - exec: accept
@@ -48,6 +48,19 @@ plugins:
       - exec: ttl 3600-0
       - exec: accept
  
+  - tag: change_cdn_akamai
+    type: sequence
+    args:
+      - matches:
+          - cname akamai.net akamaized.net
+          - qtype 1
+          - has_wanted_ans # 防止纯 IPV6 域名被替换
+        exec: jump blackhole_akamai_ipv4
+
+      - matches: # 有些 AKAMAI 的域名不能直接替换 IP（没有绑定全证书）
+          - cname $akamailist
+        exec: accept # 此处多加一次判断，接受全部 AKAMAI CDN 的 域名 不用再过一遍下面的matches
+
   - tag: change_cdn_ip # https://github.com/XIU2/CloudflareSpeedTest/discussions/317
     type: sequence
     args:
@@ -60,16 +73,6 @@ plugins:
           - has_wanted_ans
           - "resp_ip $cloudflare_ipv4"
         exec: jump blackhole_cloudflare_ipv4
-        
-      - matches:
-          - cname akamai.net akamaized.net
-          - qtype 1
-          - has_wanted_ans # 防止纯 IPV6 域名被替换
-        exec: jump blackhole_akamai_ipv4
-
-      - matches: # 有些 AKAMAI 的域名不能直接替换 IP（没有绑定全证书）
-          - cname $akamailist
-        exec: accept # 此处多加一次判断，接受全部 AKAMAI CDN 的 域名 不用再过一遍下面的matches
         
       - matches:
           - qtype 1
@@ -96,3 +99,4 @@ plugins:
           - qtype 28
           - cname full:ghs.googlehosted.com
         exec: jump blackhole_ghs_ipv6
+        

@@ -5,7 +5,7 @@ plugins:
 #       rules:
 #         - cdn.jsdelivr.net cdn.jsdelivr.net.cdn.cloudflare.net
       files:  # 从文件载入规则
-        - "./rule/redirect.txt"
+        - "./rule/redirect_list.txt"
 
   - tag: "hosts"
     type: "hosts"
@@ -31,7 +31,7 @@ plugins:
     type: domain_set
     args:
       files:
-        - "./rule/china_domain_list.txt" # https://raw.githubusercontent.com/pmkol/easymosdns/rules/china_domain_list.txt
+        - "./rule/direct_domain_list.txt" # https://raw.githubusercontent.com/pmkol/easymosdns/rules/china_domain_list.txt
 
   - tag: geoip_cn # 国内 IP
     type: ip_set
@@ -147,5 +147,5 @@ plugins:
     type: ip_set
     args:
       files:
-        - "./rule/cloudfront.txt" # https://raw.githubusercontent.com/Journalist-HK/Rules/main/cloudfront.txt
+        - "./rule/cloudfront_ipv4.txt" # https://raw.githubusercontent.com/Journalist-HK/Rules/main/cloudfront.txt
 

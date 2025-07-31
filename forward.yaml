@@ -59,22 +59,9 @@ plugins:
       upstreams:
 #        - addr: "https://149.112.112.112/dns-query" # Quad9
 #        - addr: "https://208.67.222.123/dns-query" # opendns
-        - addr: "https://v.recipes/dns/dns.google/dns-query"
-          bootstrap: "1.1.1.1"
-        - addr: "https://v.recipes/dns/dns.cloudflare.com/dns-query"
-          bootstrap: "1.1.1.1"
-          
-  - tag: "forward_ecs"
-    type: "forward"
-    args:
-      concurrent: 1
-      upstreams:
-        - tag: quad9_11
-          addr: "https://9.9.9.11/dns-query"
-#          socks5: "127.0.0.1:10808"
-#        - tag: google_doh
-#          addr: "https://8.8.8.8/dns-query"
-##          socks5: "127.0.0.1:10808"
-        - tag: google_doh
-          addr: "https://v.recipes/dns/dns.google/dns-query"
+        - tag: doh_ecs_google
+          addr: "https://dns.google/dns-query"
           bootstrap: "8.8.8.8"
+        - tag: doh_ecs_cloudflare
+          addr: "https://cloudflare-dns.com/dns-query"
+          bootstrap: "1.1.1.1"
