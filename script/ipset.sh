@@ -1,9 +1,8 @@
-#!/bin/bash
+#!/bin/sh
 
-tag="$1"
+tag="telegram"
 FW4=$(command -v fw4)
 filename="/etc/mosdns/rule/telegram-cidr.txt"
-
 
 if test -f "$filename"; then
     if [ -n "$FW4" ]; then
@@ -32,3 +31,5 @@ if test -f "$filename"; then
 else
     echo "$filename missing."
 fi
+
+rm -rf "$tmpdir"

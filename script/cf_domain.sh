@@ -8,6 +8,7 @@ LOG_FILE="$SCRIPT_DIR/../mosdns.log"
 OUTPUT_DIR="$SCRIPT_DIR/../output"  # 单独定义output目录
 CLOUDFLARE_OUTPUT="$OUTPUT_DIR/cloudflare_best.txt" 
 AKAMAI_OUTPUT="$OUTPUT_DIR/best_akamai.txt"
+Cloudflare_OUTPUT="$OUTPUT_DIR/cloudfront_best.txt"
 
 # 检查日志文件
 if [ ! -f "$LOG_FILE" ]; then
@@ -21,6 +22,7 @@ mkdir -p "$OUTPUT_DIR"
 # 初始化输出文件（原touch逻辑保持不变）
 touch "$CLOUDFLARE_OUTPUT"
 touch "$AKAMAI_OUTPUT"
+touch "$Cloudflare_OUTPUT"
 
 # 统计变量（原样保留）
 cloudflare_added=0
@@ -58,15 +60,18 @@ while read -r domain; do
     fi
 done
 
-# 输出结果（原样保留）
-if [ "$cloudflare_added" -gt 0 ]; then
-    echo "Done. Added $cloudflare_added new domains to $CLOUDFLARE_OUTPUT"
-else
-    echo "No new cloudflare_best domains found in $LOG_FILE."
-fi
-
-if [ "$akamai_added" -gt 0 ]; then
-    echo "Done. Added $akamai_added new domains to $AKAMAI_OUTPUT"
-else
-    echo "No new best_akamai domains found in $LOG_FILE."
-fi
+# 处理cloudfront_best（原样保留）
+grep "cloudfront_best" "$LOG_FILE" | \
+awk -F'"qname": "' '{print $2}' | \
+awk -F'"' '{print $1}' | \
+sed 's/\.$//' | \
+sort -u | \
+while read -r domain; do
+    [ -z "$domain" ] && continue
+    
+    if ! grep -qFx "$domain" "$Cloudflare_OUTPUT"; then
+        echo "$domain" >> "$Cloudflare_OUTPUT"
+        echo "[+] [cloudfront] Added: $domain"
+        cloudfront_added=$((cloudfront_added + 1))
+    fi
+done

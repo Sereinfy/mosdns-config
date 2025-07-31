@@ -1,48 +1,88 @@
 #!/bin/sh
 
-# »ñÈ¡½Å±¾ËùÔÚÄ¿Â¼
-SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
+SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd -P)
+LOG_FILE="${SCRIPT_DIR}/../mosdns.log"
+OUTPUT_FILE="${SCRIPT_DIR}/../output/dns_hijack_results.txt"
+HIJACK_FILE="${SCRIPT_DIR}/../rule/dns_hijack.txt"
+TMP_FILE=$(mktemp)
+CHANGED_FILE=$(mktemp)
 
-# Ïà¶ÔÂ·¾¶¶¨Òå
-LOG_FILE="$SCRIPT_DIR/../mosdns.log"
-OUTPUT_DIR="$SCRIPT_DIR/../output"
-DNS_HIJACK_OUTPUT="$OUTPUT_DIR/dns_hijack.txt"
+[ -f "$LOG_FILE" ] || { echo "Error: $LOG_FILE not found" >&2; exit 1; }
+touch "$OUTPUT_FILE" "$HIJACK_FILE"
 
-# ¼ì²éÈÕÖ¾ÎÄ¼þÊÇ·ñ´æÔÚ
-if [ ! -f "$LOG_FILE" ]; then
-    echo "Error: $LOG_FILE not found." >&2
-    exit 1
-fi
+# 1. æå–æ—¥å¿—ä¸­åŒ…å« dns_hijack çš„è®°å½•
+extract_data() {
+  grep -a "dns_hijack" "$LOG_FILE" | while read -r line; do
+    domain=$(echo "$line" | awk -F 'QUESTION SECTION:\\\\n;|\\.\\\\' 'NF>1{print $2}')
+    ips=$(echo "$line" | awk -F 'tA\\\\t|\\\\n' '{
+      for(i=1; i<=NF; i++) {
+        if ($i ~ /^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/) print $i
+      }
+    }' | sort -u | tr '\n' ' ' | sed 's/ *$//')
 
-# ´´½¨Êä³öÄ¿Â¼£¨Èç¹û²»´æÔÚ£©
-mkdir -p "$OUTPUT_DIR"
+    [ -n "$domain" ] && [ -n "$ips" ] && echo "$domain $ips"
+  done
+}
 
-# ³õÊ¼»¯Êä³öÎÄ¼þ£¨Ê¹ÓÃtouchÈ·±£´æÔÚ£©
-touch "$DNS_HIJACK_OUTPUT"
+# 2. æå–åˆ°ä¸´æ—¶æ–‡ä»¶ä¸­
+extract_data > "$TMP_FILE"
 
-# Í³¼ÆÐÂÔöÓòÃûÊýÁ¿
-hijack_added=0
+# 3. éåŽ† dns_results.txtï¼Œä¿æŒé¡ºåºå¹¶åˆå¹¶æ–° IPï¼ˆåŽŸ IP åœ¨å‰ï¼‰
+> "$CHANGED_FILE"
+while read -r line; do
+  orig_domain=$(echo "$line" | awk '{print $1}')
+  orig_ips=$(echo "$line" | cut -d' ' -f2-)
 
-# ´¦Àí dns_hijack ¼ÇÂ¼
-grep "dns_hijack" "$LOG_FILE" | \
-awk -F'"qname": "' '{print $2}' | \
-awk -F'"' '{print $1}' | \
-sed 's/\.$//' | \
-sort -u | \
-while read -r domain; do
-    [ -z "$domain" ] && continue
-    
-    # ¼ì²éÊÇ·ñÒÑ´æÔÚÓÚÊä³öÎÄ¼þÖÐ
-    if ! grep -qFx "full:$domain" "$DNS_HIJACK_OUTPUT"; then
-        echo "full:$domain" >> "$DNS_HIJACK_OUTPUT"
-        echo "[+] [DNS Hijack] Added: full:$domain"
-        hijack_added=$((hijack_added + 1))
+  match_line=$(grep -F "$orig_domain " "$TMP_FILE")
+  if [ -n "$match_line" ]; then
+    new_ips=$(echo "$match_line" | cut -d' ' -f2-)
+
+    # åˆå¹¶ï¼šåŽŸ IP åœ¨å‰ï¼Œæ–° IP åœ¨åŽï¼ŒåŽ»é‡
+    all_ips="$orig_ips $new_ips"
+    merged_ips=$(printf "%s\n" $all_ips | awk '!seen[$0]++' | tr '\n' ' ' | sed 's/ *$//')
+
+    if [ "$merged_ips" != "$orig_ips" ]; then
+      echo "$orig_domain $merged_ips" >> "$CHANGED_FILE"
+      echo "[UPDATED] $orig_domain $merged_ips"
+    else
+      echo "$line" >> "$CHANGED_FILE"
     fi
-done
 
-# Êä³ö½á¹û
-if [ "$hijack_added" -gt 0 ]; then
-    echo "Done. Added $hijack_added hijacked domains to $DNS_HIJACK_OUTPUT"
-else
-    echo "No new dns_hijack records found in $LOG_FILE."
-fi
+    # ä»Ž TMP_FILE ä¸­åˆ é™¤è¯¥åŸŸåï¼Œé¿å…åŽé¢é‡å¤å†™å…¥
+    grep -vF "$orig_domain " "$TMP_FILE" > "$TMP_FILE.tmp" && mv "$TMP_FILE.tmp" "$TMP_FILE"
+  else
+    echo "$line" >> "$CHANGED_FILE"
+  fi
+done < "$OUTPUT_FILE"
+
+# 4. è¿½åŠ  TMP_FILE ä¸­å‰©ä½™çš„æ–°åŸŸåè®°å½•ï¼ˆæ–°åŸŸåï¼‰
+while read -r new_line; do
+  new_domain=$(echo "$new_line" | awk '{print $1}')
+
+  # ç¡®ä¿æ²¡å†™è¿‡è¯¥åŸŸå
+  if ! grep -qF "$new_domain " "$CHANGED_FILE"; then
+    echo "$new_line" >> "$CHANGED_FILE"
+    echo "[NEW-RESULT] $new_line"
+
+    hijack_entry="full:$new_domain"
+    if ! grep -qF "$hijack_entry" "$HIJACK_FILE"; then
+      echo "$hijack_entry" >> "$HIJACK_FILE"
+      echo "[NEW-HIJACK] $hijack_entry"
+    fi
+  fi
+done < "$TMP_FILE"
+
+# 5. åŽ»é‡åŸŸååªä¿ç•™ç¬¬ä¸€æ¬¡å‡ºçŽ°çš„é‚£ä¸€è¡Œï¼Œä¿æŒé¡ºåº
+TMP_FINAL=$(mktemp)
+awk '
+{
+  if (!seen[$1]++) print $0
+}
+' "$CHANGED_FILE" > "$TMP_FINAL"
+
+mv "$TMP_FINAL" "$OUTPUT_FILE"
+rm -f "$TMP_FILE" "$CHANGED_FILE"
+
+echo "Processing complete. Results in:"
+echo "- $OUTPUT_FILE"
+echo "- $HIJACK_FILE"
