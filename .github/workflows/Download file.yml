@@ -80,22 +80,6 @@ jobs:
           curl -sSL https://raw.githubusercontent.com/Sereinfy/china_ip_list/main/china_ip_list.txt -o ./publish/china_ip_list.txt
           curl -sSL https://raw.githubusercontent.com/Journalist-HK/Rules/refs/heads/main/original_domain_list.txt -o ./publish/original_domain_list.txt
 
-      - name: Extract txt
-        run: |
-          # 下载 v2dat 文件
-          curl -L https://github.com/MetaCubeX/geo/releases/download/v1.1/geo-linux-amd64 --output geo
-
-          # 给 v2dat 文件赋予执行权限
-          chmod +x ./geo
-
-          # 下载 geosite.dat 文件
-          curl -L https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo/geosite.dat --output geosite.dat
-
-          # 解包 geosite.dat，输出到 out 目录
-          [ ! -d "./publish/out" ] && mkdir -p ./publish/out
-          ./geo unpack site geosite.dat -d ./publish/out
-
-          
       - name: Git push assets to "release" branch
         run: |
           cd publish || exit 1
