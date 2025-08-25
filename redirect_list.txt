@@ -1,0 +1,144 @@
+avatars.steamstatic.com avatars.akamai.steamstatic.com
+cdn.steamstatic.com cdn.akamai.steamstatic.com
+checkout.steamstatic.com checkout.akamai.steamstatic.com
+clan.steamstatic.com clan.akamai.steamstatic.com
+clientconfig.steamstatic.com clientconfig.akamai.steamstatic.com
+community.steamstatic.com community.akamai.steamstatic.com
+shared.steamstatic.com shared.akamai.steamstatic.com
+store.steamstatic.com store.akamai.steamstatic.com
+video.steamstatic.com video.akamai.steamstatic.com
+vod.steamstatic.com vod.akamai.steamstatic.com
+
+cdn.jsdelivr.net cdn.jsdelivr.net.cdn.cloudflare.net
+
+cdn-ima.33across.com cdn-ima.33across.com.cdn.cloudflare.net
+
+thumbs.ebaycdn.net slot5842.ebay.com.edgekey.net
+i.ebayimg.com ebayimg.edgesuite.net
+images.ebaycdn.net ebayimg.edgesuite.net
+www.ebay.com.hk slot11847.ebay.com.edgekey.net
+www.ebay.com.hk.ebaycdn.net slot11847.ebay.com.edgekey.net
+ir.ebaystatic.com ipv4.slot11847.ebay.com.edgekey.net
+ir.ebaycdn.net ipv4.slot11847.ebay.com.edgekey.net
+apisd.ebay.com slot12565.ebay.com.edgekey.net
+apisd.ebaycdn.net slot12565.ebay.com.edgekey.net
+
+account-public-service-prod.ak.epicgames.com ak.epicgames.com.edgekey.net
+
+adgt.fandom.com partners.ids.ad.gt
+metallicmenace.fandom.com d1ha795gd19jee.cloudfront.net
+sli.fandom.com d1e21p1elafqwq.cloudfront.net
+support.fandom.com fandom.zendesk.com
+
+git.kernel.org dfw.source.kernel.org
+lore.kernel.org dfw.source.kernel.org
+www.kernel.org dfw.source.kernel.org
+geo.source.kernel.org dfw.source.kernel.org
+
+c6.paypal.com c6.paypal.com.cdn.cloudflare.net
+c6.glb.paypal.com c6.paypal.com.cdn.cloudflare.net
+pics.paypal.com fallback.www.paypalobjects.com.cdn.cloudflare.net
+pics.glb.paypal.com fallback.www.paypalobjects.com.cdn.cloudflare.net
+ppo.glb.paypal.com www.paypalobjects.com.cdn.cloudflare.net
+t.paypal.com c.paypal.com.cdn.cloudflare.net
+t.glb.paypal.com c.paypal.com.cdn.cloudflare.net
+
+dms.licdn.com dms-amd.akamaized.net
+2-01-2c3e-004c.cdx.cedexis.net dms-amd.akamaized.net
+media-exp1.licdn.com od.linkedin.edgesuite.net
+media-exp2.licdn.com od.linkedin.edgesuite.net
+media-exp3.licdn.com od.linkedin.edgesuite.net
+media.licdn.com od.linkedin.edgesuite.net
+2-01-2c3e-005c.cdx.cedexis.net od.linkedin.edgesuite.net
+static-exp1.licdn.com www-linkedin-com.l-0005.l-msedge.net
+static-exp2.licdn.com od.linkedin.edgesuite.net
+static.licdn.com od.linkedin.edgesuite.net
+2-01-2c3e-003d.cdx.cedexis.net od.linkedin.edgesuite.net
+static-exp3.licdn.com od.linkedin.edgesuite.net
+pulsar.lnkdns.net od.linkedin.edgesuite.net
+
+login.live.com kwa.a.v4.a.prd.aadg.akadns.net
+login.msa.msidentity.com kwa.a.v4.a.prd.aadg.akadns.net
+www.tm.lg.prod.aadmsa.trafficmanager.net kwa.a.v4.a.prd.aadg.akadns.net
+www.tm.lg.prod.aadmsa.akadns.net kwa.a.v4.a.prd.aadg.akadns.net
+www.a.lg.prod.aadmsa.akadns.net kwa.a.v4.a.prd.aadg.akadns.net
+default.a.lg.prod.aadmsa.akadns.net kwa.a.v4.a.prd.aadg.akadns.net
+prdv4a.aadg.msidentity.com kwa.a.v4.a.prd.aadg.akadns.net
+www.tm.v4.a.prd.aadg.akadns.net kwa.a.v4.a.prd.aadg.akadns.net
+www.a.v4.a.prd.aadg.akadns.net kwa.a.v4.a.prd.aadg.akadns.net
+
+login.microsoftonline.com kwa.next.a.prd.aadg.akadns.net
+login.mso.msidentity.com kwa.next.a.prd.aadg.akadns.net
+ak.privatelink.msidentity.com kwa.next.a.prd.aadg.akadns.net
+www.tm.a.prd.aadg.akadns.net kwa.next.a.prd.aadg.akadns.net
+www.next.a.prd.aadg.akadns.net kwa.next.a.prd.aadg.akadns.net
+
+software-static.download.prss.microsoft.com download.prss.microsoft.com.akamaized.net
+sundry-fg-geo-nocn.trafficmanager.net download.prss.microsoft.com.akamaized.net
+
+# 有几率解析到国外所以手动指定国内 CDN
+1d.dl.delivery.mp.microsoft.com dl.delivery.mp.microsoft.com.jsd.ksyunv5.com
+1d.dl.delivery.mp.microsoft.com.delivery.microsoft.com dl.delivery.mp.microsoft.com.jsd.ksyunv5.com
+dcat-b-nlu-net.trafficmanager.net dl.delivery.mp.microsoft.com.jsd.ksyunv5.com
+kingsoftspark.bg.download.ks-cdn.com dl.delivery.mp.microsoft.com.jsd.ksyunv5.com
+
+1d.tlu.dl.delivery.mp.microsoft.com tlu.dl.delivery.mp.microsoft.com.jsd.ksyunv5.com
+1d.tlu.dl.delivery.mp.microsoft.com.delivery.microsoft.com tlu.dl.delivery.mp.microsoft.com.jsd.ksyunv5.com
+dcat-b-tlu-net.trafficmanager.net tlu.dl.delivery.mp.microsoft.com.jsd.ksyunv5.com
+kingsoftspark.bg.tlu.download.ks-cdn.com tlu.dl.delivery.mp.microsoft.com.jsd.ksyunv5.com
+
+licensing.mp.microsoft.com sea-1.frontdoor.licensing.commerce.microsoft.com
+consumer-licensing-aks2aks.md.mp.microsoft.com.akadns.net sea-1.frontdoor.licensing.commerce.microsoft.com
+licensing-prod-frontdoor-geomap.trafficmanager.net sea-1.frontdoor.licensing.commerce.microsoft.com
+
+nav-edge.smartscreen.microsoft.com prod-agic-jw-2.japanwest.cloudapp.azure.com
+prod-atm-wds-edge.trafficmanager.net prod-agic-jw-2.japanwest.cloudapp.azure.com
+
+res.public.onecdn.static.microsoft res-1.public.onecdn.static.microsoft
+res-ocdi-public.trafficmanager.net res-1.public.onecdn.static.microsoft
+
+dlassets.xboxlive.com dlassets.xboxlive.com.edgesuite.net
+dlassets.xboxlive.com.delivery.microsoft.com dlassets.xboxlive.com.edgesuite.net
+xbx-dlassets-net.trafficmanager.net dlassets.xboxlive.com.edgesuite.net
+
+assets1.xboxlive.com assets1.xboxlive.com.edgesuite.net
+assets1.xboxlive.com.delivery.microsoft.com assets1.xboxlive.com.edgesuite.net
+xbx-f-net.trafficmanager.net assets1.xboxlive.com.edgesuite.net
+
+assets2.xboxlive.com assets1.xboxlive.com.edgesuite.net
+assets2.xboxlive.com.delivery.microsoft.com assets1.xboxlive.com.edgesuite.net
+xbx-f-geo.trafficmanager.net assets1.xboxlive.com.edgesuite.net
+
+d1.xboxlive.com d1.xboxlive.com.edgesuite.net
+d1.xboxlive.com.delivery.microsoft.com d1.xboxlive.com.edgesuite.net
+xbx-b-net.trafficmanager.net d1.xboxlive.com.edgesuite.net
+
+d2.xboxlive.com d1.xboxlive.com.edgesuite.net
+d2.xboxlive.com.delivery.microsoft.com d1.xboxlive.com.edgesuite.net
+xbx-b-geo.trafficmanager.net d1.xboxlive.com.edgesuite.net
+
+assets1.xboxlive.cn assets-xlc.xboxlive.cn.z.cngslb.com
+assets1.xboxlive.cn.delivery.microsoft.com assets-xlc.xboxlive.cn.z.cngslb.com
+xbx-f-cn-net.trafficmanager.net assets-xlc.xboxlive.cn.z.cngslb.com
+
+assets2.xboxlive.cn assets-xlc.xboxlive.cn.z.cngslb.com
+assets2.xboxlive.cn.delivery.microsoft.com assets-xlc.xboxlive.cn.z.cngslb.com
+xbx-f-cn-geo.trafficmanager.net assets-xlc.xboxlive.cn.z.cngslb.com
+
+d1.xboxlive.cn assets-xlc.xboxlive.cn.z.cngslb.com
+d1.xboxlive.cn.delivery.microsoft.com assets-xlc.xboxlive.cn.z.cngslb.com
+xbx-b-cn-net.trafficmanager.net assets-xlc.xboxlive.cn.z.cngslb.com
+
+d2.xboxlive.cn assets-xlc.xboxlive.cn.z.cngslb.com
+d2.xboxlive.cn.delivery.microsoft.com assets-xlc.xboxlive.cn.z.cngslb.com
+xbx-b-cn-geo.trafficmanager.net assets-xlc.xboxlive.cn.z.cngslb.com
+
+dlassets.xboxlive.cn dlassets.xboxlive.cn.cdn.dnsv1.com
+dlassets.xboxlive.cn.delivery.microsoft.com dlassets.xboxlive.cn.cdn.dnsv1.com
+xbx-dl-cn-geo.trafficmanager.net dlassets.xboxlive.cn.cdn.dnsv1.com
+
+dlassets2.xboxlive.cn dlassets.xboxlive.cn.cdn.dnsv1.com
+dlassets2.xboxlive.cn.delivery.microsoft.com dlassets.xboxlive.cn.cdn.dnsv1.com
+
+# regexp:^.+\.maelstrom\.gameservices\.xboxlive\.com$ rtep-ingestion-shared-na-1.centralus.cloudapp.azure.com
+# maelstrom-gsxbl.trafficmanager.net rtep-ingestion-shared-na-1.centralus.cloudapp.azure.com
