@@ -16,7 +16,7 @@ plugins:
     type: "cache"
     args:
       size: 8192  # 默认: 1024。
-      lazy_cache_ttl: 259200  # 默认: 0（禁用 lazy cache）。#建议值 86400（1天）~ 259200（3天）
+      lazy_cache_ttl: 86400  # 默认: 0（禁用 lazy cache）。#建议值 86400（1天）~ 259200（3天）
       dump_file: ./cache_0.dump 
       dump_interval: 7200  # (实验性) 自动保存间隔。
 
@@ -40,7 +40,7 @@ plugins:
     args:
       - matches: # 污染ip 屏蔽ip
           - "resp_ip $banned_ip 0.0.0.0 127.0.0.1 ::1"
-        exec: debug_print dns_hijack # 打印日志 后期放入wall_list.txt
+        exec: debug_print dns_hijack_list # 打印日志 后期放入wall_list.txt
       - matches: # 污染ip 屏蔽ip
           - "resp_ip $banned_ip 0.0.0.0 127.0.0.1 ::1"
         exec: jump remote_sequence
@@ -59,8 +59,6 @@ plugins:
     args:
       - exec: $forward_remote
       - exec: jump change_cdn_akamai
-#      - exec: $forward_fakeip
-#      - exec: ttl 1
       - exec: accept
       
   - tag: ali_sequence_jp # 阿里日本准确度高，腾讯美国准确度高
@@ -96,7 +94,7 @@ plugins:
     type: "fallback"
     args:
       primary: default_sequence       # 国内ip走直连，如果是gfw ip 走代理
-      secondary: remote_sequence   # 国外ip 尝试优选  走直连
+      secondary: remote_sequence   #
       threshold: 360           # 无响应回滚阈值。单位毫秒。默认 500 。
       always_standby: true     # 副可执行插件始终待命。
       
@@ -108,9 +106,26 @@ plugins:
         exec: reject 3 # 屏蔽 QTYPE 65
 
       - matches:
-          - qname $greylist &./rule/wall_list.txt &./rule/dns_hijack.txt  # wall_list.txt手动创建手动更新 dns_hijack.txt手动创建脚本自动更新
+          - qname $grey_list $wall_list
         exec: jump remote_sequence # 适用于被墙/被污染/尚未移出geosite_cn列表的，提前走代理
 
+      # 下面四个 matches 脚本生成于/output/目录
+      - matches:
+          - qname $dns_hijack_list
+        exec: jump remote_sequence
+
+      - matches:
+          - qname $best_akamai_list
+        exec: jump blackhole_akamai_ipv4
+
+      - matches:
+          - qname $best_cloudflare_list
+        exec: jump blackhole_cloudflare_ipv4
+        
+      - matches:
+          - qname $best_cloudfront_list
+        exec: jump blackhole_cloudfront_ipv4
+          
       - exec: $redirect
       
       - exec: $hosts
@@ -121,17 +136,17 @@ plugins:
       - exec: jump has_resp_sequence
       
       - matches:
-          - qname $privatelist $blocklist #内网域名 & 黑名单
+          - qname $private_list $block_list #内网域名 & 黑名单
         exec: reject 5
 
       - matches:
-          - qname $whitelist # DDNS 和 白名单
+          - qname $white_list # DDNS 和 白名单
         exec: $forward_local
 #      - exec: ttl 5-180 #如果使用了DDNS，把这个打开
       - exec: jump has_resp_sequence
 
       - matches: "!qtype 1 28"
-        exec: $forward_remote doh_ecs_cloudflare
+        exec: $forward_remote doh_ecs_google
       - matches: "!qtype 1 28" # = accept
         exec: accept
 
@@ -139,7 +154,7 @@ plugins:
       - exec: jump has_resp_sequence
 
       - matches:
-          - qname $akamailist
+          - qname $akamai_list
         exec: jump ali_sequence_jp
 
       - matches:
@@ -152,7 +167,7 @@ plugins:
       - exec: jump has_resp_sequence
 
       - matches:
-          - qname $originallist # 不进行 IP 替换的域名，通常是游戏等使用非常用端口的域名
+          - qname $original_list # 不进行 IP 替换的域名，通常是游戏等使用非常用端口的域名
         exec: $forward_remote
       - exec: jump has_resp_sequence
 
@@ -165,7 +180,7 @@ plugins:
         exec: jump local_sequence # 国内域名 & apple cn & Microsoft_cn 提前走直连
 
       - matches:
-          - qname $gfwlist # GFW 域名直接走代理
+          - qname $gfw_list # GFW 域名直接走代理
         exec: jump gfw_akamai_sequence
 
       - exec: $fallback_final # 不在列表内的域名

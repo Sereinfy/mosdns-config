@@ -57,11 +57,20 @@ plugins:
     args:
       concurrent: 2 # 并发数。每次请求随机选取 concurrent 个 upstreams 发送请求。
       upstreams:
-#        - addr: "https://149.112.112.112/dns-query" # Quad9
-#        - addr: "https://208.67.222.123/dns-query" # opendns
         - tag: doh_ecs_google
-          addr: "https://dns.google/dns-query"
-          bootstrap: "8.8.8.8"
-        - tag: doh_ecs_cloudflare
-          addr: "https://cloudflare-dns.com/dns-query"
+          addr: "https://v.recipes/dns-ecs"
           bootstrap: "1.1.1.1"
+        - tag: 1111-doh_ecs_google
+          addr: "https://google.gohub.site/dns-query"
+          bootstrap: "1.1.1.1"
+        - tag: 1111-doh_ecs_cloudflare
+          addr: "https://cloudflare.gohub.site/dns-query"
+          bootstrap: "1.1.1.1"
+#        - tag: google_doh
+#          addr: "https://dns.google/dns-query"
+#          dial_addr: "8.8.8.8"
+#          enable_http3: true
+#        - tag: cloudflare_doh
+#          addr: "https://cloudflare-dns.com/dns-query"
+#          dial_addr: "1.1.1.1"
+#          enable_http3: true
