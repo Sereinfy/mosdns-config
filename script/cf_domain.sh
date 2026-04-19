@@ -6,9 +6,9 @@ SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 # 相对路径定义（保持您原有的变量结构）
 LOG_FILE="$SCRIPT_DIR/../mosdns.log"
 OUTPUT_DIR="$SCRIPT_DIR/../output"  # 单独定义output目录
-CLOUDFLARE_OUTPUT="$OUTPUT_DIR/cloudflare_best.txt" 
-AKAMAI_OUTPUT="$OUTPUT_DIR/best_akamai.txt"
-Cloudflare_OUTPUT="$OUTPUT_DIR/cloudfront_best.txt"
+CLOUDFLARE_OUTPUT="$OUTPUT_DIR/best_cloudflare_list.txt" 
+AKAMAI_OUTPUT="$OUTPUT_DIR/best_akamai_list.txt"
+Cloudflare_OUTPUT="$OUTPUT_DIR/best_cloudfront_list.txt"
 
 # 检查日志文件
 if [ ! -f "$LOG_FILE" ]; then
@@ -28,8 +28,8 @@ touch "$Cloudflare_OUTPUT"
 cloudflare_added=0
 akamai_added=0
 
-# 处理cloudflare_best（原样保留）
-grep "cloudflare_best" "$LOG_FILE" | \
+# 处理best_cloudflare（原样保留）
+grep "best_cloudflare" "$LOG_FILE" | \
 awk -F'"qname": "' '{print $2}' | \
 awk -F'"' '{print $1}' | \
 sed 's/\.$//' | \
@@ -60,8 +60,8 @@ while read -r domain; do
     fi
 done
 
-# 处理cloudfront_best（原样保留）
-grep "cloudfront_best" "$LOG_FILE" | \
+# 处理best_cloudfront（原样保留）
+grep "best_cloudfront" "$LOG_FILE" | \
 awk -F'"qname": "' '{print $2}' | \
 awk -F'"' '{print $1}' | \
 sed 's/\.$//' | \
