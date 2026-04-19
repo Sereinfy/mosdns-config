@@ -1,6 +1,6 @@
 plugins:
   - tag: ecs_jp
-    type: ecs_handler
+    输入: ecs_handler
     args:
       forward: false
       preset: 13.78.0.0
@@ -8,7 +8,7 @@ plugins:
       mask4: 17
 
   - tag: ecs_lax
-    type: ecs_handler
+    输入: ecs_handler
     args:
       forward: false
       preset: 151.101.196.0
@@ -16,7 +16,7 @@ plugins:
       mask4: 22
       
   - tag: "forward_local"
-    type: forward
+    输入: forward
     args:
       concurrent: 1
       upstreams:
@@ -24,14 +24,14 @@ plugins:
         - addr: "211.138.180.3" # 一般情况下是最快的
 
   - tag: "forward_fakeip"
-    type: forward
+    输入: forward
     args:
       concurrent: 1
       upstreams:
         - addr: "127.0.0.1:7874"
         
   - tag: "forward_alidns"
-    type: forward
+    输入: forward
     args:
       concurrent: 1
       upstreams:
@@ -44,7 +44,7 @@ plugins:
           enable_http3: true
           
   - tag: "forward_dnspod"
-    type: forward
+    输入: forward
     args:
       concurrent: 1
       upstreams:
@@ -53,19 +53,14 @@ plugins:
           enable_http3: false
         
   - tag: "forward_remote" # 优先选择可直连的
-    type: "forward"
+    输入: "forward"
     args:
       concurrent: 2 # 并发数。每次请求随机选取 concurrent 个 upstreams 发送请求。
       upstreams:
         - tag: doh_ecs_google
           addr: "https://v.recipes/dns-ecs"
           bootstrap: "1.1.1.1"
-        - tag: 1111-doh_ecs_google
-          addr: "https://google.gohub.site/dns-query"
-          bootstrap: "1.1.1.1"
-        - tag: 1111-doh_ecs_cloudflare
-          addr: "https://cloudflare.gohub.site/dns-query"
-          bootstrap: "1.1.1.1"
+
 #        - tag: google_doh
 #          addr: "https://dns.google/dns-query"
 #          dial_addr: "8.8.8.8"
