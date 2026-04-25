@@ -1,0 +1,472 @@
+store.steampowered.com 23.39.1.50
+checkout.steampowered.com 23.39.1.50
+api.steampowered.com 104.68.104.163
+
+avatars.akamai.steamstatic.com 202.142.229.42
+cdn.akamai.steamstatic.com 202.142.229.42
+checkout.akamai.steamstatic.com 202.142.229.42
+clan.akamai.steamstatic.com 202.142.229.42
+clientconfig.akamai.steamstatic.com 202.142.229.42
+community.akamai.steamstatic.com 202.142.229.42
+shared.akamai.steamstatic.com 202.142.229.42
+store.akamai.steamstatic.com 202.142.229.42
+video.akamai.steamstatic.com 202.142.229.42
+vod.akamai.steamstatic.com 202.142.229.42
+
+dlassets-ssl.xboxlive.com 23.36.229.48 23.45.9.48
+gameclipscontent-d2009.xboxlive.com 23.36.229.48 23.45.9.48
+images-eds-ssl.xboxlive.com 23.36.229.48 23.45.9.48
+musicart.xboxlive.com 23.36.229.48 23.45.9.48
+peoplehub.xboxlive.com 23.36.229.48 23.45.9.48
+sisu.xboxlive.com 23.36.229.48 23.45.9.48
+titlehub.xboxlive.com 23.36.229.48 23.45.9.48
+xforgeassets001.xboxlive.com 23.36.229.48 23.45.9.48
+xforgeassets002.xboxlive.com 23.36.229.48 23.45.9.48
+xnotify.xboxlive.com 23.36.229.48 23.45.9.48
+china-rta.xboxlive.com.akadns.net 23.36.229.48 23.45.9.48
+sisu.xboxlive.com.akadns.net 23.36.229.48 23.45.9.48
+us-west-sisu.xboxlive.com.akadns.net 23.36.229.48 23.45.9.48
+dlassets-ssl.xboxlive.com.edgekey.net 23.36.229.48 23.45.9.48
+gameclipscontent-d.xboxlive.com.edgekey.net 23.36.229.48 23.45.9.48
+images-eds-ssl.xboxlive.com.edgekey.net 23.36.229.48 23.45.9.48
+musicart.xboxlive.com.edgekey.net 23.36.229.48 23.45.9.48
+peoplehub.xboxlive.com.edgekey.net 23.36.229.48 23.45.9.48
+rta.xboxlive.com-c.edgekey.net 23.36.229.48 23.45.9.48
+sisu.xboxlive.com.edgekey.net 23.36.229.48 23.45.9.48
+titlehub.xboxlive.com.edgekey.net 23.36.229.48 23.45.9.48
+wildcard.xboxlive.com.edgekey.net 23.36.229.48 23.45.9.48
+xforgeassets.xboxlive.com.edgekey.net 23.36.229.48 23.45.9.48
+regexp:^e87\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.36.229.48 23.45.9.48
+
+tv-cdn-row.itunes-apple.com.akadns.net 23.37.16.29 23.62.176.24
+itunes.apple.com.edgekey.net 23.37.16.29 23.62.176.24
+e673.dsce9.akamaiedge.net 23.37.16.29 23.62.176.24
+regexp:^e673\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.37.16.29 23.62.176.24
+
+shop.corsair.com 184.28.33.18
+support-cn.corsair.com 184.28.33.18
+support-de.corsair.com 184.28.33.18
+support-jp.corsair.com 184.28.33.18
+support.corsair.com 184.28.33.18
+www.corsair.com 184.28.33.18
+live-pwa.corsair.com.edgekey.net 184.28.33.18
+support.corsair.com.edgekey.net 184.28.33.18
+regexp:^e956\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 184.28.33.18
+
+res-1.public.onecdn.static.microsoft 184.29.20.115
+res-1.public.onecdn.static.microsoft.edgekey.net 184.29.20.115
+regexp:^e2808\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 184.29.20.115
+
+drivers.amd.com 23.221.100.27 2600:1406:5400:2b0::b51
+cdn-drivers.amd.com.edgekey.net 23.221.100.27 2600:1406:5400:2b0::b51
+cdn-drivers.amd.com.edgekey.net.globalredir.akadns.net 23.221.100.27 2600:1406:5400:2b0::b51
+e2897.ca.s.tl88.net 23.221.100.27 2600:1406:5400:2b0::b51
+regexp:^e2897\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.221.100.27 2600:1406:5400:2b0::b51
+
+account.g2a.com 104.89.231.55
+bundle.g2a.com 104.89.231.55
+cps.g2a.com 104.89.231.55
+cs.g2a.com 104.89.231.55
+dashboard.g2a.com 104.89.231.55
+direct.g2a.com 104.89.231.55
+fckd-callback.g2a.com 104.89.231.55
+files-billing.g2a.com 104.89.231.55
+get-key.g2a.com 104.89.231.55
+id.g2a.com 104.89.231.55
+images.g2a.com 104.89.231.55
+img.g2a.com 104.89.231.55
+login.g2a.com 104.89.231.55
+loot.g2a.com 104.89.231.55
+modal.g2a.com 104.89.231.55
+mp.g2a.com 104.89.231.55
+pay.g2a.com 104.89.231.55
+platform.g2a.com 104.89.231.55
+plus.g2a.com 104.89.231.55
+static.g2a.com 104.89.231.55
+supportcenter.g2a.com 104.89.231.55
+supporthub.g2a.com 104.89.231.55
+webapi.g2a.com 104.89.231.55
+wishlist.g2a.com 104.89.231.55
+www.g2a.com 104.89.231.55
+cps.g2a.com.edgekey.net 104.89.231.55
+img.g2a.com.edgekey.net 104.89.231.55
+star.g2a.com.edgekey.net 104.89.231.55
+regexp:^e3350\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 104.89.231.55
+
+download.ebz.epson.net 2600:1406:5400:4a4::d2e
+download.ebz.epson.net.edgekey.net 2600:1406:5400:4a4::d2e
+regexp:^e3374\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 2600:1406:5400:4a4::d2e
+
+pki-ocsp.digicert.com.edgekey.net 23.55.219.46
+e3782.cd.akamaiedge.net 23.55.219.46
+regexp:^e3782\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.55.219.46
+
+cac-ocsp.digicert.com.edgekey.net 23.55.219.177
+e3913.cd.akamaiedge.net 23.55.219.177
+regexp:^e3913\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.55.219.177
+
+checkout.ea.com 23.222.204.187
+qa.sst.digitalcodes.ea.com 23.222.204.187
+sst.digitalcodes.ea.com 23.222.204.187
+docs.ea.com 23.222.204.187
+www.forums.ea.com 23.222.204.187
+dev.gamekit.ea.com 23.222.204.187
+www.gamekit.ea.com 23.222.204.187
+gateway.ea.com 23.222.204.187
+proxy.novafusion.integration.ea.com 23.222.204.187
+myaccount.ea.com 23.222.204.187
+proxy.novafusion.ea.com 23.222.204.187
+myaccount.staging.ea.com 23.222.204.187
+www.ea.com 23.222.204.187
+ea.com 23.222.204.187
+ea10.com.edgekey.net 23.222.204.187
+ea17.com.edgekey.net 23.222.204.187
+regexp:^e4391\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.222.204.187
+
+secure.api.admin.zmags.com 23.196.115.22
+secure.admin.zmags.com 23.196.115.22
+admin.zmags.com 23.196.115.22
+img.creator-prod.zmags.com 23.196.115.22
+img.creator.zmags.com 23.196.115.22
+creator.zmags.com 23.196.115.22
+c.zmags.com 23.196.115.22
+c.zma.gs 23.196.115.22
+secure.ps.zmags.com 23.196.115.22
+secure.static.ps.zmags.com 23.196.115.22
+secure.api.viewer.zmags.com 23.196.115.22
+secure.viewer.zmags.com 23.196.115.22
+secure.api.admin.zmags.com.edgekey.net 23.196.115.22
+secure.admin.zmags.com.edgekey.net 23.196.115.22
+admin.zmags.com.edgekey.net 23.196.115.22
+img.creator-prod.zmags.com-v1.edgekey.net 23.196.115.22
+img.creator.zmags.com.edgekey.net 23.196.115.22
+creator.zmags.com.edgekey.net 23.196.115.22
+secure.ps.zmags.com.edgekey.net 23.196.115.22
+secure.static.ps.zmags.com.edgekey.net 23.196.115.22
+secure.api.viewer.zmags.com.edgekey.net 23.196.115.22
+secure.viewer.zmags.com.edgekey.net 23.196.115.22
+regexp:^e5293\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.196.115.22
+
+ipv6.slot5842.ebay.com.edgekey.net 23.221.147.96
+slot5842.ebay.com.edgekey.net 23.221.147.96
+regexp:^e5842\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.221.147.96
+
+aic-ngfts.lge.com 23.202.133.116
+ngfts.lge.com 23.202.133.116
+su-ssl.lge.com 23.202.133.116
+aic-ngfts.lge.com.edgekey.net 23.202.133.116
+ngfts.lge.com.edgekey.net 23.202.133.116
+su-ssl.lge.com.edgekey.net 23.202.133.116
+e6114.e21.akamaiedge.net 23.202.133.116
+regexp:^e6114\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.202.133.116
+
+assets.adobedtm.com 23.37.17.57
+cn-assets.adobedtm.com.edgekey.net 23.37.17.57
+regexp:^e7808\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.37.17.57
+
+avatars.ubisoft.com 184.29.21.80
+static-esports.ubisoft.com 184.29.21.80
+static-overlay.ubisoft.com 184.29.21.80
+staticctf.ubisoft.com 184.29.21.80
+ubistatic-a.ubisoft.com 184.29.21.80
+ubistatic2-a.ubisoft.com 184.29.21.80
+static3.cdn.ubi.com 184.29.21.80
+avatars.ubisoft.com.edgekey.net 184.29.21.80
+static-esports.ubisoft.com.edgekey.net 184.29.21.80
+static-overlay.ubisoft.com.edgekey.net 184.29.21.80
+staticctf.ubisoft.com.edgekey.net 184.29.21.80
+ubistatic-a.ubisoft.com.edgekey.net 184.29.21.80
+ubistatic2-a.ubisoft.com.edgekey.net 184.29.21.80
+static-ww.cdn.ubi.com.edgekey.net 184.29.21.80
+static.cdn.ubi.com.edgekey.net 184.29.21.80
+regexp:^e7923\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 184.29.21.80
+
+drop-api.ea.com 184.28.149.56
+drop-assets.ea.com 184.28.149.56
+gamekit.ea.com 184.28.149.56
+go.ea.com 184.28.149.56
+nds-network-nav.ea.com 184.28.149.56
+orbit.ea.com 184.28.149.56
+pl.ea.com 184.28.149.56
+ea11.com.edgekey.net 184.28.149.56
+ea4.com.edgekey.net 184.28.149.56
+ea5.com.edgekey.net 184.28.149.56
+regexp:^e8688\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 184.28.149.56
+
+media.contentapi.ea.com 202.43.48.251
+ea6.com.edgekey.net 202.43.48.251
+# 数字范围未知
+e8690.e12.akamaiedge.net 202.43.48.251
+regexp:^e8690\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 202.43.48.251
+
+www.hackerrank.com 23.198.173.30
+hackerrank.com.edgekey.net 23.198.173.30
+regexp:^e8937\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.198.173.30
+
+accounts.microsoft.com 23.45.41.148
+account.microsoft.com 23.45.41.148
+account.microsoft.com.edgekey.net. 23.45.41.148
+regexp:^e9412\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.45.41.148
+
+ipv6.slot9428.ebay.com.edgekey.net 23.222.205.142
+slot9428.ebay.com.edgekey.net 23.222.205.142
+regexp:^e9428\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.222.205.142
+
+ipv6.slot9430.ebay.com.edgekey.net 23.48.183.178 2600:1406:5400:29b::24d6
+slot9430.ebay.com.edgekey.net 23.48.183.178 2600:1406:5400:29b::24d6
+regexp:^e9430\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.48.183.178 2600:1406:5400:29b::24d6
+
+cdn1-dest.epicgames.com 173.223.1.57
+cdn2.epicgames.com 173.223.1.57
+cdn1-dest.unrealengine.com 173.223.1.57
+cdn2-dest.unrealengine.com 173.223.1.57
+san.cdn.unrealengine.com.edgekey.net 173.223.1.57
+regexp:^e9616\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 173.223.1.57
+
+account.cdn.ubisoft.com 23.44.146.94
+authentication.cdn.ubisoft.com 23.44.146.94
+buy-for-friend.cdn.ubisoft.com 23.44.146.94
+cat.cdn.ubisoft.com 23.44.146.94
+challenges.cdn.ubisoft.com 23.44.146.94
+chat.cdn.ubisoft.com 23.44.146.94
+connect.cdn.ubisoft.com 23.44.146.94
+discussions.cdn.ubisoft.com 23.44.146.94
+dog.cdn.ubisoft.com 23.44.146.94
+feedback.cdn.ubisoft.com 23.44.146.94
+files.cdn.ubisoft.com 23.44.146.94
+friend-referral.cdn.ubisoft.com 23.44.146.94
+friends-list.cdn.ubisoft.com 23.44.146.94
+galaxy.cdn.ubisoft.com 23.44.146.94
+game-dl-mgr.cdn.ubisoft.com 23.44.146.94
+game-page.cdn.ubisoft.com 23.44.146.94
+gamer-profile.cdn.ubisoft.com 23.44.146.94
+help.cdn.ubisoft.com 23.44.146.94
+home-page.cdn.ubisoft.com 23.44.146.94
+ingame-store.cdn.ubisoft.com 23.44.146.94
+key-activation.cdn.ubisoft.com 23.44.146.94
+key-redemption.cdn.ubisoft.com 23.44.146.94
+library.cdn.ubisoft.com 23.44.146.94
+live-feed.cdn.ubisoft.com 23.44.146.94
+live-video-streaming.cdn.ubisoft.com 23.44.146.94
+marketplace.cdn.ubisoft.com 23.44.146.94
+news.cdn.ubisoft.com 23.44.146.94
+news-page.cdn.ubisoft.com 23.44.146.94
+notifications.cdn.ubisoft.com 23.44.146.94
+overlay.cdn.ubisoft.com 23.44.146.94
+preferences.cdn.ubisoft.com 23.44.146.94
+product-details.cdn.ubisoft.com 23.44.146.94
+promotab.cdn.ubisoft.com 23.44.146.94
+quay.cdn.ubisoft.com 23.44.146.94
+quick-buys.cdn.ubisoft.com 23.44.146.94
+remote-play.cdn.ubisoft.com 23.44.146.94
+rewards.cdn.ubisoft.com 23.44.146.94
+settings.cdn.ubisoft.com 23.44.146.94
+share-play.cdn.ubisoft.com 23.44.146.94
+share-play-client-app.cdn.ubisoft.com 23.44.146.94
+sigma.cdn.ubisoft.com 23.44.146.94
+smart-intel.cdn.ubisoft.com 23.44.146.94
+social.cdn.ubisoft.com 23.44.146.94
+spotlight.cdn.ubisoft.com 23.44.146.94
+static19.cdn.ubisoft.com 23.44.146.94
+static2.cdn.ubisoft.com 23.44.146.94
+static9.cdn.ubisoft.com 23.44.146.94
+stats.cdn.ubisoft.com 23.44.146.94
+streaming-client.cdn.ubisoft.com 23.44.146.94
+testing.cdn.ubisoft.com 23.44.146.94
+ubiservices.cdn.ubisoft.com 23.44.146.94
+ugc.cdn.ubisoft.com 23.44.146.94
+web-browser.cdn.ubisoft.com 23.44.146.94
+prd-uapps-connect.edgekey.net 23.44.146.94
+uplay-next-files-prd.edgekey.net 23.44.146.94
+uplay-next-quick-buys-prd.edgekey.net 23.44.146.94
+regexp:^e11195\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.44.146.94
+
+static2.cdn.ubi.com 72.247.97.191
+ubiservices.cdn.ubi.com 72.247.97.191
+wildcard.cdn.ubi.com.edgekey.net 72.247.97.191
+regexp:^e11196\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 72.247.97.191
+
+support.activision.com 23.61.213.222
+s.activision.com 23.61.213.222
+san.activision.com.edgekey.net 23.61.213.222
+regexp:^e11358\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.61.213.222
+
+ipv4.slot11847.ebay.com.edgekey.net 23.37.17.245
+ipv6.slot11847.ebay.com.edgekey.net 23.37.17.245
+slot11847.ebay.com.edgekey.net 23.37.17.245
+regexp:^e11847\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.37.17.245
+
+shop.samsung.com 23.6.183.16
+shop.samsung.com.edgekey.net 23.6.183.16
+regexp:^e11982\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.6.183.16
+
+store-images.s-microsoft.com 2600:1406:5400:49f::3114
+store-images.s-microsoft.com-c.edgekey.net 2600:1406:5400:49f::3114
+regexp:^e12564\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 2600:1406:5400:49f::3114
+
+ipv6.slot12565.ebay.com.edgekey.net 23.222.206.28
+slot12565.ebay.com.edgekey.net 23.222.206.28
+regexp:^e12565\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.222.206.28
+
+slot12570.ebay.com.edgekey.net 2600:1406:5400:49f::311a
+regexp:^e12570\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 2600:1406:5400:49f::311a
+
+answers.microsoft.com-v1.edgekey.net 23.59.205.194
+regexp:^e13362\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.59.205.194
+
+c.s-microsoft.com 210.57.89.210
+i.s-microsoft.com 210.57.89.210
+c-s.cms.ms.akadns.net 210.57.89.210
+i.s-microsoft.com.edgekey.net 210.57.89.210
+c.s-microsoft.com-c.edgekey.net 210.57.89.210
+regexp:^e13678\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 210.57.89.210
+
+store-content-ipv4.ak.epicgames.com 23.44.147.161
+store-content.ak.epicgames.com 23.44.147.161
+store-content-ipv4.ak.epicgames.com.edgekey.net 23.44.147.161
+store-content.ak.epicgames.com.edgekey.net 23.44.147.161
+ak.epicgames.com.edgekey.net 23.44.147.161
+regexp:^e15203\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.44.147.161
+
+autopatch.juno.ea.com 104.69.149.41
+cloudsync.juno.ea.com 104.69.149.41
+contentful-proxy.juno.ea.com 104.69.149.41
+desktop-config.juno.ea.com 104.69.149.41
+ratt.juno.ea.com 104.69.149.41
+service-aggregation-layer.juno.ea.com 104.69.149.41
+update.layer.ea.com 104.69.149.41
+update.layer.ea.com.edgekey.net 104.69.149.41
+ea15.com.edgekey.net 104.69.149.41
+e16166.e12.akamaiedge.net 104.69.149.41
+regexp:^e16166\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 104.69.149.41
+
+livetileedge.dsx.mp.microsoft.com 96.7.233.218
+storesdk.dsx.mp.microsoft.com 96.7.233.218
+sfdataservice-legacy-staging.microsoft.com 96.7.233.218
+sfdataservice-legacy.microsoft.com 96.7.233.218
+sfdataservice-staging.microsoft.com 96.7.233.218
+sfdataservice.microsoft.com 96.7.233.218
+livetileedge.dsx.mp.microsoft.com.akadns.net 96.7.233.218
+storesdk.dsx.mp.microsoft.com.akadns.net 96.7.233.218
+sfdataservice-legacy-staging.unistore.akadns.net 96.7.233.218
+livetileedge.xbetservices.akadns.net 96.7.233.218
+sfdataservice-legacy.xbetservices.akadns.net 96.7.233.218
+sfdataservice.xbetservices.akadns.net 96.7.233.218
+storesdk.xbetservices.akadns.net 96.7.233.218
+livetileedge.dsx.mp.microsoft.com.edgekey.net 96.7.233.218
+storesdk.dsx.mp.microsoft.com.edgekey.net 96.7.233.218
+sfdataservice-legacy-staging.microsoft.com.edgekey.net 96.7.233.218
+sfdataservice-legacy.microsoft.com.edgekey.net 96.7.233.218
+sfdataservice-staging.microsoft.com.edgekey.net 96.7.233.218
+sfdataservice.microsoft.com.edgekey.net 96.7.233.218
+e16646.ca.s.tl88.net 96.7.233.218
+regexp:^e16646\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 96.7.233.218
+
+s2-sni.cloudinary.com.edgekey.net 23.199.57.80
+# regexp:^e26130\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.199.57.80
+
+ngx.download.nvidia.com 23.199.57.80
+ngx.download.nvidia.com.edgekey.net 23.199.57.80
+# regexp:^e28142\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.199.57.80
+
+www3.corsair.com 23.199.57.80
+www3.corsair.com.edgekey.net 23.199.57.80
+# regexp:^e30526\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.199.57.80
+
+uat.corsair.com 23.199.57.80
+uat.corsair.com.edgekey.net 23.199.57.80
+# regexp:^e32975\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.199.57.80
+
+api-prod.nvidia.com 23.199.57.80
+images.nvidia.com 23.199.57.80
+www.nvidia.com 23.199.57.80
+api-prod.nvidia.com.edgekey.net 23.199.57.80
+gfwsl.geforce.com.edgekey.net 23.199.57.80
+images.nvidia.com.edgekey.net 23.199.57.80
+www.nvidia.com.edgekey.net 23.199.57.80
+# regexp:^e33907\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.199.57.80
+
+cdn-dynmedia-1.microsoft.com 23.199.57.80
+san-ion.secure4.scene7.com.edgekey.net 23.199.57.80
+# regexp:^e81481\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.199.57.80
+
+aka-sandbox.ebay.com.edgekey.net 23.199.57.80
+slot86223.ebay.com.edgekey.net 23.199.57.80
+# regexp:^e86223\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.199.57.80
+
+www.ebay.com 23.199.57.80
+www.ebay.com.ebaycdn.net 23.199.57.80
+slot88167.ebay.com.edgekey.net 23.199.57.80
+# regexp:^e88167\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.199.57.80
+
+ir.corsair.com 23.199.57.80
+corsair.gcs-web.com 23.199.57.80
+leapfrog-ssl-34.gcs-web.com.edgekey.net 23.199.57.80
+# regexp:^e96016\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.199.57.80
+
+monitor.ebay.com 23.199.57.80
+gisufespipeline22.ebaycdn.net 23.199.57.80
+gisufespipeline22.ebay.com.edgekey.net 23.199.57.80
+# regexp:^e102410\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.199.57.80
+
+signin.ebay.com 23.199.57.80
+slot286433.ebay.com.edgekey.net 23.199.57.80
+# regexp:^e164274\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.199.57.80
+
+static-dm.ubisoft.com 23.199.57.80
+static-live.ubisoft.com 23.199.57.80
+static-dm.ubisoft.com-v1.edgekey.net 23.199.57.80
+static-live.ubisoft.com.edgekey.net 23.199.57.80
+# regexp:^e163413\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.199.57.80
+
+backstory.ebay.com 23.199.57.80
+autotrack.ebay.com 23.199.57.80
+autotrack.ebaycdn.net 23.199.57.80
+autotrack.ebay.com.edgekey.net 23.199.57.80
+# regexp:^e189811\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.199.57.80
+
+edgetrksvc.ebay.com 23.199.57.80
+edgetrksvc.ebay.com.edgekey.net 23.199.57.80
+# regexp:^e193737\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.199.57.80
+
+pulsar.ebay.com 23.199.57.80
+pulsar.ebay.com.edgekey.net 23.199.57.80
+# regexp:^e207850\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.199.57.80
+
+sofe.ebay.com 23.199.57.80
+spdmetrics.ebay.com 23.199.57.80
+sitespeedmetrics.ebay.com.edgekey.net 23.199.57.80
+spdmetrics.ebay.com.edgekey.net 23.199.57.80
+# regexp:^e219129\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.199.57.80
+
+c.info.corsair.com 23.199.57.80
+c.updates.corsair.com 23.199.57.80
+c.info.corsair.com.edgekey.net 23.199.57.80
+c.updates.corsair.com.edgekey.net 23.199.57.80
+# regexp:^e243932\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.199.57.80
+
+rbwm-api.hsbc.com.hk 23.199.57.80
+rbwm-api.hsbc.com.hk.edgekey.net 23.199.57.80
+# regexp:^e244181\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.199.57.80
+
+aadcdn.msftauth.net 23.199.57.80
+www.tm.aadcdn.msftauth.akadns.net 23.199.57.80
+www.a.aadcdn.msftauth.akadns.net 23.199.57.80
+www.tm.aadcdn.msftauth.trafficmanager.net 23.199.57.80
+aadcdn.msftauth.edgekey.net 23.199.57.80
+# regexp:^e329293\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.199.57.80
+
+pay.ebay.com 23.199.57.80
+slot334050.ebay.com.edgekey.net 23.199.57.80
+# regexp:^e334050\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.199.57.80
+
+pages.ebay.com 23.199.57.80
+slot348525.ebay.com.edgekey.net 23.199.57.80
+# regexp:^e348525\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.199.57.80
+
+aka-sandbox.ebay.com 23.199.57.80
+aka-sandbox.ebaycdn.net 23.199.57.80
+ipv6.slot356480.ebay.com.edgekey.net 23.199.57.80
+# regexp:^e356480\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.199.57.80
+
+regexp:^e0*(19199|19[2-9]\d{2}|[2-9]\d{4}|[1-9]\d{5,14})\.((dsc)?[a-z]|dsp[a-x])\.akamaiedge\.net$ 23.199.57.80
