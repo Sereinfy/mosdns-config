@@ -1,0 +1,45 @@
+# Cloudflare主动拦截
+bulianglin.com
+ffjav.com
+imagestwist.com
+magnet.pics
+liangxin.xyz
+cdn.paddle.com
+www.nexcess.net
+cdn.optimizely.com
+reviews-badge.capterra.com
+www.g2.com
+www.getapp.com
+
+# 未分类
+mahjongsoul.com
+dog.tg
+keyword:jav
+keyword:missav
+
+# akamai
+use.typekit.net
+
+age.tv
+dns.paesa.es
+# 翻译服务
+immersivetranslate.com
+full:translate.googleapis.com
+full:translation.googleapis.com
+full:services.googleapis.cn
+gstatic.com
+safebrowsing.googleapis.com
+66img.cc
+
+# 黑料
+355.fun
+xgg.su
+yxopdyoft.com
+hgekbuvqu.com
+
+# dns
+dns.google
+
+# 51
+51cg1.com
+vdtuzv.com
